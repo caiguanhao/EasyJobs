@@ -61,6 +61,17 @@ class JobsController < ApplicationController
     end
   end
 
+  # POST /jobs/1/run
+  include ActionController::Live
+  def run
+    response.headers['Content-Type'] = 'text/event-stream'
+    5.times {
+      response.stream.write "hello world\n"
+      sleep 1
+    }
+    response.stream.close
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_job
