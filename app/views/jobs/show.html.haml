@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @job.name
+%p
+  %b Script:
+  = @job.script
+
+= link_to 'Edit', edit_job_path(@job)
+\|
+= link_to 'Back', jobs_path
