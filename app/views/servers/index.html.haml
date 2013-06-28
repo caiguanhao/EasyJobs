@@ -1,0 +1,25 @@
+%h1 Listing servers
+
+%table
+  %tr
+    %th Name
+    %th Host
+    %th Username
+    %th Password
+    %th
+    %th
+    %th
+
+  - @servers.each do |server|
+    %tr
+      %td= server.name
+      %td= server.host
+      %td= server.username
+      %td= server.password
+      %td= link_to 'Show', server
+      %td= link_to 'Edit', edit_server_path(server)
+      %td= link_to 'Destroy', server, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Server', new_server_path

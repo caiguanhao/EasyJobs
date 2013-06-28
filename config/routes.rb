@@ -1,4 +1,6 @@
 EasyJobs::Application.routes.draw do
+  resources :servers
+
   resources :jobs
 
   # The priority is based upon order of creation: first created -> highest priority.

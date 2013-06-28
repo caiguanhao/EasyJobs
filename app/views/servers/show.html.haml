@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @server.name
+%p
+  %b Host:
+  = @server.host
+%p
+  %b Username:
+  = @server.username
+%p
+  %b Password:
+  = @server.password
+
+= link_to 'Edit', edit_server_path(@server)
+\|
+= link_to 'Back', servers_path
