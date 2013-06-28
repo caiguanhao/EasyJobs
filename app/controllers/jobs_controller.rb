@@ -67,10 +67,18 @@ class JobsController < ApplicationController
     require 'net/ssh'
     response.headers['Content-Type'] = 'text/event-stream'
     @job = Job.find(params[:id])
-    Net::SSH.start(@job.server.host, @job.server.username, :password => @job.server.password) do |ssh|
-      ssh.exec!(@job.script) do |channel, stream, data|
-        response.stream.write data
+    begin
+      Net::SSH.start(@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5) do |ssh|
+        ssh.exec!(@job.script) do |channel, stream, data|
+          response.stream.write data
+        end
       end
+    rescue Timeout::Error
+      response.stream.write "Timed out!"
+    rescue Net::SSH::AuthenticationFailed
+      response.stream.write "Authentication failed!"
+    rescue Exception => e
+      response.stream.write e.message
     end
     response.stream.close
   end
