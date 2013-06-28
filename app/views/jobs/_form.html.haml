@@ -12,5 +12,8 @@
   .field
     = f.label :script
     = f.text_area :script
+  .field
+    = f.label :server_id
+    = f.collection_select :server_id, Server.all, :id, :name, include_blank: "(none)"
   .actions
     = f.submit 'Save'

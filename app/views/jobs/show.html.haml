@@ -6,6 +6,9 @@
 %p
   %b Script:
   = @job.script
+%p
+  %b Server:
+  = @job.server ? link_to(@job.server.name, server_path(@job.server)) : "(none)"
 
 = link_to 'Edit', edit_job_path(@job)
 \|
