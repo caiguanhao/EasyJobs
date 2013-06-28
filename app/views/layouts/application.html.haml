@@ -6,6 +6,11 @@
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
-    = link_to 'Jobs', jobs_path
-    = link_to 'Servers', servers_path
-    = yield
+    #wrapper
+      #main
+        #header
+          %h1#title EasyJobs
+        #menu.button_group
+          = link_to 'Jobs', jobs_path, class: "button" + (params[:controller]=="jobs" ? " active" : "")
+          = link_to 'Servers', servers_path, class: "button" + (params[:controller]=="servers" ? " active" : "")
+        = yield
