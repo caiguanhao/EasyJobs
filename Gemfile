@@ -36,6 +36,8 @@ gem 'haml-rails'
 
 gem 'puma'
 
+gem 'net-ssh'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

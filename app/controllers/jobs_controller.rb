@@ -64,11 +64,14 @@ class JobsController < ApplicationController
   # POST /jobs/1/run
   include ActionController::Live
   def run
+    require 'net/ssh'
     response.headers['Content-Type'] = 'text/event-stream'
-    5.times {
-      response.stream.write "hello world\n"
-      sleep 1
-    }
+    @job = Job.find(params[:id])
+    Net::SSH.start(@job.server.host, @job.server.username, :password => @job.server.password) do |ssh|
+      ssh.exec!(@job.script) do |channel, stream, data|
+        response.stream.write data
+      end
+    end
     response.stream.close
   end
 

@@ -60,6 +60,7 @@ GEM
     mime-types (1.23)
     minitest (4.7.5)
     multi_json (1.7.7)
+    net-ssh (2.6.7)
     polyglot (0.3.3)
     puma (2.1.1)
       rack (>= 1.1, < 2.0)
@@ -122,6 +123,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails
+  net-ssh
   puma
   rails (= 4.0.0)
   sass-rails (~> 4.0.0)
