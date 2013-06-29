@@ -1,4 +1,8 @@
 jobsonload = ->
+  $("#notice, #alert").find(".close").click (e) ->
+    e.preventDefault();
+    $("#notice, #alert").fadeOut 200, ->
+      $(this).remove()
   $("#run_job").click (e) ->
     e.preventDefault();
     run_job = $(this)
