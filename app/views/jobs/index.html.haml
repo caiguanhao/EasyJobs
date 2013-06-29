@@ -1,4 +1,7 @@
-%h1 Listing jobs
+#submenu.button_group
+  = link_to 'Listing Jobs', jobs_path, class: "button active"
+  = link_to 'New Job', new_job_path, class: "button"
+.menu_div
 
 %table.list
   %thead
@@ -19,7 +22,3 @@
         %td= job.id
         %td= link_to job.name, job
         %td.date= job.created_at
-
-%br
-
-= link_to 'New Job', new_job_path

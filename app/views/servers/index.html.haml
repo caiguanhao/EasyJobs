@@ -1,4 +1,7 @@
-%h1 Listing servers
+#submenu.button_group
+  = link_to 'Listing Servers', servers_path, class: "button active"
+  = link_to 'New Server', new_server_path, class: "button"
+.menu_div
 
 %table.list
   %thead
@@ -21,7 +24,3 @@
         %td= link_to server.name, server
         %td= server.host
         %td= server.username
-
-%br
-
-= link_to 'New Server', new_server_path
