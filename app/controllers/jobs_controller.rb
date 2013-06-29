@@ -84,7 +84,8 @@ class JobsController < ApplicationController
             end
           else
             script = @job.script
-            script.gsub!(/\r\n?/, "\n").gsub!(/\\\n\s*/, "")
+            script.gsub!(/\r\n?/, "\n")
+            script.gsub!(/\\\n\s*/, "")
             script.lines.each do |line|
               line.strip!
               next if line.empty? or line[0] == "#"
