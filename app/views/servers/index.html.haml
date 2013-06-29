@@ -1,24 +1,26 @@
 %h1 Listing servers
 
-%table
-  %tr
-    %th Name
-    %th Host
-    %th Username
-    %th Password
-    %th
-    %th
-    %th
-
-  - @servers.each do |server|
+%table.list
+  %thead
     %tr
-      %td= server.name
-      %td= server.host
-      %td= server.username
-      %td= server.password
-      %td= link_to 'Show', server
-      %td= link_to 'Edit', edit_server_path(server)
-      %td= link_to 'Destroy', server, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th ID
+      %th Name
+      %th Host
+      %th Username
+  %tfoot
+    %tr
+      %td{ colspan: 4 }
+        .table-pager
+          <a href="#" class="table-pager-link prev">Previous</a>
+          <a href="#" class="table-pager-link next">Next</a>
+        = pluralize(@servers.size, "server")
+  %tbody
+    - @servers.each do |server|
+      %tr
+        %td= server.id
+        %td= link_to server.name, server
+        %td= server.host
+        %td= server.username
 
 %br
 

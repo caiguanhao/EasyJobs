@@ -8,10 +8,12 @@
 
   .field
     = f.label :name
+    %br
     = f.text_field :name
   .field
     = f.label :script
-    = f.text_area :script
+    %br
+    = f.text_area :script, size: "80x10"
   .field
     = f.label :server_id
     = f.collection_select :server_id, Server.all, :id, :name, include_blank: "(none)"

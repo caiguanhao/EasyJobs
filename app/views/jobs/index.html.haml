@@ -1,20 +1,24 @@
 %h1 Listing jobs
 
-%table
-  %tr
-    %th Name
-    %th Script
-    %th
-    %th
-    %th
-
-  - @jobs.each do |job|
+%table.list
+  %thead
     %tr
-      %td= job.name
-      %td= job.script
-      %td= link_to 'Show', job
-      %td= link_to 'Edit', edit_job_path(job)
-      %td= link_to 'Destroy', job, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th ID
+      %th Name
+      %th.date Created at
+  %tfoot
+    %tr
+      %td{ colspan: 3 }
+        .table-pager
+          <a href="#" class="table-pager-link prev">Previous</a>
+          <a href="#" class="table-pager-link next">Next</a>
+        = pluralize(@jobs.size, "job")
+  %tbody
+    - @jobs.each do |job|
+      %tr
+        %td= job.id
+        %td= link_to job.name, job
+        %td.date= job.created_at
 
 %br
 
