@@ -61,26 +61,33 @@ class JobsController < ApplicationController
     end
   end
 
-  # POST /jobs/1/run
+  # GET /jobs/1/run
   include ActionController::Live
   def run
+    require 'streamer/sse'
     require 'net/ssh'
     response.headers['Content-Type'] = 'text/event-stream'
-    @job = Job.find(params[:id])
+    sse = Streamer::SSE.new(response.stream)
     begin
-      Net::SSH.start(@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5) do |ssh|
-        ssh.exec!(@job.script) do |channel, stream, data|
-          response.stream.write data
+      @job = Job.find(params[:id])
+      begin
+        Net::SSH.start(@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5) do |ssh|
+          ssh.exec!(@job.script) do |channel, stream, data|
+            sse.write({ :output => data })
+          end
         end
+      rescue Timeout::Error
+        sse.write({ :output => "Timed out!\n" })
+      rescue Net::SSH::AuthenticationFailed
+        sse.write({ :output => "Authentication failed!\n" })
+      rescue Exception => e
+        sse.write({ :output => "#{e.message}\n" })
       end
-    rescue Timeout::Error
-      response.stream.write "Timed out!"
-    rescue Net::SSH::AuthenticationFailed
-      response.stream.write "Authentication failed!"
-    rescue Exception => e
-      response.stream.write e.message
+    rescue IOError
+      # the client disconnects
+    ensure
+      sse.close
     end
-    response.stream.close
   end
 
   private

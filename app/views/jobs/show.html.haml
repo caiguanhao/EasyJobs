@@ -15,4 +15,8 @@
   = @job.server ? link_to(@job.server.name, server_path(@job.server)) : "(none)"
 
 %p
-  = link_to 'Run', run_job_path(@job), class: "button button-blue"
+  = link_to 'Run', '', data: { cancel: 'Cancel', run: 'Run', to: run_job_path(@job) }, id: "run_job", class: "button button-blue"
+
+.separator
+
+%pre#output Pending.

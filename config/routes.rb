@@ -3,7 +3,7 @@ EasyJobs::Application.routes.draw do
 
   resources :jobs do
     member do
-      post :run
+      get :run
     end
   end
 

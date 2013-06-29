@@ -399,3 +399,19 @@ table.list {
     }
   }
 }
+
+.separator {
+  background: #efefef url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAHUlEQVR42q3IoREAAACCQHdy/91IFrLcfSGqc5wAdFYCZQo/LFUAAAAASUVORK5CYII=') repeat-x 0 0;
+  height: 4px;
+  overflow: hidden;
+  padding: 0;
+  margin: 15px 0;
+}
+
+#output {
+  font-size: 13px;
+  font-family: monospace;
+  line-height: 18px;
+  background: #9DD1FF;
+  padding: 8px 10px;
+}
