@@ -94,6 +94,9 @@ class JobsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_job
       @job = Job.find(params[:id])
+
+      # remeber last entered job
+      session[:job_id] = params[:id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

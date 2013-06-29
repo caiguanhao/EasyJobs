@@ -65,6 +65,9 @@ class ServersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_server
       @server = Server.find(params[:id])
+
+      # remeber last entered server
+      session[:server_id] = params[:id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
