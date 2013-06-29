@@ -1,4 +1,4 @@
-onload = ->
+jobsonload = ->
   $("#run_job").click (e) ->
     e.preventDefault();
     run_job = $(this)
@@ -25,5 +25,5 @@ onload = ->
       window.source.close();
       run_job.text run_job.data('run')
       $("#output").empty().append("Pending.\n")
-$(onload)
-$(window).bind 'page:change', onload # because of turbolinks
+$(jobsonload)
+$(window).bind 'page:change', jobsonload # because of turbolinks
