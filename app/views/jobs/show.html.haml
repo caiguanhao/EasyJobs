@@ -4,17 +4,24 @@
   = link_to 'Edit Job', edit_job_path(@job), class: "button"
 .menu_div
 
-%p
-  %b Name:
-  = @job.name
-%p
-  %b Script:
-  = @job.script
-%p
-  %b Server:
-  = @job.server ? link_to(@job.server.name, server_path(@job.server)) : "(none)"
+.panel
+  %h3 Name
+  .pc
+    = @job.name
 
-%p
+.panel
+  %h3 Script
+  .pc.script
+    = @job.script
+
+.panel
+  %h3 Server
+  .pc
+    = @job.server ? link_to(@job.server.name, server_path(@job.server)) : "(none)"
+    %br
+    = "#{@job.server.username}@#{@job.server.host}"
+
+.field
   = link_to 'Run', '', data: { cancel: 'Cancel', run: 'Run', to: run_job_path(@job) }, id: "run_job", class: "button button-blue"
 
 .separator
