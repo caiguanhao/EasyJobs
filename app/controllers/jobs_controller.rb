@@ -72,8 +72,26 @@ class JobsController < ApplicationController
       @job = Job.find(params[:id])
       begin
         Net::SSH.start(@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5) do |ssh|
-          ssh.exec!(@job.script) do |channel, stream, data|
-            sse.write({ :output => data })
+          if Job::Interpreters.include? @job.interpreter
+            ssh.open_channel do |channel|
+              channel.exec(@job.interpreter) do |ch, success|
+                channel.send_data @job.script
+                channel.eof!
+                channel.on_data do |ch,data|
+                  sse.write({ :output => data })
+                end
+              end
+            end
+          else
+            script = @job.script
+            script.gsub!(/\r\n?/, "\n").gsub!(/\\\n\s*/, "")
+            script.lines.each do |line|
+              line.strip!
+              next if line.empty? or line[0] == "#"
+              ssh.exec!(line) do |channel, stream, data|
+                sse.write({ :output => data })
+              end
+            end
           end
         end
       rescue Timeout::Error
@@ -101,6 +119,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:name, :script, :server_id)
+      params.require(:job).permit(:name, :interpreter, :script, :server_id)
     end
 end

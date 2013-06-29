@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130628122441) do
+ActiveRecord::Schema.define(version: 20130629124843) do
 
   create_table "jobs", force: true do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20130628122441) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "server_id"
+    t.string   "interpreter"
   end
 
   create_table "servers", force: true do |t|

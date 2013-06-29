@@ -11,7 +11,9 @@
     = @job.name
 
 .panel
-  %h3 Script
+  %h3
+    Script -
+    = @job.interpreter.presence || "(default)"
   .pc.script
     = @job.script
 
