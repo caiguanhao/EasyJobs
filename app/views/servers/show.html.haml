@@ -15,4 +15,9 @@
   = @server.username
 %p
   %b Password:
-  = @server.password
+  = "*" * @server.password.length
+%p
+  %b Jobs:
+  %ul
+    - @server.jobs.each do |job|
+      %li= link_to job.name, job_path(job)
