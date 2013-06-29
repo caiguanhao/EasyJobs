@@ -15,4 +15,4 @@
   = @job.server ? link_to(@job.server.name, server_path(@job.server)) : "(none)"
 
 %p
-  = button_to 'Run', run_job_path(@job)
+  = link_to 'Run', run_job_path(@job), class: "button button-blue"
