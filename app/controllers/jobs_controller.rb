@@ -122,7 +122,7 @@ class JobsController < ApplicationController
           if good_param != parameters.count
             sse.write({ :output => "At least one parameter value is not provided!\n" })
           else
-            script = script % params[:parameters].symbolize_keys
+            script = script % params[:parameters].symbolize_keys if good_param > 0
 
             # execute commands
             Net::SSH.start *ssh_params do |ssh|
