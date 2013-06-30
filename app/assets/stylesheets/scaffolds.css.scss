@@ -463,6 +463,9 @@ div.panel {
   background-image: linear-gradient(to bottom, #fafafa, #e1e1e1);
   -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  &.max {
+    width: 100%;
+  }
   h3 {
     text-align: center;
     font-size: 14px;
@@ -482,6 +485,9 @@ div.panel {
   }
   .pc {
     padding: 5px 10px;
+    input[type=text], input[type=email], input[type=url], input[type=search], select {
+      width: 100%;
+    }
   }
   .script {
     font-family: monospace;
