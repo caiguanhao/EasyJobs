@@ -15,6 +15,11 @@
 //= require jquery.modal.min
 //= require turbolinks
 //= require codemirror
+//= require codemirror/modes/ruby
+//= require codemirror/modes/clike
+//= require codemirror/modes/php
+//= require codemirror/modes/perl
+//= require codemirror/modes/python
 //= require codemirror/modes/shell
 //= require codemirror/modes/yaml
 //= require_tree .

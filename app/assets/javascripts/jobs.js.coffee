@@ -42,12 +42,21 @@ jobsonload = ->
       run_job.text run_job.data('run')
       $("#output").empty().append("Pending.\n")
   # render script text editor
+  get_current_mode = ->
+    bins = ["perl", "php", "python", "ruby"]
+    mode = bin for bin in bins when $("#job_interpreter_id option:selected").text().indexOf(bin) isnt -1
+    return mode
   if $("#job_script").length > 0
+    mode = 'shell'
+    mode = get_current_mode()
     editor = CodeMirror.fromTextArea document.getElementById("job_script"), {
       theme: 'monokai',
-      mode: 'shell',
+      mode: mode,
       lineNumbers: true
     }
+    $("#job_interpreter_id").change ->
+      if editor
+        editor.setOption("mode", get_current_mode())
   # behaviours of text inputs of custom parameters
   if $(".custom_param").length > 0
     $("#script").data("original", $("#script").text())
