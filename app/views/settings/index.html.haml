@@ -10,7 +10,7 @@
     %tfoot
       %tr
         %td{ colspan: 3 }
-          = pluralize(@interpreters.size, "interpreter")
+          = pluralize(@interpreters.size - 1, "interpreter")
     %tbody
       - @interpreters.each do |interpreter|
         %tr
@@ -22,4 +22,29 @@
           %td
             = check_box_tag "interpreters_usf[]", interpreter.id, interpreter.upload_script_first, id: "interpreter_usf_#{interpreter.id}"
             = label_tag "interpreter_usf_#{interpreter.id}", "Upload script first"
+  = submit_tag "Save Changes", class: "button button-blue"
+
+.separator
+
+= form_tag edit_constants_path, method: :put do
+  %table.list
+    %thead
+      %tr
+        %th ID
+        %th.path Constant name
+        %th Actions
+    %tfoot
+      %tr
+        %td{ colspan: 3 }
+          = pluralize(@constants.size - 1, "constant")
+    %tbody
+      - @constants.each do |constant|
+        %tr
+          %td
+            = constant.id if constant.id > 0
+            = hidden_field_tag "constants[]", constant.id, id: nil
+          %td.path
+            = text_field_tag "constants_name[]", constant.name, id: nil
+          %td
+            = link_to 'Edit content...', '#', class: "edit-constant-content", data: { id: constant.id, action: edit_content_of_constant_path(constant) } if constant.id > 0
   = submit_tag "Save Changes", class: "button button-blue"

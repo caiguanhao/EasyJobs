@@ -1,6 +1,11 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
+  helper_method :get_parameters_of
+  def get_parameters_of(script)
+    script.scan(/[^%]%{(.+?)}/).flatten(1).uniq
+  end
+
   # GET /jobs
   # GET /jobs.json
   def index

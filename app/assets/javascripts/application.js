@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.modal.min
 //= require turbolinks
 //= require codemirror
 //= require codemirror/modes/shell

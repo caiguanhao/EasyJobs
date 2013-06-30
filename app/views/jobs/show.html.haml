@@ -22,7 +22,15 @@
   %pre.pc.script
     = preserve do
       = @job.script
+
+- if @job.interpreter.nil?
+  - get_parameters_of(@job.script).each do |param|
+    .panel.float
+      %h3= param
+      .pc
+        WHAT
 .clear
+
 .field
   = link_to 'Run', '', data: { cancel: 'Cancel', run: 'Run', to: run_job_path(@job) }, id: "run_job", class: "button button-blue"
 

@@ -10,6 +10,8 @@ EasyJobs::Application.routes.draw do
   get '/settings', to: "settings#index"
   scope '/settings' do
     put :edit_interpreters, to: "settings#update_interpreters"
+    put :edit_constants, to: "settings#update_constants"
+    put '/constant/:id', to: "settings#update_content_of_constant", as: "edit_content_of_constant"
   end
 
   root to: "jobs#index"
