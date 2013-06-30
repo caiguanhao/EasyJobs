@@ -62,17 +62,18 @@ class SettingsController < ApplicationController
     end
   end
 
-  def update_content_of_constant
-    
+  def get_constant
+    constant = Constant.find(params[:id])
+    render json: constant.to_json
   end
 
-  private
-    def server_params
-      case params[:action]
-        when :update_interpreters
-          params.permit(:interpreters[], :interpreters_path[], :interpreters_usf[])
-        when :update_constants
-          params.permit(:constants[], :constants_name[])
-      end
+  def update_content_of_constant
+    constant = Constant.find(params[:id])
+    if constant.update({ content: params[:content] })
+      render json: { content: constant.content.length }
+    else
+      render json: { content: -1 }, status: :unprocessable_entity
     end
+  end
+
 end

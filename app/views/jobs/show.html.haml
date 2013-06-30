@@ -19,16 +19,21 @@
   %h3
     Script -
     = @job.interpreter.try(:path).presence || "(default)"
-  %pre.pc.script
+  %pre#script.pc.script
     = preserve do
       = @job.script
 
-- if @job.interpreter.nil?
+- if @job.interpreter.nil? # only for jobs without interpreters (default)
   - get_parameters_of(@job.script).each do |param|
     .panel.float
       %h3= param
       .pc
-        WHAT
+        = text_field_tag nil, nil, id: nil, class: "custom_param", placeholder: "value", data: { param: param }
+        - if @job_parameters.include? param
+          .select
+            = select_tag nil, options_for_select([['(select)','']] + @job_parameters[param]), id: nil, class: "fill_custom_param"
+        - else
+          %small= "No '#{param}' found in 'job_parameters' constant."
 .clear
 
 .field

@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require codemirror
 //= require codemirror/modes/shell
+//= require codemirror/modes/yaml
 //= require_tree .

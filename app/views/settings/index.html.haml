@@ -31,11 +31,13 @@
     %thead
       %tr
         %th ID
-        %th.path Constant name
+        %th.name Constant name
+        %th.size Size
+        %th.date Updated
         %th Actions
     %tfoot
       %tr
-        %td{ colspan: 3 }
+        %td{ colspan: 5 }
           = pluralize(@constants.size - 1, "constant")
     %tbody
       - @constants.each do |constant|
@@ -43,8 +45,12 @@
           %td
             = constant.id if constant.id > 0
             = hidden_field_tag "constants[]", constant.id, id: nil
-          %td.path
+          %td.name
             = text_field_tag "constants_name[]", constant.name, id: nil
+          %td.size
+            = constant.content.length if constant.id > 0
+          %td.date
+            = constant.updated_at if constant.id > 0
           %td
             = link_to 'Edit content...', '#', class: "edit-constant-content", data: { id: constant.id, action: edit_content_of_constant_path(constant) } if constant.id > 0
   = submit_tag "Save Changes", class: "button button-blue"

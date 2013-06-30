@@ -3,7 +3,7 @@ class JobsController < ApplicationController
 
   helper_method :get_parameters_of
   def get_parameters_of(script)
-    script.scan(/[^%]%{(.+?)}/).flatten(1).uniq
+    script.scan(/[^%]?%{(.+?)}/).flatten(1).uniq
   end
 
   # GET /jobs
@@ -15,6 +15,8 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+    @job_parameters = Constant.where("name = ?", "job_parameters").first || []
+    @job_parameters = YAML::load @job_parameters.content unless @job_parameters.blank?
   end
 
   # GET /jobs/new
@@ -101,15 +103,30 @@ class JobsController < ApplicationController
                 end
               end
             end
-          else
+          else # job without interpreter (default)
             script = @job.script
             script.gsub!(/\r\n?/, "\n")
             script.gsub!(/\\\n\s*/, "")
-            script.lines.each do |line|
-              line.strip!
-              next if line.empty? or line[0] == "#"
-              ssh.exec!(line) do |channel, stream, data|
-                sse.write({ :output => data })
+
+            # param substitute
+            good_param = 0
+            parameters = get_parameters_of(script)
+            parameters.each do |p|
+              good_param = good_param + 1 if params.has_key?(:parameters) and 
+                params[:parameters].has_key?(p) and params[:parameters][p].length > 0
+            end
+            if good_param != parameters.count
+              sse.write({ :output => "At least one parameter value is not provided!\n" })
+            else
+              script = script % params[:parameters].symbolize_keys
+
+              # execute commands
+              script.lines.each do |line|
+                line.strip!
+                next if line.empty? or line[0] == "#"
+                ssh.exec!(line) do |channel, stream, data|
+                  sse.write({ :output => data })
+                end
               end
             end
           end

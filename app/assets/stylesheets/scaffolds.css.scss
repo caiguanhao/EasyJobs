@@ -387,7 +387,7 @@ table.list {
   td.date {
     font-size: 13px;
   }
-  td.path {
+  td.path, td.name {
     width: 250px;
     input[type=text] {
       padding: 2px 5px;
@@ -395,6 +395,12 @@ table.list {
       width: 250px;
       font-family: monospace;
     }
+  }
+  td.size {
+    width: 40px;
+  }
+  td.date {
+    white-space: nowrap;
   }
   thead>tr>th {
     font-weight:bold;
@@ -565,6 +571,9 @@ div.panel {
     }
     select, .select {
       width: 100%;
+    }
+    .custom_param {
+      margin-bottom: 2px;
     }
   }
   .script {
