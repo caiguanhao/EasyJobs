@@ -79,6 +79,7 @@ class JobsController < ApplicationController
     begin
       @job = Job.find(params[:id])
       begin
+        raise "Please select one server!" if @job.server.nil?
         ssh_params = [@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5]
 
         if @job.interpreter.try(:path)
@@ -120,7 +121,7 @@ class JobsController < ApplicationController
               params[:parameters].has_key?(p) and params[:parameters][p].length > 0
           end
           if good_param != parameters.count
-            sse.write({ :output => "At least one parameter value is not provided!\n" })
+            raise "At least one parameter value is not provided!"
           else
             script = script % params[:parameters].symbolize_keys if good_param > 0
 
@@ -138,10 +139,7 @@ class JobsController < ApplicationController
                     exit_code = data.read_long
                   end
                 end
-                if exit_if_non_zero and exit_code > 0
-                  sse.write({ :output => "> Exit with status code #{exit_code}.\n" })
-                  break
-                end
+                raise "> Exit with status code #{exit_code}." if exit_if_non_zero and exit_code > 0
               end
             end
           end
