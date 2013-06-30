@@ -19,7 +19,7 @@
   %h3
     Script -
     = @job.interpreter.try(:path).presence || "(default)"
-  %pre#script.pc.script
+  %pre#script.pc.script.CodeMirror.cm-s-monokai{ data: { interpreter: @job.interpreter.try(:path) } }
     = preserve do
       = @job.script
 

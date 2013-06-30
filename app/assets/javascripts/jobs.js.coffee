@@ -43,11 +43,19 @@ jobsonload = ->
       $("#output").empty().append("Pending.\n")
   # render script text editor
   get_current_mode = ->
-    bins = ["perl", "php", "python", "ruby"]
-    mode = bin for bin in bins when $("#job_interpreter_id option:selected").text().indexOf(bin) isnt -1
-    return mode
-  if $("#job_script").length > 0
     mode = 'shell'
+    if arguments[0]
+      text = arguments[0]
+    else
+      text = $("#job_interpreter_id option:selected").text()
+    bins = ["perl", "php", "python", "ruby"]
+    mode = bin for bin in bins when text.indexOf(bin) isnt -1
+    return mode
+  set_runMode = ->
+    CodeMirror.runMode($("#script").text(), get_current_mode($("#script").data("interpreter")), document.getElementById("script"));
+  if $("#script").length > 0
+    set_runMode();
+  if $("#job_script").length > 0
     mode = get_current_mode()
     editor = CodeMirror.fromTextArea document.getElementById("job_script"), {
       theme: 'monokai',
@@ -68,6 +76,7 @@ jobsonload = ->
           data = data.replace new RegExp('([^%]?)%{'+$(this).data('param')+'}', 'g'), (m, p1) ->
             return p1 + value
         $("#script").text(data)
+        set_runMode();
   # select options for custom parameters
   if $(".fill_custom_param").length > 0
     $(".fill_custom_param").change ->

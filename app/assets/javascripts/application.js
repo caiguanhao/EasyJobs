@@ -15,6 +15,7 @@
 //= require jquery.modal.min
 //= require turbolinks
 //= require codemirror
+//= require codemirror/addons/runmode/runmode
 //= require codemirror/modes/ruby
 //= require codemirror/modes/clike
 //= require codemirror/modes/php
