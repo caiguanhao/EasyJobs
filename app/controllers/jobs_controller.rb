@@ -79,8 +79,10 @@ class JobsController < ApplicationController
     begin
       @job = Job.find(params[:id])
       begin
-        Net::SSH.start(@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5) do |ssh|
-          if @job.interpreter.try(:path)
+        ssh_params = [@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5]
+
+        if @job.interpreter.try(:path)
+          Net::SSH.start *ssh_params do |ssh|
             if @job.interpreter.upload_script_first
               script = @job.script
               script.gsub!(/\r\n?/, "\n")
@@ -103,24 +105,27 @@ class JobsController < ApplicationController
                 end
               end
             end
-          else # job without interpreter (default)
-            script = @job.script
-            script.gsub!(/\r\n?/, "\n")
-            script.gsub!(/\\\n\s*/, "")
+          end
+        else
+          # job without interpreter (default)
+          script = @job.script
+          script.gsub!(/\r\n?/, "\n")
+          script.gsub!(/\\\n\s*/, "")
 
-            # param substitute
-            good_param = 0
-            parameters = get_parameters_of(script)
-            parameters.each do |p|
-              good_param = good_param + 1 if params.has_key?(:parameters) and 
-                params[:parameters].has_key?(p) and params[:parameters][p].length > 0
-            end
-            if good_param != parameters.count
-              sse.write({ :output => "At least one parameter value is not provided!\n" })
-            else
-              script = script % params[:parameters].symbolize_keys
+          # param substitute
+          good_param = 0
+          parameters = get_parameters_of(script)
+          parameters.each do |p|
+            good_param = good_param + 1 if params.has_key?(:parameters) and 
+              params[:parameters].has_key?(p) and params[:parameters][p].length > 0
+          end
+          if good_param != parameters.count
+            sse.write({ :output => "At least one parameter value is not provided!\n" })
+          else
+            script = script % params[:parameters].symbolize_keys
 
-              # execute commands
+            # execute commands
+            Net::SSH.start *ssh_params do |ssh|
               script.lines.each do |line|
                 line.strip!
                 next if line.empty? or line[0] == "#"
