@@ -81,28 +81,34 @@ div {
   border-color:#98cf9f #98cf9f #8ec397;
 }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
 #error_explanation {
   width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
+  background-color: #FFF5F5;
+  margin: 0 0 12px 0;
   h2 {
     text-align: left;
     font-weight: bold;
     padding: 5px 5px 5px 15px;
     font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0px;
-    background-color: #c00;
-    color: #fff;
+    background-color: #FFD3D3;
+    color: #C00;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-left: 1px solid #C00;
+    border-top: 1px solid #C00;
+    border-right: 1px solid #C00;
+    margin: 0;
+  }
+  ul {
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+    border-left: 1px solid #C00;
+    border-bottom: 1px solid #C00;
+    border-right: 1px solid #C00;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
   }
   ul li {
     font-size: 12px;
@@ -617,4 +623,5 @@ div.panel {
   padding: 8px 10px;
   -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
 }
