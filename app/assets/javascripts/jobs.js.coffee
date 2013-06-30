@@ -29,5 +29,11 @@ jobsonload = ->
       window.source.close();
       run_job.text run_job.data('run')
       $("#output").empty().append("Pending.\n")
+  if $("#job_script").length > 0
+    editor = CodeMirror.fromTextArea document.getElementById("job_script"), {
+      theme: 'monokai',
+      mode: 'shell',
+      lineNumbers: true
+    }
 $(jobsonload)
 $(window).bind 'page:change', jobsonload # because of turbolinks
