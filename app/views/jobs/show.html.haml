@@ -5,17 +5,16 @@
   = link_to 'New Job', new_job_path, class: "button button-green"
 .menu_div
 
-.panel
+.panel.float
   %h3 Name
   .pc
     = @job.name
-.panel
+.panel.float
   %h3 Server
   .pc
     = @job.server ? link_to(@job.server.name, server_path(@job.server)) : "(none)"
     - if @job.server.present?
-      %br
-      = "#{@job.server.username}@#{@job.server.host}"
+      %small= "(#{@job.server.username}@#{@job.server.host})"
 .panel.max
   %h3
     Script -
@@ -23,7 +22,7 @@
   %pre.pc.script
     = preserve do
       = @job.script
-
+.clear
 .field
   = link_to 'Run', '', data: { cancel: 'Cancel', run: 'Run', to: run_job_path(@job) }, id: "run_job", class: "button button-blue"
 

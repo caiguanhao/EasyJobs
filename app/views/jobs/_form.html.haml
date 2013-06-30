@@ -6,14 +6,14 @@
         - @job.errors.full_messages.each do |msg|
           %li= msg
 
-  .panel
+  .panel.float
     %h3= f.label :name
     .pc= f.text_field :name
-  .panel
+  .panel.float
     %h3= f.label :server_id
     .pc
       .select= f.collection_select :server_id, Server.all, :id, :name, include_blank: "(none)"
-  .panel
+  .panel.float
     %h3= f.label :interpreter_id
     .pc
       .select= f.collection_select :interpreter_id, Interpreter.all, :id, :path, include_blank: "(default)"
