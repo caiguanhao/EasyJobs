@@ -36,6 +36,7 @@ gem 'haml-rails'
 
 gem 'puma'
 
+gem 'net-scp'
 gem 'net-ssh'
 
 gem 'codemirror-rails'

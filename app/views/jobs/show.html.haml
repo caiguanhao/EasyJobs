@@ -21,8 +21,9 @@
   %h3 Server
   .pc
     = @job.server ? link_to(@job.server.name, server_path(@job.server)) : "(none)"
-    %br
-    = "#{@job.server.username}@#{@job.server.host}"
+    - if @job.server.present?
+      %br
+      = "#{@job.server.username}@#{@job.server.host}"
 
 .field
   = link_to 'Run', '', data: { cancel: 'Cancel', run: 'Run', to: run_job_path(@job) }, id: "run_job", class: "button button-blue"

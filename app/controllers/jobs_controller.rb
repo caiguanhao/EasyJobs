@@ -66,6 +66,7 @@ class JobsController < ApplicationController
   def run
     require 'streamer/sse'
     require 'net/ssh'
+    require 'net/scp'
     response.headers['Content-Type'] = 'text/event-stream'
     sse = Streamer::SSE.new(response.stream)
     begin
@@ -73,12 +74,25 @@ class JobsController < ApplicationController
       begin
         Net::SSH.start(@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5) do |ssh|
           if @job.interpreter.try(:path)
-            ssh.open_channel do |channel|
-              channel.exec(@job.interpreter.path) do |ch, success|
-                channel.send_data @job.script
-                channel.eof!
-                channel.on_data do |ch,data|
-                  sse.write({ :output => data })
+            if @job.interpreter.upload_script_first
+              script = @job.script
+              script.gsub!(/\r\n?/, "\n")
+              ssh.scp.upload!(StringIO.new(script), "/tmp/easyjobs_script") do |ch, name, sent, total|
+                sse.write({ :output => "Uploading #{name} ... #{(sent.to_f * 100 / total.to_f).to_i}% #{sent}/#{total} bytes sent\n" })
+              end
+              cmd = "#{@job.interpreter.path} /tmp/easyjobs_script"
+              sse.write({ :output => "Running #{cmd} ...\n" })
+              ssh.exec!(cmd) do |channel, stream, data|
+                sse.write({ :output => data })
+              end
+            else
+              ssh.open_channel do |channel|
+                channel.exec(@job.interpreter.path) do |ch, success|
+                  channel.send_data @job.script
+                  channel.eof!
+                  channel.on_data do |ch,data|
+                    sse.write({ :output => data })
+                  end
                 end
               end
             end
