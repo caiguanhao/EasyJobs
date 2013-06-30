@@ -384,8 +384,13 @@ table.list {
   th.date {
     width: 150px;
   }
+  th.server {
+    width: 130px;
+    white-space: nowrap;
+  }
   td.date {
     font-size: 13px;
+    white-space: nowrap;
   }
   td.path, td.name {
     width: 250px;
@@ -396,11 +401,11 @@ table.list {
       font-family: monospace;
     }
   }
+  td.server {
+    font-size: 13px;
+  }
   td.size {
     width: 40px;
-  }
-  td.date {
-    white-space: nowrap;
   }
   thead>tr>th {
     font-weight:bold;

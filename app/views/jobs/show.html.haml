@@ -16,9 +16,7 @@
     - if @job.server.present?
       %small= "(#{@job.server.username}@#{@job.server.host})"
 .panel.max
-  %h3
-    Script -
-    = @job.interpreter.try(:path).presence || "(default)"
+  %h3= @job.interpreter.try(:path).presence || "Script"
   %pre#script.pc.script.CodeMirror.cm-s-monokai{ data: { interpreter: @job.interpreter.try(:path) } }
     = preserve do
       = @job.script

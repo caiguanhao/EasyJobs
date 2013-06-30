@@ -10,10 +10,11 @@
     %tr
       %th ID
       %th Name
+      %th.server Server
       %th.date Updated at
   %tfoot
     %tr
-      %td{ colspan: 3 }
+      %td{ colspan: 4 }
         .table-pager
           <a href="#" class="table-pager-link prev">Previous</a>
           <a href="#" class="table-pager-link next">Next</a>
@@ -23,4 +24,6 @@
       %tr
         %td= job.id
         %td= link_to job.name, job
+        %td.server
+          = link_to job.server.name, server_path(job.server) unless job.server.nil?
         %td.date= job.updated_at
