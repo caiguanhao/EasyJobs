@@ -7,6 +7,11 @@ EasyJobs::Application.routes.draw do
     end
   end
 
+  get '/settings', to: "settings#index"
+  scope '/settings' do
+    put :edit_interpreters, to: "settings#update_interpreters"
+  end
+
   root to: "jobs#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

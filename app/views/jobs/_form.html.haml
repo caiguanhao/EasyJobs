@@ -11,8 +11,8 @@
     %br
     = f.text_field :name
   .field
-    = f.label :interpreter
-    = f.collection_select :interpreter, Job::Interpreters, :to_s, :to_s, include_blank: "(default)"
+    = f.label :interpreter_id
+    = f.collection_select :interpreter_id, Interpreter.all, :id, :path, include_blank: "(default)"
   .field
     = f.label :script
     %br

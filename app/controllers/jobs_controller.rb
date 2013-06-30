@@ -72,9 +72,9 @@ class JobsController < ApplicationController
       @job = Job.find(params[:id])
       begin
         Net::SSH.start(@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5) do |ssh|
-          if Job::Interpreters.include? @job.interpreter
+          if @job.interpreter.try(:path)
             ssh.open_channel do |channel|
-              channel.exec(@job.interpreter) do |ch, success|
+              channel.exec(@job.interpreter.path) do |ch, success|
                 channel.send_data @job.script
                 channel.eof!
                 channel.on_data do |ch,data|
@@ -120,6 +120,6 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:name, :interpreter, :script, :server_id)
+      params.require(:job).permit(:name, :interpreter_id, :script, :server_id)
     end
 end

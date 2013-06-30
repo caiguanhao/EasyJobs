@@ -1,7 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+Interpreter.create([
+  { path: "/usr/bin/perl"  , upload_script_first: false },
+  { path: "/usr/bin/php"   , upload_script_first: false },
+  { path: "/usr/bin/python", upload_script_first: false }
+])

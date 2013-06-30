@@ -1,0 +1,25 @@
+.menu_div
+
+= form_tag edit_interpreters_path, method: :put do
+  %table.list
+    %thead
+      %tr
+        %th ID
+        %th.path Path of interpreter
+        %th Options
+    %tfoot
+      %tr
+        %td{ colspan: 3 }
+          = pluralize(@interpreters.size, "interpreter")
+    %tbody
+      - @interpreters.each do |interpreter|
+        %tr
+          %td
+            = interpreter.id if interpreter.id > 0
+            = hidden_field_tag "interpreters[]", interpreter.id, id: nil
+          %td.path
+            = text_field_tag "interpreters_path[]", interpreter.path, id: nil
+          %td
+            = check_box_tag "interpreters_usf[]", interpreter.id, interpreter.upload_script_first, id: "interpreter_usf_#{interpreter.id}"
+            = label_tag "interpreter_usf_#{interpreter.id}", "Upload script first"
+  = submit_tag "Save Changes", class: "button button-blue"

@@ -13,7 +13,7 @@
 .panel
   %h3
     Script -
-    = @job.interpreter.presence || "(default)"
+    = @job.interpreter.try(:path).presence || "(default)"
   .pc.script
     = @job.script
 
