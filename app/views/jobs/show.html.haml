@@ -9,15 +9,6 @@
   %h3 Name
   .pc
     = @job.name
-
-.panel
-  %h3
-    Script -
-    = @job.interpreter.try(:path).presence || "(default)"
-  %pre.pc.script
-    = preserve do
-      = @job.script
-
 .panel
   %h3 Server
   .pc
@@ -25,6 +16,13 @@
     - if @job.server.present?
       %br
       = "#{@job.server.username}@#{@job.server.host}"
+.panel.max
+  %h3
+    Script -
+    = @job.interpreter.try(:path).presence || "(default)"
+  %pre.pc.script
+    = preserve do
+      = @job.script
 
 .field
   = link_to 'Run', '', data: { cancel: 'Cancel', run: 'Run', to: run_job_path(@job) }, id: "run_job", class: "button button-blue"

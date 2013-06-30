@@ -11,10 +11,12 @@
     .pc= f.text_field :name
   .panel
     %h3= f.label :server_id
-    .pc= f.collection_select :server_id, Server.all, :id, :name, include_blank: "(none)"
+    .pc
+      .select= f.collection_select :server_id, Server.all, :id, :name, include_blank: "(none)"
   .panel
     %h3= f.label :interpreter_id
-    .pc= f.collection_select :interpreter_id, Interpreter.all, :id, :path, include_blank: "(default)"
+    .pc
+      .select= f.collection_select :interpreter_id, Interpreter.all, :id, :path, include_blank: "(default)"
   .panel.max
     %h3= f.label :script
     .pc= f.text_area :script, size: "80x10"
