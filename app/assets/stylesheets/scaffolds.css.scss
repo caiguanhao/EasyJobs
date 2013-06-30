@@ -486,6 +486,10 @@ div.panel {
   .script {
     font-family: monospace;
     font-size: 12px;
+    background: none;
+    margin: 0;
+    max-height: 130px;
+    overflow: scroll;
   }
 }
 

@@ -14,8 +14,9 @@
   %h3
     Script -
     = @job.interpreter.try(:path).presence || "(default)"
-  .pc.script
-    = @job.script
+  %pre.pc.script
+    = preserve do
+      = @job.script
 
 .panel
   %h3 Server
