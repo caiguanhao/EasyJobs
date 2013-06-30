@@ -1,4 +1,5 @@
 jobsonload = ->
+  # notice and alert tooltip
   remove_notice_or_alert = ->
     $("#notice, #alert").fadeOut 200, ->
       $(this).remove()
@@ -7,6 +8,7 @@ jobsonload = ->
     remove_notice_or_alert();
   if $("#notice, #alert").length > 0
     setTimeout remove_notice_or_alert, 3000
+  # the run button in job show page
   $("#run_job").click (e) ->
     e.preventDefault();
     run_job = $(this)
@@ -39,25 +41,25 @@ jobsonload = ->
       window.source.close();
       run_job.text run_job.data('run')
       $("#output").empty().append("Pending.\n")
+  # render script text editor
   if $("#job_script").length > 0
     editor = CodeMirror.fromTextArea document.getElementById("job_script"), {
       theme: 'monokai',
       mode: 'shell',
       lineNumbers: true
     }
+  # behaviours of text inputs of custom parameters
   if $(".custom_param").length > 0
+    $("#script").data("original", $("#script").text())
     $(".custom_param").bind 'keyup keydown', ->
       data = $("#script").data("original")
-      value = $(this).val()
-      if !data
-        data = $("#script").text()
-        $("#script").data("original", data)
-      if value .length == 0
+      $(".custom_param").each (a,b) ->
+        value = $(this).val()
+        if value != ''
+          data = data.replace new RegExp('([^%]?)%{'+$(this).data('param')+'}', 'g'), (m, p1) ->
+            return p1 + value
         $("#script").text(data)
-      else
-        $("#script").text(data.replace(new RegExp('([^%]?)%{'+$(this).data('param')+'}', 'g'), (m, p1) ->
-          return p1 + value 
-        ))
+  # select options for custom parameters
   if $(".fill_custom_param").length > 0
     $(".fill_custom_param").change ->
       $(this).closest(".pc").find(".custom_param").val($(this).val()).trigger('keydown')
