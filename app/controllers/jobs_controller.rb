@@ -124,13 +124,23 @@ class JobsController < ApplicationController
           else
             script = script % params[:parameters].symbolize_keys if good_param > 0
 
+            exit_if_non_zero = (params.has_key?(:exit_if_non_zero) && params[:exit_if_non_zero] == "1")
+
             # execute commands
             Net::SSH.start *ssh_params do |ssh|
               script.lines.each do |line|
                 line.strip!
                 next if line.empty? or line[0] == "#"
+                exit_code = 0
                 ssh.exec!(line) do |channel, stream, data|
                   sse.write({ :output => data })
+                  channel.on_request("exit-status") do |ch,data|
+                    exit_code = data.read_long
+                  end
+                end
+                if exit_if_non_zero and exit_code > 0
+                  sse.write({ :output => "> Exit with status code #{exit_code}.\n" })
+                  break
                 end
               end
             end

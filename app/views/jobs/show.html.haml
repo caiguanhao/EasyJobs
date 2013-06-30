@@ -36,6 +36,11 @@
           %small= "No '#{param}' found in 'job_parameters' constant."
 .clear
 
+- if @job.interpreter.nil? # only for jobs without interpreters (default)
+  .misc
+    = check_box_tag :exit_if_non_zero, 1, true
+    = label_tag :exit_if_non_zero, "Exit if previous command returns a non-zero status"
+
 .field
   = link_to 'Run', '', data: { cancel: 'Cancel', run: 'Run', to: run_job_path(@job) }, id: "run_job", class: "button button-blue"
 

@@ -15,13 +15,13 @@ jobsonload = ->
     if run_job.text() == run_job.data('run')
       run_job.text run_job.data('cancel')
       $("#output").empty().append("Please wait while connection is beeing established...\n")
-      param = ''
+      parameters = { parameters: {} };
       if $(".custom_param").length > 0
-        parameters = { parameters: {} };
         $(".custom_param").each (a,b) ->
           parameters.parameters[$(this).data("param")] = $(this).val();
-        param = "?" + $.param(parameters)
-      window.source = new EventSource $(this).data('to') + param;
+      if $("#exit_if_non_zero").prop("checked")
+        parameters.exit_if_non_zero = 1
+      window.source = new EventSource $(this).data('to') + "?" + $.param(parameters);
       window.source.addEventListener 'open', (e) ->
         $("#output").empty().append("> Connected.\n")
         $("#output").append(Array(50).join("-")+"\n")
