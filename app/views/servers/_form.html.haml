@@ -5,18 +5,18 @@
       %ul
         - @server.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :host
-    = f.text_field :host
-  .field
-    = f.label :username
-    = f.text_field :username
-  .field
-    = f.label :password
-    = f.text_field :password
+  .panel
+    %h3= f.label :name
+    .pc= f.text_field :name
+  .panel
+    %h3= f.label :host
+    .pc= f.text_field :host
+  .panel
+    %h3= f.label :username
+    .pc= f.text_field :username
+  .panel
+    %h3= f.label :password
+    .pc= f.text_field :password
+  .separator
   .actions
     = f.submit 'Save', class: "button button-green"

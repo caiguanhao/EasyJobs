@@ -5,20 +5,32 @@
   = link_to 'New Server', new_server_path, class: "button button-green"
 .menu_div
 
-%p
-  %b Name:
-  = @server.name
-%p
-  %b Host:
-  = @server.host
-%p
-  %b Username:
-  = @server.username
-%p
-  %b Password:
-  = "*" * @server.password.length
-%p
-  %b Jobs:
-  %ul
+.panel.float
+  %h3 Name
+  .pc
+    = @server.name
+.panel.float
+  %h3 Host
+  .pc
+    = @server.host
+.panel.float
+  %h3 Username (Password)
+  .pc
+    = "#{@server.username} (#{"*" * @server.password.length})"
+
+%table.list
+  %thead
+    %tr
+      %th ID
+      %th Name
+      %th.date Updated at
+  %tfoot
+    %tr
+      %td{ colspan: 3 }
+        = pluralize(@server.jobs.size, "related job")
+  %tbody
     - @server.jobs.each do |job|
-      %li= link_to job.name, job_path(job)
+      %tr
+        %td= job.id
+        %td= link_to job.name, job
+        %td.date= job.updated_at
