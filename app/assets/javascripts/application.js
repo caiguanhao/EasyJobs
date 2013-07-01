@@ -23,4 +23,5 @@
 //= require codemirror/modes/python
 //= require codemirror/modes/shell
 //= require codemirror/modes/yaml
+//= require highcharts
 //= require_tree .

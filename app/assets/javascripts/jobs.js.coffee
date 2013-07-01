@@ -34,6 +34,7 @@ jobsonload = ->
         if e.eventPhase == EventSource.CLOSED
           $("#output").append(Array(50).join("-")+"\n")
           $("#output").append("> Disconnected.\n")
+          update_chart();
         window.source.close();
         run_job.text run_job.data('run')
       , false
@@ -82,5 +83,33 @@ jobsonload = ->
     $(".fill_custom_param").change ->
       $(this).closest(".pc").find(".custom_param").val($(this).val()).trigger('keydown')
       $(this).val('')
+  # chart
+  pad = (str, max) ->
+    str = str.toString()
+    return if str.length < max then pad("0" + str, max) else str;
+  update_chart = ->
+    $.getJSON $("#chart").data("json"), (data) ->
+      chart = $('#chart').highcharts()
+      if chart
+        chart.destroy();
+      $('#chart').highcharts({
+        chart: { type: 'areaspline' },
+        title: { text: null },
+        xAxis: { minTickInterval: 1, categories: data.created_at, labels: { formatter: ->
+          date = new Date(this.value)
+          return pad(date.getMonth()+1,2) + "-" + pad(date.getDate(),2) + " " + pad(date.getHours(),2) + ":" + pad(date.getMinutes(),2)
+        } },
+        yAxis: [ { title: { text: null }, showFirstLabel: false },
+                 { title: { text: null }, showFirstLabel: false, linkedTo: 0, opposite: true }],
+        tooltip: { shared: true, valueSuffix: ' seconds' },
+        credits: { enabled: false },
+        plotOptions: { areaspline: { fillOpacity: 0.5, pointPlacement: 'on' } },
+        series: [{
+          name: 'Time used',
+          data: data.real
+        }]
+      });
+  if $('#chart').length > 0
+    update_chart();
 $(jobsonload)
 $(window).bind 'page:change', jobsonload # because of turbolinks

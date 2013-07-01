@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy]
+  before_action :set_job, only: [:show, :edit, :update, :destroy, :timestats]
 
   helper_method :get_parameters_of
   def get_parameters_of(script)
@@ -17,6 +17,11 @@ class JobsController < ApplicationController
   def show
     @job_parameters = Constant.where("name = ?", "job_parameters").first || []
     @job_parameters = YAML::load @job_parameters.content unless @job_parameters.blank?
+  end
+
+  def timestats
+    render json: { created_at: @job.time_stats.pluck(:created_at).last(12).map{|x|
+      l x, format: "%Y-%m-%d %H:%M:%S" }, real: @job.time_stats.pluck(:real).last(12) }
   end
 
   # GET /jobs/new
@@ -146,6 +151,7 @@ class JobsController < ApplicationController
                 end
               end
             }
+            TimeStat.create([{ real: time_used.real, job_id: @job.id, job_script_size: @job.script.length }])
             sse.write({ :output => "> Time used: #{time_used.real} seconds.\n" })
           end
         end

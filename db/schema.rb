@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130630094836) do
+ActiveRecord::Schema.define(version: 20130701065340) do
 
   create_table "constants", force: true do |t|
     t.string   "name"
@@ -44,5 +44,15 @@ ActiveRecord::Schema.define(version: 20130630094836) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "time_stats", force: true do |t|
+    t.float    "real"
+    t.integer  "job_id"
+    t.integer  "job_script_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "time_stats", ["job_id"], name: "index_time_stats_on_job_id"
 
 end

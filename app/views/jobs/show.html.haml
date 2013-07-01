@@ -45,3 +45,9 @@
 .separator
 
 %pre#output Pending.
+
+- unless @job.time_stats.empty?
+  .separator
+  .panel.max
+    %h3 Statistics
+    #chart{ data: { json: timestats_job_path(@job) } }
