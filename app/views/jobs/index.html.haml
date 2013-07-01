@@ -1,12 +1,4 @@
-#submenu.button_group
-  = link_to 'Listing Jobs', jobs_path, class: "button active"
-  - if session[:job_id].present?
-    = link_to 'Job Details', job_path(session[:job_id]), class: "button"
-    = link_to 'Edit Job', edit_job_path(session[:job_id]), class: "button"
-    = link_to delete_job_path(session[:job_id]), class: "button button-red delete" do
-      %span.icon Delete
-  = link_to 'New Job', new_job_path, class: "button button-green"
-.menu_div
+= render 'menu'
 
 %table.list
   %thead

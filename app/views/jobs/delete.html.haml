@@ -1,14 +1,7 @@
-#submenu.button_group
-  = link_to 'Listing Jobs', jobs_path, class: "button"
-  = link_to 'Job Details', job_path(@job), class: "button"
-  = link_to 'Edit Job', edit_job_path(@job), class: "button"
-  = link_to delete_job_path(@job), class: "button button-red active delete" do
-    %span.icon Delete
-  = link_to 'New Job', new_job_path, class: "button button-green"
-.menu_div
+= render 'menu'
 
 .panel.max
-  %h3 Delete a job
+  %h3= "Deleting #{@job.name}"
   .confirm
     Are you sure you want to delete this job?
     .buttons
