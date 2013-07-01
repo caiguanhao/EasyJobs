@@ -1,5 +1,9 @@
 EasyJobs::Application.routes.draw do
-  resources :servers
+  resources :servers do
+    member do
+      get :delete
+    end
+  end
 
   resources :jobs do
     member do

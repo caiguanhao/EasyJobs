@@ -1,5 +1,5 @@
 class ServersController < ApplicationController
-  before_action :set_server, only: [:show, :edit, :update, :destroy]
+  before_action :set_server, only: [:show, :edit, :update, :delete, :destroy]
 
   # GET /servers
   # GET /servers.json
@@ -51,10 +51,14 @@ class ServersController < ApplicationController
     end
   end
 
+  def delete
+  end
+
   # DELETE /servers/1
   # DELETE /servers/1.json
   def destroy
     @server.destroy
+    session[:server_id] = nil
     respond_to do |format|
       format.html { redirect_to servers_url }
       format.json { head :no_content }

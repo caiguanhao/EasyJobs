@@ -1,0 +1,10 @@
+= render 'menu'
+
+.panel.max
+  %h3= "Deleting #{@server.name}"
+  .confirm
+    Are you sure you want to delete this server?
+    %br
+    = "There are #{@server.jobs.count} jobs related to this server."
+    .buttons
+      = link_to 'Yes. Delete this server. I know this action is irreversible.', server_path(@server), method: :delete, class: "button button-red"

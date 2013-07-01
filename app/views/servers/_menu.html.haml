@@ -5,5 +5,7 @@
   - if server_id.present?
     = link_to 'Server Details', server_path(server_id), class: "button" + (active_action? %w(show))
     = link_to 'Edit Server', edit_server_path(server_id), class: "button" + (active_action? %w(edit update))
+    = link_to delete_server_path(server_id), class: "button button-red delete#{active_action? %w(delete)}" do
+      %span.icon Delete
   = link_to 'New Server', new_server_path, class: "button button-green" + (active_action? %w(new create))
 .menu_div
