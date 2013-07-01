@@ -46,8 +46,9 @@
 
 %pre#output Pending.
 
-- unless @job.time_stats.empty?
-  .separator
-  .panel.max
-    %h3 Statistics
-    #chart{ data: { json: timestats_job_path(@job) } }
+.separator
+.panel.max
+  %h3 Statistics
+  #chart{ class: ("never" if @job.time_stats.empty?), data: { json: timestats_job_path(@job) } }
+    - if @job.time_stats.empty?
+      %p The job has not been started yet!

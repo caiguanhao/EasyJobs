@@ -9,6 +9,8 @@ jobsonload = ->
   if $("#notice, #alert").length > 0
     setTimeout remove_notice_or_alert, 3000
   # the run button in job show page
+  output_scroll_to_bottom = ->
+    $('#output').clearQueue().animate({scrollTop: $('#output')[0].scrollHeight});
   $("#run_job").click (e) ->
     e.preventDefault();
     run_job = $(this)
@@ -30,6 +32,7 @@ jobsonload = ->
         console.log e
         data = $.parseJSON e.data
         $("#output").append(data.output)
+        output_scroll_to_bottom()
       window.source.addEventListener 'error', (e) ->
         if e.eventPhase == EventSource.CLOSED
           $("#output").append(Array(50).join("-")+"\n")
@@ -92,23 +95,24 @@ jobsonload = ->
       chart = $('#chart').highcharts()
       if chart
         chart.destroy();
-      $('#chart').highcharts({
-        chart: { type: 'areaspline' },
-        title: { text: null },
-        xAxis: { minTickInterval: 1, categories: data.created_at, labels: { formatter: ->
-          date = new Date(this.value)
-          return pad(date.getMonth()+1,2) + "-" + pad(date.getDate(),2) + "<br />" + pad(date.getHours(),2) + ":" + pad(date.getMinutes(),2)
-        } },
-        yAxis: [ { title: { text: null }, showFirstLabel: false },
-                 { title: { text: null }, showFirstLabel: false, linkedTo: 0, opposite: true }],
-        tooltip: { shared: true, valueSuffix: ' seconds' },
-        credits: { enabled: false },
-        plotOptions: { areaspline: { fillOpacity: 0.5, pointPlacement: 'on' } },
-        series: [{
-          name: 'Time used',
-          data: data.real
-        }]
-      });
+      if data.hasOwnProperty("real") && data.real.length > 0
+        $('#chart').removeClass("never").highcharts({
+          chart: { type: 'areaspline' },
+          title: { text: null },
+          xAxis: { minTickInterval: 1, categories: data.created_at, labels: { formatter: ->
+            date = new Date(this.value)
+            return pad(date.getMonth()+1,2) + "-" + pad(date.getDate(),2) + "<br />" + pad(date.getHours(),2) + ":" + pad(date.getMinutes(),2)
+          } },
+          yAxis: [ { title: { text: null }, showFirstLabel: false },
+                   { title: { text: null }, showFirstLabel: false, linkedTo: 0, opposite: true }],
+          tooltip: { shared: true, valueSuffix: ' seconds' },
+          credits: { enabled: false },
+          plotOptions: { areaspline: { fillOpacity: 0.5, pointPlacement: 'on' } },
+          series: [{
+            name: 'Time used',
+            data: data.real
+          }]
+        });
   if $('#chart').length > 0
     update_chart();
 $(jobsonload)
