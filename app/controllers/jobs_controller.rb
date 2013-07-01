@@ -74,12 +74,14 @@ class JobsController < ApplicationController
     require 'streamer/sse'
     require 'net/ssh'
     require 'net/scp'
+    require 'benchmark'
+
     response.headers['Content-Type'] = 'text/event-stream'
     sse = Streamer::SSE.new(response.stream)
     begin
       @job = Job.find(params[:id])
       begin
-        raise "Please select one server!" if @job.server.nil?
+        raise "> Please select one server!" if @job.server.nil?
         ssh_params = [@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5]
 
         if @job.interpreter.try(:path)
@@ -88,10 +90,10 @@ class JobsController < ApplicationController
               script = @job.script
               script.gsub!(/\r\n?/, "\n")
               ssh.scp.upload!(StringIO.new(script), "/tmp/easyjobs_script") do |ch, name, sent, total|
-                sse.write({ :output => "Uploading #{name} ... #{(sent.to_f * 100 / total.to_f).to_i}% #{sent}/#{total} bytes sent\n" })
+                sse.write({ :output => "> Uploading #{name} ... #{(sent.to_f * 100 / total.to_f).to_i}% #{sent}/#{total} bytes sent\n" })
               end
               cmd = "#{@job.interpreter.path} /tmp/easyjobs_script"
-              sse.write({ :output => "Running #{cmd} ...\n" })
+              sse.write({ :output => "> Running #{cmd} ...\n" })
               ssh.exec!(cmd) do |channel, stream, data|
                 sse.write({ :output => data })
               end
@@ -121,33 +123,36 @@ class JobsController < ApplicationController
               params[:parameters].has_key?(p) and params[:parameters][p].length > 0
           end
           if good_param != parameters.count
-            raise "At least one parameter value is not provided!"
+            raise "> At least one parameter value is not provided!"
           else
             script = script % params[:parameters].symbolize_keys if good_param > 0
 
             exit_if_non_zero = (params.has_key?(:exit_if_non_zero) && params[:exit_if_non_zero] == "1")
 
             # execute commands
-            Net::SSH.start *ssh_params do |ssh|
-              script.lines.each do |line|
-                line.strip!
-                next if line.empty? or line[0] == "#"
-                exit_code = 0
-                ssh.exec!(line) do |channel, stream, data|
-                  sse.write({ :output => data })
-                  channel.on_request("exit-status") do |ch,data|
-                    exit_code = data.read_long
+            time_used = Benchmark.measure {
+              Net::SSH.start *ssh_params do |ssh|
+                script.lines.each do |line|
+                  line.strip!
+                  next if line.empty? or line[0] == "#"
+                  exit_code = 0
+                  ssh.exec!(line) do |channel, stream, data|
+                    sse.write({ :output => data })
+                    channel.on_request("exit-status") do |ch,data|
+                      exit_code = data.read_long
+                    end
                   end
+                  raise "> Exit with status code #{exit_code}." if exit_if_non_zero and exit_code > 0
                 end
-                raise "> Exit with status code #{exit_code}." if exit_if_non_zero and exit_code > 0
               end
-            end
+            }
+            sse.write({ :output => "> Time used: #{time_used.real} seconds.\n" })
           end
         end
       rescue Timeout::Error
-        sse.write({ :output => "Timed out!\n" })
+        sse.write({ :output => "> Timed out!\n" })
       rescue Net::SSH::AuthenticationFailed
-        sse.write({ :output => "Authentication failed!\n" })
+        sse.write({ :output => "> Authentication failed!\n" })
       rescue Exception => e
         sse.write({ :output => "#{e.message}\n" })
       end
