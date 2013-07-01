@@ -17,7 +17,7 @@
       %small= "(#{@job.server.username}@#{@job.server.host})"
 .panel.float
   %h3 Mean time
-  #mean_time.pc
+  #mean_time.pc{ data: { mean_time: @job.mean_time.presence || "0" }}
     = @job.mean_time.present? ? "#{@job.mean_time} s" : "(not started yet)"
 .panel.max
   %h3= @job.interpreter.try(:path).presence || "Script"
@@ -43,9 +43,13 @@
     = check_box_tag :exit_if_non_zero, 1, true
     = label_tag :exit_if_non_zero, "Exit if previous command returns a non-zero status"
 
+#progress.progress.progress-blue.right-side
+  %span
+
 .field
   = link_to 'Run', '', data: { cancel: 'Cancel', run: 'Run', to: run_job_path(@job) }, id: "run_job", class: "button button-blue"
 
+.clear
 .separator
 
 %pre#output Pending.

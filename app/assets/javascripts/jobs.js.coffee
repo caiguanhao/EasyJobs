@@ -15,6 +15,15 @@ jobsonload = ->
     e.preventDefault();
     run_job = $(this)
     if run_job.text() == run_job.data('run')
+      dur = $("#mean_time").data("mean-time")
+      init = "99%"
+      if dur == 0
+        dur = 2000
+        init = "90%"
+      else
+        dur = dur * 1000
+      $("#progress span").stop().clearQueue().animate { width: "0%" }, ->
+        $("#progress span").animate({ width: init }, dur);
       run_job.text run_job.data('cancel')
       $("#output").empty().append("Please wait while connection is beeing established...\n")
       parameters = { parameters: {} };
@@ -38,6 +47,8 @@ jobsonload = ->
           $("#output").append(Array(50).join("-")+"\n")
           $("#output").append("> Disconnected.\n")
           update_chart();
+          $("#progress span").stop().clearQueue().animate { width: "100%" }, ->
+            $("#progress span").delay(3000).animate { width: "0%" }
         window.source.close();
         run_job.text run_job.data('run')
       , false
@@ -97,7 +108,7 @@ jobsonload = ->
         chart.destroy();
       if data.hasOwnProperty("real") && data.real.length > 0
         if data.mean_time != null
-          $("#mean_time").text(data.mean_time + " s")
+          $("#mean_time").data("mean-time", data.mean_time).text(data.mean_time + " s")
         $('#chart').removeClass("never").highcharts({
           chart: { type: 'areaspline' },
           title: { text: null },

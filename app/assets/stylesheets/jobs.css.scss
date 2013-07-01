@@ -1,3 +1,48 @@
 // Place all the styles related to the jobs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.progress {
+  position:relative;
+  height:13px;
+  background:white;
+  border:1px solid #c6c6c6;
+  border-top-color:#bbb;
+  border-radius:8px;
+  -webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.06),0 1px rgba(255,255,255,0.4);
+  box-shadow:inset 0 1px 1px rgba(0,0,0,0.06),0 1px rgba(255,255,255,0.4);
+  &>span {
+    display:block;
+    position:absolute;
+    top:-1px;
+    bottom:-1px;
+    left:-1px;
+    min-width:13px;
+    background:#ececec;
+    border:1px solid #ccc;
+    border-bottom-color:#c6c6c6;
+    border-radius:8px;
+    background-image:linear-gradient(tobottom,#fcfcfc,#e6e6e6);
+    -webkit-box-shadow:inset 0 1px #fff,inset 0 0 0 1px rgba(255,255,255,0.3),1px 1px 1px rgba(0,0,0,0.06);
+    box-shadow:inset 0 1px #fff,inset 0 0 0 1px rgba(255,255,255,0.3),1px 1px 1px rgba(0,0,0,0.06);
+  }
+  &.progress-blue>span {
+    background:#3e91ee;
+    background-image:linear-gradient(tobottom,#5ea8fc,#2e86e7);
+    -webkit-box-shadow:inset 0 1px rgba(255,255,255,0.25),inset 0 0 0 1px rgba(255,255,255,0.08),1px 1px 1px rgba(0,0,0,0.1);
+    box-shadow:inset 0 1px rgba(255,255,255,0.25),inset 0 0 0 1px rgba(255,255,255,0.08),1px 1px 1px rgba(0,0,0,0.1);
+    border-color:#6898c8 #5a87b5 #4573a1;
+  }
+
+  &.progress-green>span {
+    background:#84c43e;
+    background-image:linear-gradient(tobottom,#a0d44d,#70b834);
+    -webkit-box-shadow:inset 0 1px rgba(255,255,255,0.25),inset 0 0 0 1px rgba(255,255,255,0.1),1px 1px 1px rgba(0,0,0,0.1);
+    box-shadow:inset 0 1px rgba(255,255,255,0.25),inset 0 0 0 1px rgba(255,255,255,0.1),1px 1px 1px rgba(0,0,0,0.1);
+    border-color:#7ba845 #77a343 #6f983f;
+  }
+  &.right-side {
+    float: right;
+    width: 200px;
+    margin: 12px 0 0 0;
+  }
+}
