@@ -20,8 +20,7 @@ class JobsController < ApplicationController
   end
 
   def timestats
-    created_at = @job.time_stats.pluck(:created_at).last(12).map{|x|
-      l x, format: "%Y-%m-%d %H:%M:%S" }
+    created_at = @job.time_stats.pluck(:created_at).last(12).map{|x| x.to_i }
     real = @job.time_stats.pluck(:real).last(12)
 
     created_at.push created_at[0] if created_at.length == 1

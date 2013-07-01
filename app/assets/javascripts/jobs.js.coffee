@@ -113,12 +113,17 @@ jobsonload = ->
           chart: { type: 'areaspline' },
           title: { text: null },
           xAxis: { minTickInterval: 1, categories: data.created_at, labels: { formatter: ->
-            date = new Date(this.value)
+            date = new Date(this.value * 1000)
             return pad(date.getMonth()+1,2) + "-" + pad(date.getDate(),2) + "<br />" + pad(date.getHours(),2) + ":" + pad(date.getMinutes(),2)
           } },
           yAxis: [ { title: { text: null }, showFirstLabel: false },
                    { title: { text: null }, showFirstLabel: false, linkedTo: 0, opposite: true }],
-          tooltip: { shared: true, valueSuffix: ' seconds' },
+          tooltip: { shared: true, formatter: ->
+            date = new Date(this.x * 1000)
+            return date.getFullYear() + "-" + pad(date.getMonth()+1,2) + "-" + pad(date.getDate(),2) + " " + 
+            pad(date.getHours(),2) + ":" + pad(date.getMinutes(),2) + ":" + pad(date.getSeconds(),2)+
+            '<br /><b>Time used: '+this.y+' seconds</b>';
+          },
           credits: { enabled: false },
           plotOptions: { areaspline: { fillOpacity: 0.5, pointPlacement: 'on' } },
           series: [{
