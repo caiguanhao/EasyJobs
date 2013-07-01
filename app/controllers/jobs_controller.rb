@@ -122,7 +122,7 @@ class JobsController < ApplicationController
               end
             end
           }
-          record_and_output_real_time time_used, @job
+          record_and_output_real_time time_used, @job, sse
         else
           # job without interpreter (default)
           script = @job.script
@@ -160,7 +160,7 @@ class JobsController < ApplicationController
                 end
               end
             }
-            record_and_output_real_time time_used, @job
+            record_and_output_real_time time_used, @job, sse
           end
         end
       rescue Timeout::Error
@@ -191,7 +191,7 @@ class JobsController < ApplicationController
       params.require(:job).permit(:name, :interpreter_id, :script, :server_id)
     end
 
-    def record_and_output_real_time(time_used, job)
+    def record_and_output_real_time(time_used, job, sse)
       TimeStat.create([{ real: time_used.real, job_id: job.id, job_script_size: job.script.length }])
       sse.write({ :output => "> Time used: #{time_used.real} seconds.\n" })
     end
