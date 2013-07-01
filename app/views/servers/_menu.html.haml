@@ -1,0 +1,9 @@
+#submenu.button_group
+  = link_to 'Listing Servers', servers_path, class: "button" + (active_action? %w(index))
+  - server_id = @server.try(:id)
+  - server_id = session[:server_id] if server_id.nil? and session[:server_id].present?
+  - if server_id.present?
+    = link_to 'Server Details', server_path(server_id), class: "button" + (active_action? %w(show))
+    = link_to 'Edit Server', edit_server_path(server_id), class: "button" + (active_action? %w(edit update))
+  = link_to 'New Server', new_server_path, class: "button button-green" + (active_action? %w(new create))
+.menu_div

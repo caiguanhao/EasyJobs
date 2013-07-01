@@ -1,8 +1,3 @@
-#submenu.button_group
-  = link_to 'Listing Servers', servers_path, class: "button"
-  = link_to 'Server Details', server_path(@server), class: "button"
-  = link_to 'Edit Server', edit_server_path(@server), class: "button active"
-  = link_to 'New Server', new_server_path, class: "button button-green"
-.menu_div
+= render 'menu'
 
 = render 'form'
