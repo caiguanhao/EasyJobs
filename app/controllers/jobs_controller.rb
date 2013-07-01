@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :destroy, :timestats]
+  before_action :set_job, only: [:show, :edit, :update, :delete, :destroy, :timestats]
 
   helper_method :get_parameters_of
   def get_parameters_of(script)
@@ -69,12 +69,16 @@ class JobsController < ApplicationController
     end
   end
 
+  def delete
+  end
+
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
     @job.destroy
+    session[:job_id] = nil
     respond_to do |format|
-      format.html { redirect_to jobs_url }
+      format.html { redirect_to jobs_url, notice: 'Job was successfully deleted.' }
       format.json { head :no_content }
     end
   end

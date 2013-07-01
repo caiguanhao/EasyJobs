@@ -2,6 +2,8 @@
   = link_to 'Listing Jobs', jobs_path, class: "button"
   = link_to 'Job Details', job_path(@job), class: "button"
   = link_to 'Edit Job', edit_job_path(@job), class: "button active"
+  = link_to delete_job_path(@job), class: "button button-red delete" do
+    %span.icon Delete
   = link_to 'New Job', new_job_path, class: "button button-green"
 .menu_div
 

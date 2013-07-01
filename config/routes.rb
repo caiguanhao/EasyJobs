@@ -5,6 +5,7 @@ EasyJobs::Application.routes.draw do
     member do
       get :run
       get :timestats
+      get :delete
     end
   end
 
