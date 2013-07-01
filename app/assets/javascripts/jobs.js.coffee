@@ -97,7 +97,7 @@ jobsonload = ->
         title: { text: null },
         xAxis: { minTickInterval: 1, categories: data.created_at, labels: { formatter: ->
           date = new Date(this.value)
-          return pad(date.getMonth()+1,2) + "-" + pad(date.getDate(),2) + " " + pad(date.getHours(),2) + ":" + pad(date.getMinutes(),2)
+          return pad(date.getMonth()+1,2) + "-" + pad(date.getDate(),2) + "<br />" + pad(date.getHours(),2) + ":" + pad(date.getMinutes(),2)
         } },
         yAxis: [ { title: { text: null }, showFirstLabel: false },
                  { title: { text: null }, showFirstLabel: false, linkedTo: 0, opposite: true }],

@@ -20,8 +20,14 @@ class JobsController < ApplicationController
   end
 
   def timestats
-    render json: { created_at: @job.time_stats.pluck(:created_at).last(12).map{|x|
-      l x, format: "%Y-%m-%d %H:%M:%S" }, real: @job.time_stats.pluck(:real).last(12) }
+    created_at = @job.time_stats.pluck(:created_at).last(12).map{|x|
+      l x, format: "%Y-%m-%d %H:%M:%S" }
+    real = @job.time_stats.pluck(:real).last(12)
+
+    created_at.push created_at[0] if created_at.length == 1
+    real.push real[0] if real.length == 1
+
+    render json: { created_at: created_at, real: real }
   end
 
   # GET /jobs/new
@@ -90,30 +96,33 @@ class JobsController < ApplicationController
         ssh_params = [@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5]
 
         if @job.interpreter.try(:path)
-          Net::SSH.start *ssh_params do |ssh|
-            if @job.interpreter.upload_script_first
-              script = @job.script
-              script.gsub!(/\r\n?/, "\n")
-              ssh.scp.upload!(StringIO.new(script), "/tmp/easyjobs_script") do |ch, name, sent, total|
-                sse.write({ :output => "> Uploading #{name} ... #{(sent.to_f * 100 / total.to_f).to_i}% #{sent}/#{total} bytes sent\n" })
-              end
-              cmd = "#{@job.interpreter.path} /tmp/easyjobs_script"
-              sse.write({ :output => "> Running #{cmd} ...\n" })
-              ssh.exec!(cmd) do |channel, stream, data|
-                sse.write({ :output => data })
-              end
-            else
-              ssh.open_channel do |channel|
-                channel.exec(@job.interpreter.path) do |ch, success|
-                  channel.send_data @job.script
-                  channel.eof!
-                  channel.on_data do |ch,data|
-                    sse.write({ :output => data })
+          time_used = Benchmark.measure {
+            Net::SSH.start *ssh_params do |ssh|
+              if @job.interpreter.upload_script_first
+                script = @job.script
+                script.gsub!(/\r\n?/, "\n")
+                ssh.scp.upload!(StringIO.new(script), "/tmp/easyjobs_script") do |ch, name, sent, total|
+                  sse.write({ :output => "> Uploading #{name} ... #{(sent.to_f * 100 / total.to_f).to_i}% #{sent}/#{total} bytes sent\n" })
+                end
+                cmd = "#{@job.interpreter.path} /tmp/easyjobs_script"
+                sse.write({ :output => "> Running #{cmd} ...\n" })
+                ssh.exec!(cmd) do |channel, stream, data|
+                  sse.write({ :output => data })
+                end
+              else
+                ssh.open_channel do |channel|
+                  channel.exec(@job.interpreter.path) do |ch, success|
+                    channel.send_data @job.script
+                    channel.eof!
+                    channel.on_data do |ch,data|
+                      sse.write({ :output => data })
+                    end
                   end
                 end
               end
             end
-          end
+          }
+          record_and_output_real_time time_used, @job
         else
           # job without interpreter (default)
           script = @job.script
@@ -151,8 +160,7 @@ class JobsController < ApplicationController
                 end
               end
             }
-            TimeStat.create([{ real: time_used.real, job_id: @job.id, job_script_size: @job.script.length }])
-            sse.write({ :output => "> Time used: #{time_used.real} seconds.\n" })
+            record_and_output_real_time time_used, @job
           end
         end
       rescue Timeout::Error
@@ -181,5 +189,10 @@ class JobsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
       params.require(:job).permit(:name, :interpreter_id, :script, :server_id)
+    end
+
+    def record_and_output_real_time(time_used, job)
+      TimeStat.create([{ real: time_used.real, job_id: job.id, job_script_size: job.script.length }])
+      sse.write({ :output => "> Time used: #{time_used.real} seconds.\n" })
     end
 end
