@@ -96,6 +96,8 @@ jobsonload = ->
       if chart
         chart.destroy();
       if data.hasOwnProperty("real") && data.real.length > 0
+        if data.mean_time != null
+          $("#mean_time").text(data.mean_time + " s")
         $('#chart').removeClass("never").highcharts({
           chart: { type: 'areaspline' },
           title: { text: null },

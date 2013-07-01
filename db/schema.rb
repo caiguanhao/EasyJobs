@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130701090833) do
+ActiveRecord::Schema.define(version: 20130701105513) do
 
   create_table "constants", force: true do |t|
     t.string   "name"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20130701090833) do
     t.datetime "updated_at"
     t.integer  "server_id"
     t.integer  "interpreter_id"
+    t.float    "mean_time"
   end
 
   add_index "jobs", ["interpreter_id"], name: "index_jobs_on_interpreter_id"

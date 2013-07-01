@@ -27,7 +27,7 @@ class JobsController < ApplicationController
     created_at.push created_at[0] if created_at.length == 1
     real.push real[0] if real.length == 1
 
-    render json: { created_at: created_at, real: real }
+    render json: { created_at: created_at, real: real, mean_time: @job.mean_time }
   end
 
   # GET /jobs/new
@@ -193,6 +193,9 @@ class JobsController < ApplicationController
 
     def record_and_output_real_time(time_used, job, sse)
       TimeStat.create([{ real: time_used.real, job_id: job.id, job_script_size: job.script.length }])
+      mean_time = job.time_stats.average(:real)
+      job.update({ mean_time: mean_time })
       sse.write({ :output => "> Time used: #{time_used.real} seconds.\n" })
+      sse.write({ :output => "> Mean time: #{mean_time} seconds.\n" })
     end
 end
