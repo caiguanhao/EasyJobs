@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130701090427) do
+ActiveRecord::Schema.define(version: 20130701090833) do
 
   create_table "constants", force: true do |t|
     t.string   "name"
@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 20130701090427) do
     t.integer  "server_id"
     t.integer  "interpreter_id"
   end
+
+  add_index "jobs", ["interpreter_id"], name: "index_jobs_on_interpreter_id"
+  add_index "jobs", ["server_id"], name: "index_jobs_on_server_id"
 
   create_table "servers", force: true do |t|
     t.string   "name"
