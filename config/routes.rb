@@ -15,6 +15,8 @@ EasyJobs::Application.routes.draw do
     end
   end
 
+  resources :admins
+
   get '/settings', to: "settings#index"
   scope '/settings' do
     put :edit_interpreters, to: "settings#update_interpreters"

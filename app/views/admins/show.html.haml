@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Username:
+  = @admin.username
+%p
+  %b Email:
+  = @admin.email
+%p
+  %b Password:
+  = @admin.password
+
+= link_to 'Edit', edit_admin_path(@admin)
+\|
+= link_to 'Back', admins_path
