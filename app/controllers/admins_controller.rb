@@ -1,5 +1,4 @@
 class AdminsController < ApplicationController
-  before_action :authenticate
   before_action :set_admin, only: [:show, :edit, :update, :delete, :destroy]
   before_action :cant_change_admin_with_smaller_id, only: [:update, :destroy]
 

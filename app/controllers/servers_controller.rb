@@ -1,5 +1,4 @@
 class ServersController < ApplicationController
-  before_action :authenticate
   before_action :set_server, only: [:show, :edit, :update, :delete, :destroy]
 
   # GET /servers
