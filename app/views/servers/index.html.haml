@@ -10,9 +10,6 @@
   %tfoot
     %tr
       %td{ colspan: 4 }
-        .table-pager
-          <a href="#" class="table-pager-link prev">Previous</a>
-          <a href="#" class="table-pager-link next">Next</a>
         = pluralize(@servers.size, "server")
   %tbody
     - @servers.each do |server|

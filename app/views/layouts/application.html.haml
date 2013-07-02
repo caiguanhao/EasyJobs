@@ -20,9 +20,9 @@
           %h1#title
             EasyJobs
             .right
-              = link_to current_admin.username, admin_path(current_admin)
+              = link_to current_admin.username, edit_admin_path(current_admin)
               |
-              = link_to 'Log Out', destroy_admin_session_path, method: :delete, data: { confirm: 'Are you sure?' }
+              = link_to 'Log Out', destroy_admin_session_path, method: :delete
         #menu.button_group
           = link_to 'Jobs', jobs_path, class: "button" + (params[:controller]=="jobs" ? " active" : "")
           = link_to 'Servers', servers_path, class: "button" + (params[:controller]=="servers" ? " active" : "")

@@ -27,5 +27,8 @@
     - @server.jobs.each do |job|
       %tr
         %td= job.id
-        %td= link_to job.name, job
+        %td
+          = link_to job.name, job
+          %span.interpreter
+            = job.interpreter.try(:path).presence || "Script"
         %td.date= job.updated_at
