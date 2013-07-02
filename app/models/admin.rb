@@ -1,5 +1,6 @@
 class Admin < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable, :validatable
+  validates_uniqueness_of :username
   attr_accessor :login
 
   def self.find_for_database_authentication(warden_conditions)

@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: [:show, :edit, :update, :delete, :destroy]
+  before_action :cant_change_admin_with_smaller_id, only: [:update, :destroy]
 
   # GET /admins
   # GET /admins.json
@@ -86,6 +87,12 @@ class AdminsController < ApplicationController
 
       # remeber last entered job
       session[:admin_id] = params[:id]
+    end
+
+    def cant_change_admin_with_smaller_id
+      if current_admin.id > @admin.id
+        redirect_to :back, alert: 'You can\'t modify settings of admin with smaller ID than yours.' and return
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
