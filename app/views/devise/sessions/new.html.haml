@@ -2,8 +2,8 @@
 
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   .panel
-    %h3= f.label :email
-    .pc= f.text_field :email, autofocus: true
+    %h3= f.label :login
+    .pc= f.text_field :login, autofocus: true
   .panel
     %h3= f.label :password
     .pc= f.password_field :password
