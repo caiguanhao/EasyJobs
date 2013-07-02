@@ -1,4 +1,5 @@
 class JobsController < ApplicationController
+  before_action :authenticate
   before_action :set_job, only: [:show, :edit, :update, :delete, :destroy, :timestats]
 
   helper_method :get_parameters_of

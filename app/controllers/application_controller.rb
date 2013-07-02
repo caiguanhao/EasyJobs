@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
   def active_action?(array)
     array.include?(params[:action]) ? " active" : ""
   end
+
+  def authenticate
+    redirect_to(new_admin_session_path) and return unless admin_signed_in?
+  end
 end

@@ -1,4 +1,5 @@
 class SettingsController < ApplicationController
+  before_action :authenticate
 
   def index
     @interpreters = Interpreter.all.to_a.concat([Interpreter.new(id: 0)])
