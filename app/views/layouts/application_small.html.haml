@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title EasyJobs
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  %body
+    - if notice
+      #notice
+        = notice
+        %a.close{ href: "#" } x
+    - if alert
+      #alert
+        = alert
+        %a.close{ href: "#" } x
+    #wrapper
+      #main.small
+        #header
+          %h1#title Log into EasyJobs
+        = yield

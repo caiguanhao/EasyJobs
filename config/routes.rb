@@ -1,5 +1,6 @@
 EasyJobs::Application.routes.draw do
-  devise_for :admins
+  devise_for :admins, :controllers => { :sessions => "sessions" }
+
   resources :servers do
     member do
       get :delete
