@@ -1,0 +1,8 @@
+= render 'menu'
+
+.panel.max
+  %h3= "Deleting #{@admin.username}"
+  .confirm
+    Are you sure you want to delete this admin?
+    .buttons
+      = link_to 'Yes. Delete this admin. I know this action is irreversible.', admin_path(@admin), method: :delete, class: "button button-red"

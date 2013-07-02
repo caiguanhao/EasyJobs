@@ -15,7 +15,11 @@ EasyJobs::Application.routes.draw do
     end
   end
 
-  resources :admins
+  resources :admins do
+    member do
+      get :delete
+    end
+  end
 
   get '/settings', to: "settings#index"
   scope '/settings' do

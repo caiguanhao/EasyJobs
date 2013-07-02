@@ -1,0 +1,11 @@
+#submenu.button_group
+  = link_to 'Listing Admins', admins_path, class: "button" + (active_action? %w(index))
+  - admin_id = @admin.try(:id)
+  - admin_id = session[:admin_id] if admin_id.nil? and session[:admin_id].present?
+  - if admin_id.present?
+    = link_to 'Admin Details', admin_path(admin_id), class: "button" + (active_action? %w(show))
+    = link_to 'Edit Admin', edit_admin_path(admin_id), class: "button" + (active_action? %w(edit update))
+    = link_to delete_admin_path(admin_id), class: "button button-red delete#{active_action? %w(delete)}" do
+      %span.icon Delete
+  = link_to 'New Admins', new_admin_path, class: "button button-green" + (active_action? %w(new create))
+.menu_div

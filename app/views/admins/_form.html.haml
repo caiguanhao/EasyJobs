@@ -5,15 +5,15 @@
       %ul
         - @admin.errors.full_messages.each do |msg|
           %li= msg
-
-  .field
-    = f.label :username
-    = f.text_field :username
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :password
-    = f.text_field :password
+  .panel
+    %h3= f.label :username
+    .pc= f.text_field :username
+  .panel
+    %h3= f.label :email
+    .pc= f.text_field :email
+  .panel
+    %h3= f.label :password
+    .pc= f.password_field :password
+  .separator
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: "button button-green"

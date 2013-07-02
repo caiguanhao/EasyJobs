@@ -24,5 +24,6 @@
         #menu.button_group
           = link_to 'Jobs', jobs_path, class: "button" + (params[:controller]=="jobs" ? " active" : "")
           = link_to 'Servers', servers_path, class: "button" + (params[:controller]=="servers" ? " active" : "")
+          = link_to 'Admins', admins_path, class: "button" + (params[:controller]=="admins" ? " active" : "")
           = link_to 'Settings', settings_path, class: "button" + (params[:controller]=="settings" ? " active" : "")
         = yield

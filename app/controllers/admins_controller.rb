@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin, only: [:show, :edit, :update, :delete, :destroy]
 
   # GET /admins
   # GET /admins.json
@@ -40,6 +40,9 @@ class AdminsController < ApplicationController
   # PATCH/PUT /admins/1
   # PATCH/PUT /admins/1.json
   def update
+    # don't change password if it is empty
+    params[:admin].delete :password if params[:admin][:password].empty?
+
     respond_to do |format|
       if @admin.update(admin_params)
         format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
@@ -51,12 +54,27 @@ class AdminsController < ApplicationController
     end
   end
 
+  def delete
+  end
+
   # DELETE /admins/1
   # DELETE /admins/1.json
   def destroy
+    # self-destruction
+    if @admin.id == current_admin.id
+      redirect_to :back, alert: 'Please don\'t commit suicide.' and return
+    end
+
+    # there will be no admins
+    admin_count = Admin.count
+    if admin_count <= 1
+      redirect_to :back, alert: 'You can delete this admin. Because there will be no admins.' and return
+    end
+
     @admin.destroy
+    session[:admin_id] = nil
     respond_to do |format|
-      format.html { redirect_to admins_url }
+      format.html { redirect_to admins_url, notice: 'Admin was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +83,9 @@ class AdminsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin
       @admin = Admin.find(params[:id])
+
+      # remeber last entered job
+      session[:admin_id] = params[:id]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

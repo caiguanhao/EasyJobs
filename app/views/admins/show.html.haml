@@ -1,15 +1,41 @@
-%p#notice= notice
+= render 'menu'
 
-%p
-  %b Username:
-  = @admin.username
-%p
-  %b Email:
-  = @admin.email
-%p
-  %b Password:
-  = @admin.password
-
-= link_to 'Edit', edit_admin_path(@admin)
-\|
-= link_to 'Back', admins_path
+.panel.float
+  %h3 Username
+  .pc
+    = @admin.username
+.panel.float
+  %h3 Email
+  .pc
+    = @admin.email
+.panel.float
+  %h3 Sign In Count
+  .pc
+    = @admin.sign_in_count
+.clear
+.panel.float
+  %h3 Current Sign In At
+  .pc
+    = @admin.current_sign_in_at.presence || "(n/a)"
+.panel.float
+  %h3 Last Sign In At
+  .pc
+    = @admin.last_sign_in_at.presence || "(n/a)"
+.panel.float
+  %h3 Created At
+  .pc
+    = @admin.created_at
+.clear
+.panel.float
+  %h3 Current Sign In IP
+  .pc
+    = @admin.current_sign_in_ip.presence || "(n/a)"
+.panel.float
+  %h3 Last Sign In IP
+  .pc
+    = @admin.last_sign_in_ip.presence || "(n/a)"
+.panel.float
+  %h3 Updated At
+  .pc
+    = @admin.updated_at
+.clear
