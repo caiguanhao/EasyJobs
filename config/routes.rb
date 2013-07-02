@@ -1,4 +1,5 @@
 EasyJobs::Application.routes.draw do
+  devise_for :admins
   resources :servers do
     member do
       get :delete
