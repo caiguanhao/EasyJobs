@@ -14,4 +14,18 @@ class ApplicationController < ActionController::Base
     def authenticate
       redirect_to(new_admin_session_path) and return unless admin_signed_in?
     end
+
+    def create_job_with(job_params)
+      @job = Job.new(job_params)
+
+      respond_to do |format|
+        if @job.save
+          format.html { redirect_to @job, notice: 'Job was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @job }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @job.errors, status: :unprocessable_entity }
+        end
+      end
+    end
 end

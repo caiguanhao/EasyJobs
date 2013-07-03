@@ -4,6 +4,7 @@ EasyJobs::Application.routes.draw do
   resources :servers do
     member do
       get :delete
+      post :create_blank_job, as: "create_blank_job_for"
     end
   end
 

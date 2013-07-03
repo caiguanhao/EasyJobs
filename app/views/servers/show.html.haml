@@ -13,22 +13,29 @@
   .pc
     = "#{@server.username} (#{"*" * @server.password.length})"
 
-%table.list
-  %thead
-    %tr
-      %th ID
-      %th Name
-      %th.date Updated at
-  %tfoot
-    %tr
-      %td{ colspan: 3 }
-        = pluralize(@server.jobs.size, "related job")
-  %tbody
-    - @server.jobs.each do |job|
+.clear
+.separator
+
+- if @server.jobs.size == 0
+  .field
+    = link_to 'No jobs related to this server! Why not create a blank job to test connectivity?', create_blank_job_for_server_path(@server), method: :post, class: "button button-blue"
+- else
+  %table.list
+    %thead
       %tr
-        %td= job.id
-        %td
-          = link_to job.name, job
-          %span.interpreter
-            = job.interpreter.try(:path).presence || "Script"
-        %td.date= job.updated_at
+        %th ID
+        %th Name
+        %th.date Updated at
+    %tfoot
+      %tr
+        %td{ colspan: 3 }
+          = pluralize(@server.jobs.size, "related job")
+    %tbody
+      - @server.jobs.each do |job|
+        %tr
+          %td= job.id
+          %td
+            = link_to job.name, job
+            %span.interpreter
+              = job.interpreter.try(:path).presence || "Script"
+          %td.date= job.updated_at
