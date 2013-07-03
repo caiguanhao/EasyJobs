@@ -64,6 +64,7 @@ class JobsController < ApplicationController
   # DELETE /jobs/1
   # DELETE /jobs/1.json
   def destroy
+    @job.time_stats.clear
     @job.destroy
     session[:job_id] = nil
     respond_to do |format|
