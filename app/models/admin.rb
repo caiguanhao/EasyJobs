@@ -1,12 +1,14 @@
 class Admin < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable, :validatable
-  validates_uniqueness_of :username
+  validates_format_of :username, :with => /[0-9a-zA-Z\p{Han}]{3,16}/
+  validates :username, :uniqueness => { :case_sensitive => false }
 
   attr_accessor :login, :auth_code
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     auth_code = conditions[:auth_code]
+    return false unless !!(auth_code =~ /\A[0-9]{6}\Z/)
     conditions = conditions.except(:auth_code)
 
     first = if login = conditions.delete(:login)
