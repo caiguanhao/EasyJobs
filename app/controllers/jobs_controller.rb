@@ -87,6 +87,7 @@ class JobsController < ApplicationController
       @job = Job.find(params[:id])
       begin
         raise "> Please select one server!" if @job.server.nil?
+
         ssh_params = [@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5]
 
         if @job.interpreter.try(:path)
@@ -118,6 +119,7 @@ class JobsController < ApplicationController
           }
           record_and_output_real_time time_used, @job, sse
         else
+
           # job without interpreter (default)
           script = @job.script
           script.gsub!(/\r\n?/, "\n")
@@ -130,32 +132,32 @@ class JobsController < ApplicationController
             good_param = good_param + 1 if params.has_key?(:parameters) and 
               params[:parameters].has_key?(p) and params[:parameters][p].length > 0
           end
-          if good_param != parameters.count
-            raise "> At least one parameter value is not provided!"
-          else
-            script = script % params[:parameters].symbolize_keys if good_param > 0
 
-            exit_if_non_zero = (params.has_key?(:exit_if_non_zero) && params[:exit_if_non_zero] == "1")
+          raise "> At least one parameter value is not provided!" if good_param != parameters.count
 
-            # execute commands
-            time_used = Benchmark.measure {
-              Net::SSH.start *ssh_params do |ssh|
-                script.lines.each do |line|
-                  line.strip!
-                  next if line.empty? or line[0] == "#"
-                  exit_code = 0
-                  ssh.exec!(line) do |channel, stream, data|
-                    sse.write({ :output => data })
-                    channel.on_request("exit-status") do |ch,data|
-                      exit_code = data.read_long
-                    end
+          script = script % params[:parameters].symbolize_keys if good_param > 0
+
+          exit_if_non_zero = (params.has_key?(:exit_if_non_zero) && params[:exit_if_non_zero] == "1")
+
+          # execute commands
+          time_used = Benchmark.measure {
+            Net::SSH.start *ssh_params do |ssh|
+              script.lines.each do |line|
+                line.strip!
+                next if line.empty? or line[0] == "#"
+                exit_code = 0
+                ssh.exec!(line) do |channel, stream, data|
+                  sse.write({ :output => data })
+                  channel.on_request("exit-status") do |ch,data|
+                    exit_code = data.read_long
                   end
-                  raise "> Exit with status code #{exit_code}." if exit_if_non_zero and exit_code > 0
                 end
+                raise "> Exit with status code #{exit_code}." if exit_if_non_zero and exit_code > 0
               end
-            }
-            record_and_output_real_time time_used, @job, sse
-          end
+            end
+          }
+          record_and_output_real_time time_used, @job, sse
+
         end
       rescue Timeout::Error
         sse.write({ :output => "> Timed out!\n" })
