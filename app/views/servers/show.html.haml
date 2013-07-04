@@ -11,7 +11,12 @@
 .panel.float
   %h3 Username (Password)
   .pc
-    = "#{@server.username} (#{"*" * @server.password.length})"
+    = "#{@server.username} (" + (@server.password.blank? ? "no password" : "*" * @server.password.length) +  ")"
+.clear
+.panel.float
+  %h3 Private Key Constant
+  .pc
+    = @server.constant.present? ? link_to(@server.constant.name, settings_path) : "(none)"
 
 .clear
 .separator

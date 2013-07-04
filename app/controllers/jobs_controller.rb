@@ -85,10 +85,14 @@ class JobsController < ApplicationController
     sse = Streamer::SSE.new(response.stream)
     begin
       @job = Job.find(params[:id])
+
       begin
         raise "> Please select one server!" if @job.server.nil?
 
-        ssh_params = [@job.server.host, @job.server.username, :password => @job.server.password, :timeout => 5]
+        key_data = @job.server.constant.try(:content).presence || nil
+
+        ssh_params = [@job.server.host, @job.server.username,
+          password: @job.server.password, key_data: key_data, timeout: 5]
 
         if @job.interpreter.try(:path)
           time_used = Benchmark.measure {

@@ -100,6 +100,6 @@ END
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def server_params
-      params.require(:server).permit(:name, :host, :username, :password)
+      params.require(:server).permit(:name, :host, :username, :password, :constant_id)
     end
 end

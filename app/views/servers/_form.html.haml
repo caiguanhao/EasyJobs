@@ -17,6 +17,10 @@
   .panel
     %h3= f.label :password
     .pc= f.text_field :password
+  .panel
+    %h3= f.label :constant_id, "Private Key Constant"
+    .pc
+      .select= f.collection_select :constant_id, Constant.all, :id, :name, include_blank: "(none)"
   .separator
   .actions
     = f.submit 'Save', class: "button button-green"
