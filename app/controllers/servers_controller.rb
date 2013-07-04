@@ -64,9 +64,15 @@ END
   # PATCH/PUT /servers/1
   # PATCH/PUT /servers/1.json
   def update
+    if params.has_key?(:save_and_go_back) and params.has_key?(:referrer)
+      destination = params[:referrer]
+    else
+      destination = @server
+    end
+
     respond_to do |format|
       if @server.update(server_params)
-        format.html { redirect_to @server, notice: 'Server was successfully updated.' }
+        format.html { redirect_to destination, notice: 'Server was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

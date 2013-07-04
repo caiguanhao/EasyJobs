@@ -9,6 +9,7 @@
   .pc
     = @job.server ? link_to(@job.server.name, server_path(@job.server)) : "(none)"
     - if @job.server.present?
+      = link_to('Change Key', edit_server_path(@job.server), class: "key") if @job.server.constant.present?
       %small= "(#{@job.server.username}@#{@job.server.host})"
 .panel.float
   %h3 Mean time
