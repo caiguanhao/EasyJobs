@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130703081506) do
+ActiveRecord::Schema.define(version: 20130704035130) do
 
   create_table "admins", force: true do |t|
     t.string   "email",               default: "", null: false
@@ -65,7 +65,10 @@ ActiveRecord::Schema.define(version: 20130703081506) do
     t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "constant_id"
   end
+
+  add_index "servers", ["constant_id"], name: "index_servers_on_constant_id"
 
   create_table "time_stats", force: true do |t|
     t.float    "real"
