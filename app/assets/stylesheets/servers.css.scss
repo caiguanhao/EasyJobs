@@ -1,3 +1,12 @@
 // Place all the styles related to the servers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.key, .key:hover {
+  width: 16px;
+  height: 16px;
+  background: url('data:image/gif;base64,R0lGODlhEAAQAOYAAPr3j/n3l/zucPnqbvnkWvzpYvzpY/zqZfXjZfzsa/npavflaffnb+3ebuzecOfac/zgRfzgRvjeSvzkUPjfT/jgT/feUfzkU/bdUfPbVPzmWfzmW/jXO/vcP/TXRtTBYdbEY/jJDffKEvnMFvzUI/zUJPzVJvfRK+nFMODFTffHDue5EuS2Et6xFdesFuW7HNuyJNu0KMTCu9qsE9SqG86pK8CcL9CfDMaXD7uSILSPK7WRL7uaObKGFLeNHquEJ62HKLONK6N4G6Z9HqV+JamAJ6eAK6aAK760nsC5qZxsCptrCp1tDKFyEqFzE6Z/LqaAMaqDNK2PVK6SWrajfbmoh6d+MLGWY7mmhMO9ssO8sMXAuMfFw////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAF0ALAAAAAAQABAAAAeYgF2Cg4JIRzpBP1eEjFQ+GQgNAB9RjIJZPRwpAilLKSBTllIvHgICS11LAUCWTyIXBwmdKQ88llAqEBsGCaYOO5ZWLCQTGgUJCwxDlkoVISURFxYYNliMShQzJysjJig5VdcSNy40TkZEUjLXBDhFQk1JloJKAzFKXFta811KCjVKlPCjRwAGkywDBS1p0QFVwn5Llgh8GAgAOw==') no-repeat 0 0;
+  text-indent: -9999px;
+  display: inline-block;
+  line-height: 16px;
+  margin-left: 4px;
+}

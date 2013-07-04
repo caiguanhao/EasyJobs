@@ -24,4 +24,5 @@
             = job.interpreter.try(:path).presence || "Script"
         %td.server
           = link_to job.server.name, server_path(job.server) unless job.server.nil?
+          = link_to('Change Key', edit_server_path(job.server), class: "key") if job.server.try(:constant).present?
         %td.date= job.updated_at
