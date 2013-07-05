@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require jquery.modal.min
 //= require turbolinks
-//= require notice
 //= require codemirror
 //= require codemirror/addons/runmode/runmode
 //= require codemirror/modes/ruby

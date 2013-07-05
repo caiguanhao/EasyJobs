@@ -6,7 +6,7 @@
     %h3= f.label :password
     .pc= f.password_field :password
   .panel
-    %h3= f.label :google_authenticator_code
+    %h3= f.label :auth_code, 'Google Authenticator Code'
     .pc= f.text_field :auth_code
   = f.check_box :remember_me
   = f.label :remember_me
