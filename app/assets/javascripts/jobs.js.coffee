@@ -25,7 +25,7 @@ jobsonload = ->
       $("#progress span").stop().clearQueue().animate { width: "0%" }, ->
         $("#progress span").animate({ width: init }, dur);
       run_job.text run_job.data('cancel')
-      $("#output").empty().append("Please wait while connection is beeing established...\n")
+      $("#output").empty().append(I18n.wait_connection+"\n")
       parameters = { parameters: {} };
       if $(".custom_param").length > 0
         $(".custom_param").each (a,b) ->
@@ -34,7 +34,7 @@ jobsonload = ->
         parameters.exit_if_non_zero = 1
       window.source = new EventSource $(this).data('to') + "?" + $.param(parameters);
       window.source.addEventListener 'open', (e) ->
-        $("#output").empty().append("> Connected.\n")
+        $("#output").empty().append("> "+I18n.connected+"\n")
         $("#output").append(Array(50).join("-")+"\n")
       , false
       window.source.onmessage = (e) ->
@@ -45,7 +45,7 @@ jobsonload = ->
       window.source.addEventListener 'error', (e) ->
         if e.eventPhase == EventSource.CLOSED
           $("#output").append(Array(50).join("-")+"\n")
-          $("#output").append("> Disconnected.\n")
+          $("#output").append("> "+I18n.disconnected+"\n")
           update_chart();
           $("#progress span").stop().clearQueue().animate { width: "100%" }, ->
             $("#progress span").delay(3000).animate { width: "0%" }
@@ -55,7 +55,7 @@ jobsonload = ->
     else
       window.source.close();
       run_job.text run_job.data('run')
-      $("#output").empty().append("Pending.\n")
+      $("#output").empty().append(I18n.pending+"\n")
   # render script text editor
   get_current_mode = ->
     mode = 'shell'
@@ -123,12 +123,12 @@ jobsonload = ->
             date = new Date(this.x * 1000)
             return date.getFullYear() + "-" + pad(date.getMonth()+1,2) + "-" + pad(date.getDate(),2) + " " + 
             pad(date.getHours(),2) + ":" + pad(date.getMinutes(),2) + ":" + pad(date.getSeconds(),2)+
-            '<br /><b>Time used: '+this.y+' seconds</b>';
+            '<br /><b>'+I18n.time_used_seconds.replace(/%f/g, this.y)+'</b>';
           },
           credits: { enabled: false },
           plotOptions: { areaspline: { fillOpacity: 0.5, pointPlacement: 'on' } },
           series: [{
-            name: 'Time used',
+            name: I18n.time_used,
             data: data.real
           }]
         });

@@ -3,7 +3,7 @@ settingsonload = ->
     link = $(this)
     action = $(this).data('action')
     e.preventDefault();
-    notice = $('<div />',{style:"margin: 3px 0"}).text('Close this dialog to save content. Refresh page to cancel.')
+    notice = $('<div />',{style:"margin: 3px 0"}).text(I18n.close_to_save)
     textarea = $('<textarea />', {cols:40, id: "constant_content", rows: 10}).val("Loading...")
     editor = null
     $('<div />').append(notice).append(textarea).appendTo('body').modal().on $.modal.BEFORE_CLOSE, (event, modal) ->

@@ -56,3 +56,5 @@
   #chart{ class: ("never" if @job.time_stats.empty?), data: { json: timestats_job_path(@job) } }
     - if @job.time_stats.empty?
       %p= t('not_started_yet')
+
+%script= raw i18n_javascript_for_current_controller

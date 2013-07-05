@@ -152,6 +152,17 @@ zh-CN:
     time_used: "执行时间：%{time} 秒。"
     mean_time: "平均时间：%{time} 秒。"
 
+  javascript:
+    jobs:
+      wait_connection: 请稍等，正在建立与服务器的连接...
+      connected: 已连接。
+      disconnected: 已断开连接。
+      pending: 等待执行。
+      time_used_seconds: "执行时间：%f 秒"
+      time_used: 执行时间
+    settings:
+      close_to_save: 关闭此对话框保存内容，刷新页面取消保存
+
   # all:
   Save: 保存
   Save_and_go_back_to_previous_page: 保存并返回到之前的页面

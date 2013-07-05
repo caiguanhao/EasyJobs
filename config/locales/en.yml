@@ -165,6 +165,17 @@ en:
     time_used: "Time used: %{time} seconds."
     mean_time: "Mean time: %{time} seconds."
 
+  javascript:
+    jobs:
+      wait_connection: Please wait while connection is being established...
+      connected: Connected.
+      disconnected: Disconnected.
+      pending: Pending.
+      time_used_seconds: "Time used: %f seconds"
+      time_used: Time used
+    settings:
+      close_to_save: Close this dialog to save content. Refresh page to cancel.
+
   # all:
   Save: Save
   Save_and_go_back_to_previous_page: Save and go back to previous page
