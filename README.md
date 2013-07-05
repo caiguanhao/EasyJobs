@@ -24,7 +24,7 @@ Nginx config:
 
     server {
       listen 80;
-      server_name html9.com;
+      server_name <SERVER_NAME>;
       client_max_body_size 10m;
       keepalive_timeout 60;
       root /srv/qnn/EasyJobs/public;
@@ -65,6 +65,11 @@ Requirements
 
 * Ruby 2.0.0
 * Rails 4.0.0
+
+License
+-------
+
+* [The BSD 3-Clause License](https://github.com/qnn/EasyJobs/blob/master/LICENSE)
 
 Developer
 ---------
