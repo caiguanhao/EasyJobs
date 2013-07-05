@@ -1,5 +1,3 @@
-.menu_div
-
 = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
   .panel
     %h3= f.label :login
@@ -15,3 +13,7 @@
   .separator
   .actions
     = f.submit 'Sign In', class: "button button-green"
+
+<!--[if IE]>
+%small Please don't use Internet Explorer as it doesn't support HTML5 Server-Sent Events.
+<![endif]-->
