@@ -22,6 +22,12 @@
             .right
               = link_to current_admin.username, edit_admin_path(current_admin)
               |
+              - I18n.available_locales.each do |locale|
+                - if I18n.locale.to_s == locale.to_s
+                  %b= t(locale, locale: locale)
+                - else
+                  = link_to t(locale, locale: locale), { locale: locale }
+              |
               = link_to t('Log_Out'), destroy_admin_session_path, method: :delete
         #menu.button_group
           = link_to t('Jobs'), jobs_path, class: "button" + (params[:controller]=="jobs" ? " active" : "")

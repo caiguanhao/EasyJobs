@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :authenticate
+  before_action :authenticate, :set_locale
 
   helper_method :active_action?
   def active_action?(array)
@@ -13,6 +13,15 @@ class ApplicationController < ActionController::Base
   private
     def authenticate
       redirect_to(new_admin_session_path) and return unless admin_signed_in?
+    end
+
+    def set_locale
+      if params[:locale] && I18n.available_locales.include?(params[:locale].to_sym)
+        cookies['locale'] = { :value => params[:locale], :expires => 1.year.from_now }
+        I18n.locale = params[:locale].to_sym
+      elsif cookies['locale'] && I18n.available_locales.include?(cookies['locale'].to_sym)
+        I18n.locale = cookies['locale'].to_sym
+      end
     end
 
     def create_job_with(job_params)

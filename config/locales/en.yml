@@ -1,6 +1,18 @@
 en:
+  en: English
+
+  # application_small:
+  Log_into_EasyJobs: Log into EasyJobs
+  Google_Authenticator_Code: Google Authenticator Code
+  Sign_In: Sign In
   dont_use_ie: Please don't use Internet Explorer as it doesn't support HTML5 Server-Sent Events.
 
+  # application:
+  Log_Out: Log Out
+  Jobs: Jobs
+  Servers: Servers
+  Admins: Admins
+  Settings: Settings
   job:
     one: "1 job"
     other: "%{count} jobs"
@@ -19,6 +31,8 @@ en:
   constant:
     one: "1 constant"
     other: "%{count} constants"
+  Script: Script
+  Change_Key: Change Key
 
   this_is_you: (this is you)
   none: (none)
@@ -27,18 +41,42 @@ en:
   default: (default)
   no_password: no password
 
+  # admins:
+  Listing_Admins: Listing Admins
+  Admin_Details: Admin Details
+  Edit_Admin: Edit Admin
+  Delete_Admin: Delete Admin
+  New_Admin: New Admin
   Deleting_Admin: "Deleting %{admin}"
+  Google_Authenticator_QRCode: Google Authenticator QRCode
   Delete_Admin_Confirm: Are you sure you want to delete this admin?
   Delete_Admin_Yes: Yes. Delete this admin. I know this action is irreversible.
 
+  # jobs:
+  Listing_Jobs: Listing Jobs
+  Job_Details: Job Details
+  Edit_Job: Edit Job
+  Delete_Job: Delete Job
+  New_Job: New Job
   Deleting_Job: "Deleting %{job}"
   Delete_Job_Confirm: Are you sure you want to delete this job?
   Delete_Job_Yes: Yes. Delete this job. I know this action is irreversible.
+  value: value
   no_param_found: "No '%{param}' found in 'job_parameters' constant."
   exit_if_non_zero: Exit if previous command returns a non-zero status
+  Run: Run
+  Cancel: Cancel
   pending: Pending.
+  Statistics: Statistics
   not_started_yet: The job has not been started yet!
 
+  # servers:
+  Listing_Servers: Listing Servers
+  Server_Details: Server Details
+  Edit_Server: Edit Server
+  Delete_Server: Delete Server
+  New_Server: New Server
+  Private_Key_Constant: Private Key Constant
   Deleting_Server: "Deleting %{server}"
   Delete_Server_Confirm: Are you sure you want to delete this server?
   Delete_Server_Yes: Yes. Delete this server. I know this action is irreversible.
@@ -47,10 +85,44 @@ en:
     other: "There are %{count} jobs related to this server."
 
   Path_of_interpreter: Path of interpreter
+  Options: Options
   Upload_script_first: Upload script first
+  Constant_Name: Constant Name
+  Size: Size
+  Updated_At: Updated At
+  Actions: Actions
   edit_content: Edit content...
+  Save_Changes: Save Changes
 
+  # all:
+  Save: Save
+  Save_and_go_back_to_previous_page: Save and go back to previous page
   helpers:
     label:
+      admin:
+        login: Login
+        password: Password
+        remember_me: Remember Me
+        username: Username
+        email: Email
+        Sign_In_Count: Sign In Count
+        Created_At: Created At
+        Updated_At: Updated At
+        Current_Sign_In_At: Current Sign In At
+        Last_Sign_In_At: Last Sign In At
+        Current_Sign_In_IP: Current Sign In IP
+        Last_Sign_In_IP: Last Sign In IP
+      job:
+        name: Name
+        server: Server
+        server_id: Server
+        interpreter_id: Interpreter
+        script: Script
+        Updated_At: Updated At
+        Mean_Time: Mean Time
       server:
+        name: Name
+        host: Host
+        username: Username
+        password: Password
         userpass: Username (Password)
