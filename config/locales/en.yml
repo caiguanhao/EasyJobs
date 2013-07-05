@@ -125,6 +125,16 @@ en:
       error_updating:
         one: "An error occurred when updating constants."
         other: "%{count} errors occurred when updating constants."
+  error:
+    admin:
+      one: "An error prohibited this admin from being saved:"
+      other: "%{count} errors prohibited this admin from being saved:"
+    job:
+      one: "An error prohibited this job from being saved:"
+      other: "%{count} errors prohibited this job from being saved:"
+    server:
+      one: "An error prohibited this server from being saved:"
+      other: "%{count} errors prohibited this server from being saved:"
 
   # all:
   Save: Save

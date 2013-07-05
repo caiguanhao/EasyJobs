@@ -113,6 +113,16 @@ zh-CN:
       error_updating:
         one: 更新常量时发生一个错误。
         other: "更新常量时发生%{count}个错误。"
+  error:
+    admin:
+      one: "保存管理员时发生一个错误："
+      other: "保存管理员时发生%{count}个错误："
+    job:
+      one: "保存任务时发生一个错误："
+      other: "保存任务时发生%{count}个错误："
+    server:
+      one: "保存服务器时发生一个错误："
+      other: "保存服务器时发生%{count}个错误："
 
   # all:
   Save: 保存
@@ -146,3 +156,24 @@ zh-CN:
         username: 登录用户名
         password: 登录密码
         userpass: 用户名 (密码)
+  activerecord:
+    attributes:
+      admin:
+        password: 密码
+        username: 用户名
+        email: 电邮地址
+      job:
+        name: 任务名称
+        script: 脚本
+      server:
+        name: 服务器名称
+        host: 主机地址
+        username: 登录用户名
+    errors:
+      messages:
+        blank: 不能为空
+        too_long: "太长，最长 %{count} 个字符。"
+        too_short: "太短，最少 %{count} 个字符。"
+        invalid: 不合法
+        inclusion: 需指定一种
+        taken: 已被使用
