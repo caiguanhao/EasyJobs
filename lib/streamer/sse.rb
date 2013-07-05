@@ -1,4 +1,5 @@
 require 'json'
+require 'base64'
 
 module Streamer
   class SSE
@@ -6,11 +7,8 @@ module Streamer
       @io = io
     end
 
-    def write object, options = {}
-      options.each do |k,v|
-        @io.write "#{k}: #{v}\n"
-      end
-      @io.write "data: #{JSON.dump(object)}\n\n"
+    def write string
+      @io.write "data: #{JSON.dump({ output: Base64.strict_encode64(string)})}\n\n"
     end
 
     def close

@@ -40,7 +40,7 @@ jobsonload = ->
       window.source.onmessage = (e) ->
         console.log e
         data = $.parseJSON e.data
-        $("#output").append(data.output)
+        $("#output").append(Base64.decode(data.output))
         output_scroll_to_bottom()
       window.source.addEventListener 'error', (e) ->
         if e.eventPhase == EventSource.CLOSED

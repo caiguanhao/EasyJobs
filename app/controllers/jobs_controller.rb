@@ -101,12 +101,12 @@ class JobsController < ApplicationController
                 script = @job.script
                 script.gsub!(/\r\n?/, "\n")
                 ssh.scp.upload!(StringIO.new(script), "/tmp/easyjobs_script") do |ch, name, sent, total|
-                  sse.write({ :output => "> Uploading #{name} ... #{(sent.to_f * 100 / total.to_f).to_i}% #{sent}/#{total} bytes sent\n" })
+                  sse.write("> Uploading #{name} ... #{(sent.to_f * 100 / total.to_f).to_i}% #{sent}/#{total} bytes sent\n")
                 end
                 cmd = "#{@job.interpreter.path} /tmp/easyjobs_script"
-                sse.write({ :output => "> Running #{cmd} ...\n" })
+                sse.write("> Running #{cmd} ...\n")
                 ssh.exec!(cmd) do |channel, stream, data|
-                  sse.write({ :output => data })
+                  sse.write(data)
                 end
               else
                 ssh.open_channel do |channel|
@@ -114,7 +114,7 @@ class JobsController < ApplicationController
                     channel.send_data @job.script
                     channel.eof!
                     channel.on_data do |ch,data|
-                      sse.write({ :output => data })
+                      sse.write(data)
                     end
                   end
                 end
@@ -151,7 +151,7 @@ class JobsController < ApplicationController
                 next if line.empty? or line[0] == "#"
                 exit_code = 0
                 ssh.exec!(line) do |channel, stream, data|
-                  sse.write({ :output => data })
+                  sse.write(data)
                   channel.on_request("exit-status") do |ch,data|
                     exit_code = data.read_long
                   end
@@ -164,11 +164,11 @@ class JobsController < ApplicationController
 
         end
       rescue Timeout::Error
-        sse.write({ :output => "> Timed out!\n" })
+        sse.write("> Timed out!\n")
       rescue Net::SSH::AuthenticationFailed
-        sse.write({ :output => "> Authentication failed!\n" })
+        sse.write("> Authentication failed!\n")
       rescue Exception => e
-        sse.write({ :output => "#{e.message}\n" })
+        sse.write("#{e.message}\n")
       end
     rescue IOError
       # the client disconnects
@@ -195,7 +195,7 @@ class JobsController < ApplicationController
       TimeStat.create([{ real: time_used.real, job_id: job.id, job_script_size: job.script.length }])
       mean_time = job.time_stats.average(:real)
       job.update({ mean_time: mean_time })
-      sse.write({ :output => "> Time used: #{time_used.real} seconds.\n" })
-      sse.write({ :output => "> Mean time: #{mean_time} seconds.\n" })
+      sse.write("> Time used: #{time_used.real} seconds.\n")
+      sse.write("> Mean time: #{mean_time} seconds.\n")
     end
 end

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.modal.min
+//= require base64.min
 //= require turbolinks
 //= require codemirror
 //= require codemirror/addons/runmode/runmode
