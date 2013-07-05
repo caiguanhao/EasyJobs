@@ -28,7 +28,7 @@ class ServersController < ApplicationController
 
     respond_to do |format|
       if @server.save
-        format.html { redirect_to @server, notice: 'Server was successfully created.' }
+        format.html { redirect_to @server, notice: t('notice.server.created') }
         format.json { render action: 'show', status: :created, location: @server }
       else
         format.html { render action: 'new' }
@@ -72,7 +72,7 @@ END
 
     respond_to do |format|
       if @server.update(server_params)
-        format.html { redirect_to destination, notice: 'Server was successfully updated.' }
+        format.html { redirect_to destination, notice: t('notice.server.updated') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -90,7 +90,7 @@ END
     @server.destroy
     session[:server_id] = nil
     respond_to do |format|
-      format.html { redirect_to servers_url }
+      format.html { redirect_to servers_url, notice: t('notice.server.deleted') }
       format.json { head :no_content }
     end
   end

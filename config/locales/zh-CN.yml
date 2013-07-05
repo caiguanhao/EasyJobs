@@ -82,6 +82,38 @@ zh-CN:
   edit_content: 编辑内容...
   Save_Changes: 保存更改
 
+  # notices and alerts:
+  notice:
+    admin:
+      created: 成功创建管理员。
+      updated: 成功更新管理员。
+      deleted: 成功删除管理员。
+    job:
+      created: 成功创建任务。
+      updated: 成功更新任务。
+      deleted: 成功删除任务。
+    server:
+      created: 成功创建服务器。
+      updated: 成功更新服务器。
+      deleted: 成功删除服务器。
+    interpreters:
+      updated: 成功更新解释器。
+    constants:
+      updated: 成功更新常量。
+  alert:
+    admin:
+      commit_suicide: "请勿自杀！"
+      no_admins: 你不能删除这个管理员，因为他是最后一个。
+      cant_modify_admin: 你不能更改ID比你小的管理员。
+    interpreters:
+      error_updating:
+        one: 更新解释器时发生一个错误。
+        other: "更新解释器时发生%{count}个错误。"
+    constants:
+      error_updating:
+        one: 更新常量时发生一个错误。
+        other: "更新常量时发生%{count}个错误。"
+
   # all:
   Save: 保存
   Save_and_go_back_to_previous_page: 保存并返回到之前的页面

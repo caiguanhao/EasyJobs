@@ -29,7 +29,7 @@ class AdminsController < ApplicationController
 
     respond_to do |format|
       if @admin.save
-        format.html { redirect_to @admin, notice: 'Admin was successfully created.' }
+        format.html { redirect_to @admin, notice: t('notice.admin.created') }
         format.json { render action: 'show', status: :created, location: @admin }
       else
         format.html { render action: 'new' }
@@ -46,7 +46,7 @@ class AdminsController < ApplicationController
 
     respond_to do |format|
       if @admin.update(admin_params)
-        format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
+        format.html { redirect_to @admin, notice: t('notice.admin.updated') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -63,19 +63,19 @@ class AdminsController < ApplicationController
   def destroy
     # self-destruction
     if @admin.id == current_admin.id
-      redirect_to :back, alert: 'Please don\'t commit suicide.' and return
+      redirect_to :back, alert: t('alert.admin.commit_suicide') and return
     end
 
     # there will be no admins
     admin_count = Admin.count
     if admin_count <= 1
-      redirect_to :back, alert: 'You can delete this admin. Because there will be no admins.' and return
+      redirect_to :back, alert: t('alert.admin.no_admins') and return
     end
 
     @admin.destroy
     session[:admin_id] = nil
     respond_to do |format|
-      format.html { redirect_to admins_url, notice: 'Admin was successfully deleted.' }
+      format.html { redirect_to admins_url, notice: t('notice.admin.deleted') }
       format.json { head :no_content }
     end
   end
@@ -91,7 +91,7 @@ class AdminsController < ApplicationController
 
     def cant_change_admin_with_smaller_id
       if current_admin.id > @admin.id
-        redirect_to :back, alert: 'You can\'t modify settings of admin with smaller ID than yours.' and return
+        redirect_to :back, alert: t('alert.admin.cant_modify_admin') and return
       end
     end
 

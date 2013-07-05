@@ -27,9 +27,9 @@ class SettingsController < ApplicationController
     end
     respond_to do |format|
       if errors == 0
-        format.html { redirect_to settings_path, notice: 'Interpreters were successfully updated.' }
+        format.html { redirect_to settings_path, notice: t('notice.interpreters.updated') }
       else
-        format.html { redirect_to settings_path, alert: "#{errors} errors occurred when updating interpreters." }
+        format.html { redirect_to settings_path, alert: t('alert.interpreters.error_updating', count: errors) }
       end
     end
   end
@@ -55,9 +55,9 @@ class SettingsController < ApplicationController
     end
     respond_to do |format|
       if errors == 0
-        format.html { redirect_to settings_path, notice: 'Constants were successfully updated.' }
+        format.html { redirect_to settings_path, notice: t('notice.constants.updated') }
       else
-        format.html { redirect_to settings_path, alert: "#{errors} errors occurred when updating constants." }
+        format.html { redirect_to settings_path, alert: t('alert.constants.error_updating', count: errors) }
       end
     end
   end

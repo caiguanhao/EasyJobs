@@ -49,7 +49,7 @@ class JobsController < ApplicationController
   def update
     respond_to do |format|
       if @job.update(job_params)
-        format.html { redirect_to @job, notice: 'Job was successfully updated.' }
+        format.html { redirect_to @job, notice: t('notice.job.updated') }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -68,7 +68,7 @@ class JobsController < ApplicationController
     @job.destroy
     session[:job_id] = nil
     respond_to do |format|
-      format.html { redirect_to jobs_url, notice: 'Job was successfully deleted.' }
+      format.html { redirect_to jobs_url, notice: t('notice.job.deleted') }
       format.json { head :no_content }
     end
   end

@@ -94,6 +94,38 @@ en:
   edit_content: Edit content...
   Save_Changes: Save Changes
 
+  # notices and alerts:
+  notice:
+    admin:
+      created: Admin was successfully created.
+      updated: Admin was successfully updated.
+      deleted: Admin was successfully deleted.
+    job:
+      created: Job was successfully created.
+      updated: Job was successfully updated.
+      deleted: Job was successfully deleted.
+    server:
+      created: Server was successfully created.
+      updated: Server was successfully updated.
+      deleted: Server was successfully deleted.
+    interpreters:
+      updated: Interpreters were successfully updated.
+    constants:
+      updated: Constants were successfully updated.
+  alert:
+    admin:
+      commit_suicide: "Please don't commit suicide."
+      no_admins: "You can't delete this admin. Because there will be no admins."
+      cant_modify_admin: "You can't modify settings of admin with smaller ID than yours."
+    interpreters:
+      error_updating:
+        one: "An error occurred when updating interpreters."
+        other: "%{count} errors occurred when updating interpreters."
+    constants:
+      error_updating:
+        one: "An error occurred when updating constants."
+        other: "%{count} errors occurred when updating constants."
+
   # all:
   Save: Save
   Save_and_go_back_to_previous_page: Save and go back to previous page
