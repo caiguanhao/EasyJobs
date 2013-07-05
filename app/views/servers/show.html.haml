@@ -23,7 +23,7 @@
 
 - if @server.jobs.size == 0
   .field
-    = link_to 'No jobs related to this server! Why not create a blank job to test connectivity?', create_blank_job_for_server_path(@server), method: :post, class: "button button-blue"
+    = link_to t('create_blank_job'), create_blank_job_for_server_path(@server), method: :post, class: "button button-blue"
 - else
   %table.list
     %thead

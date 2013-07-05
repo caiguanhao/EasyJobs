@@ -69,6 +69,22 @@ en:
   pending: Pending.
   Statistics: Statistics
   not_started_yet: The job has not been started yet!
+  default_script: |
+    # Put each of your separate command in each line:
+    #
+    # cd /srv && pwd
+    # 
+    # If your command is too long for one line, you can break the line
+    # with a back-slash (\) at the end of the line:
+    # 
+    # jekyll build --source "/srv/source" --destination "/srv/site" \
+    # --config "/srv/public.yml","/srv/source/_config.yml"
+    #
+    # Do not add comments (hashtag) after each command:
+    #
+    # du -sh . # Get the size of current directory
+
+    echo "You have successfully connected to the server."
 
   # servers:
   Listing_Servers: Listing Servers
@@ -83,6 +99,7 @@ en:
   Delete_Server_Jobs_Related:
     one: "There is one job related to this server."
     other: "There are %{count} jobs related to this server."
+  create_blank_job: No jobs related to this server! Why not create a blank job to test connectivity?
 
   Path_of_interpreter: Path of interpreter
   Options: Options

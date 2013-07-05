@@ -57,6 +57,21 @@ zh-CN:
   pending: 等待执行。
   Statistics: 统计
   not_started_yet: 任务尚未被执行过。
+  default_script: |
+    # 一行一个命令：
+    #
+    # cd /srv && pwd
+    # 
+    # 如果命令太长，请用反斜杠(\)断开：
+    # 
+    # jekyll build --source "/srv/source" --destination "/srv/site" \
+    # --config "/srv/public.yml","/srv/source/_config.yml"
+    #
+    # 不要在命令之后加备注（#号）：
+    #
+    # du -sh . # 查看当前目录大小
+
+    echo "You have successfully connected to the server."
 
   # servers:
   Listing_Servers: 所有服务器
@@ -71,6 +86,7 @@ zh-CN:
   Delete_Server_Jobs_Related:
     one: "有一个任务与此服务器关联。"
     other: "有%{count}个任务与此服务器关联。"
+  create_blank_job: 目前还没有任务与服务器关联，何不创建一个测试任务？
 
   Path_of_interpreter: 解释器路径
   Options: 选项

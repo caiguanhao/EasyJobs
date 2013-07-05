@@ -40,23 +40,7 @@ class ServersController < ApplicationController
   def create_blank_job
     job_params = Hash.new
     job_params[:name] = "Blank job for #{@server.name}"
-    job_params[:script] = <<END
-# Put each of your separate command in each line:
-#
-# cd /srv && pwd
-# 
-# If your command is too long for one line, you can break the line
-# with a back-slash (\\) at the end of the line:
-# 
-# jekyll build --source "/srv/source" --destination "/srv/site" \\
-# --config "/srv/public.yml","/srv/source/_config.yml"
-#
-# Do not add comments (hashtag) after each command:
-#
-# du -sh . # Get the size of current directory
-
-echo "You have successfully connected to the server."
-END
+    job_params[:script] = t('default_script')
     job_params[:server_id] = @server.id
     create_job_with job_params
   end
