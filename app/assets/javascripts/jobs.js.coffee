@@ -71,6 +71,7 @@ jobsonload = ->
   if $("#script").length > 0
     set_runMode();
   if $("#job_script").length > 0
+    $("#job_script").siblings('div.CodeMirror').remove() # clean up CodeMirror
     mode = get_current_mode()
     editor = CodeMirror.fromTextArea document.getElementById("job_script"), {
       theme: 'monokai',
