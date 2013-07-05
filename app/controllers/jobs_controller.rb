@@ -87,7 +87,7 @@ class JobsController < ApplicationController
       @job = Job.find(params[:id])
 
       begin
-        raise "> Please select one server!" if @job.server.nil?
+        raise t("sse.please_select_server") if @job.server.nil?
 
         key_data = @job.server.constant.try(:content).presence || nil
 
@@ -101,10 +101,10 @@ class JobsController < ApplicationController
                 script = @job.script
                 script.gsub!(/\r\n?/, "\n")
                 ssh.scp.upload!(StringIO.new(script), "/tmp/easyjobs_script") do |ch, name, sent, total|
-                  sse.write("> Uploading #{name} ... #{(sent.to_f * 100 / total.to_f).to_i}% #{sent}/#{total} bytes sent\n")
+                  sse.write(status(t('sse.upload_progress', name: name, percent: "#{(sent.to_f * 100 / total.to_f).to_i}", sent: sent, total: total)))
                 end
                 cmd = "#{@job.interpreter.path} /tmp/easyjobs_script"
-                sse.write("> Running #{cmd} ...\n")
+                sse.write(status(t('sse.running_command', command: cmd)))
                 ssh.exec!(cmd) do |channel, stream, data|
                   sse.write(data)
                 end
@@ -137,7 +137,7 @@ class JobsController < ApplicationController
               params[:parameters].has_key?(p) and params[:parameters][p].length > 0
           end
 
-          raise "> At least one parameter value is not provided!" if good_param != parameters.count
+          raise t("sse.params_not_provided") if good_param != parameters.count
 
           script = script % params[:parameters].symbolize_keys if good_param > 0
 
@@ -156,7 +156,7 @@ class JobsController < ApplicationController
                     exit_code = data.read_long
                   end
                 end
-                raise "> Exit with status code #{exit_code}." if exit_if_non_zero and exit_code > 0
+                raise t("sse.exit_with_status_code", code: exit_code) if exit_if_non_zero and exit_code > 0
               end
             end
           }
@@ -164,11 +164,11 @@ class JobsController < ApplicationController
 
         end
       rescue Timeout::Error
-        sse.write("> Timed out!\n")
+        sse.write(status(t('sse.timed_out')))
       rescue Net::SSH::AuthenticationFailed
-        sse.write("> Authentication failed!\n")
+        sse.write(status(t('sse.auth_failed')))
       rescue Exception => e
-        sse.write("#{e.message}\n")
+        sse.write(status(e.message))
       end
     rescue IOError
       # the client disconnects
@@ -178,6 +178,10 @@ class JobsController < ApplicationController
   end
 
   private
+    def status(string)
+      "> #{string}\n"
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_job
       @job = Job.find(params[:id])
@@ -195,7 +199,7 @@ class JobsController < ApplicationController
       TimeStat.create([{ real: time_used.real, job_id: job.id, job_script_size: job.script.length }])
       mean_time = job.time_stats.average(:real)
       job.update({ mean_time: mean_time })
-      sse.write("> Time used: #{time_used.real} seconds.\n")
-      sse.write("> Mean time: #{mean_time} seconds.\n")
+      sse.write(status(t('sse.time_used', time: time_used.real)))
+      sse.write(status(t('sse.mean_time', time: mean_time)))
     end
 end

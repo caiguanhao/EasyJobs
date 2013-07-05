@@ -153,6 +153,18 @@ en:
       one: "An error prohibited this server from being saved:"
       other: "%{count} errors prohibited this server from being saved:"
 
+  # Server-Sent Events
+  sse:
+    please_select_server: Please select one server!
+    upload_progress: "Uploading %{name} ... %{percent}% %{sent}/%{total} bytes sent"
+    running_command: "Running %{command}"
+    params_not_provided: At least one parameter value is not provided!
+    exit_with_status_code: "Exit with status code %{code}."
+    timed_out: Timed out!
+    auth_failed: Authentication failed!
+    time_used: "Time used: %{time} seconds."
+    mean_time: "Mean time: %{time} seconds."
+
   # all:
   Save: Save
   Save_and_go_back_to_previous_page: Save and go back to previous page

@@ -140,6 +140,18 @@ zh-CN:
       one: "保存服务器时发生一个错误："
       other: "保存服务器时发生%{count}个错误："
 
+  # Server-Sent Events
+  sse:
+    please_select_server: 请选择一个服务器！
+    upload_progress: "正在上传 %{name} ... %{percent}% 完成 %{sent}/%{total} 字节已发送"
+    running_command: "正在执行 %{command}"
+    params_not_provided: 至少有一个参数没有被指定值
+    exit_with_status_code: "停止执行任务，因为返回码是%{code}。"
+    timed_out: 连接超时！
+    auth_failed: 认证失败！
+    time_used: "执行时间：%{time} 秒。"
+    mean_time: "平均时间：%{time} 秒。"
+
   # all:
   Save: 保存
   Save_and_go_back_to_previous_page: 保存并返回到之前的页面
