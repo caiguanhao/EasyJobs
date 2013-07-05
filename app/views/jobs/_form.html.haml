@@ -12,11 +12,11 @@
   .panel.float
     %h3= f.label :server_id
     .pc
-      .select= f.collection_select :server_id, Server.all, :id, :name, include_blank: "(none)"
+      .select= f.collection_select :server_id, Server.all, :id, :name, include_blank: t("none")
   .panel.float
     %h3= f.label :interpreter_id
     .pc
-      .select= f.collection_select :interpreter_id, Interpreter.all, :id, :path, include_blank: "(default)"
+      .select= f.collection_select :interpreter_id, Interpreter.all, :id, :path, include_blank: t("default")
   .panel.max
     %h3= f.label :script
     .pc= f.text_area :script, size: "80x10"

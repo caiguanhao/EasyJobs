@@ -6,10 +6,26 @@ zh-CN:
   dont_use_ie: 请勿使用Internet Explorer，因为它不支持HTML5服务器发送事件。
 
   # application:
+  Log_Out: 退出
   Jobs: 任务
   Servers: 服务器
   Admins: 管理员
   Settings: 设定
+  job: "%{count}个任务"
+  related_job: "%{count}个相关任务"
+  server: "%{count}个服务器"
+  admin: "%{count}个管理员"
+  interpreter: "%{count}个解释器"
+  constant: "%{count}个常量"
+  Script: "脚本"
+  Change_Key: "更换密钥"
+
+  this_is_you: (这是你自己)
+  none: (无)
+  not_started_yet: (尚未开始)
+  select: (选择)
+  default: (默认)
+  no_password: 无密码
 
   # admins:
   Listing_Admins: 所有管理员
@@ -17,7 +33,10 @@ zh-CN:
   Edit_Admin: 编辑管理员
   Delete_Admin: 删除管理员
   New_Admin: 新增管理员
+  Deleting_Admin: "即将删除管理员 %{admin}"
   Google_Authenticator_QRCode: Google身份验证器QR码
+  Delete_Admin_Confirm: 确定要删除这个管理员吗？
+  Delete_Admin_Yes: 我确定这是个不可逆转的操作。请删除这个管理员。
 
   # jobs:
   Listing_Jobs: 所有任务
@@ -25,6 +44,17 @@ zh-CN:
   Edit_Job: 编辑任务
   Delete_Job: 删除任务
   New_Job: 新增任务
+  Deleting_Job: "即将删除任务 %{job}"
+  Delete_Job_Confirm: 确定要删除这个任务吗？
+  Delete_Job_Yes: 我确定这是个不可逆转的操作。请删除这个任务。
+  value: 替换值
+  no_param_found: "'job_parameters'常量中找不到'%{param}'"
+  exit_if_non_zero: 如果上一个命令的返回码不为零就停止执行任务
+  Run: 执行任务
+  Cancel: 取消
+  pending: 等待执行。
+  Statistics: 统计
+  not_started_yet: 任务尚未被执行过。
 
   # servers:
   Listing_Servers: 所有服务器
@@ -33,6 +63,22 @@ zh-CN:
   Delete_Server: 删除服务器
   New_Server: 新增服务器
   Private_Key_Constant: 私钥常量
+  Deleting_Server: "即将删除服务器条目 %{server}"
+  Delete_Server_Confirm: 确定要删除这个服务器条目吗？
+  Delete_Server_Yes: 我确定这是个不可逆转的操作。请删除这个服务器条目。
+  Delete_Server_Jobs_Related:
+    one: "有一个任务与此服务器关联。"
+    other: "有%{count}个任务与此服务器关联。"
+
+  Path_of_interpreter: 解释器路径
+  Options: 选项
+  Upload_script_first: 执行前先上传脚本
+  Constant_Name: 常量名称
+  Size: 大小
+  Updated_At: 修改时间
+  Actions: 动作
+  edit_content: 编辑内容...
+  Save_Changes: 保存更改
 
   # all:
   Save: 保存
@@ -45,13 +91,24 @@ zh-CN:
         remember_me: 记住我
         username: 用户名
         email: 电邮地址
+        Sign_In_Count: 登录总次数
+        Created_At: 用户创建时间
+        Updated_At: 用户修改时间
+        Current_Sign_In_At: 当前登录于
+        Last_Sign_In_At: 最后登录于
+        Current_Sign_In_IP: 当前登录IP地址
+        Last_Sign_In_IP: 最后登录IP地址
       job:
         name: 任务名称
+        server: 服务器
         server_id: 连接到服务器
         interpreter_id: 解释器
         script: 脚本
+        Updated_At: 任务修改时间
+        Mean_Time: 平均时间
       server:
         name: 服务器名称
         host: 主机地址
         username: 登录用户名
         password: 登录密码
+        userpass: 用户名 (密码)

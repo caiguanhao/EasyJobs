@@ -1,22 +1,22 @@
 = render 'menu'
 
 .panel.float
-  %h3 Name
+  %h3= t('helpers.label.server.name')
   .pc
     = @server.name
 .panel.float
-  %h3 Host
+  %h3= t('helpers.label.server.host')
   .pc
     = @server.host
 .panel.float
-  %h3 Username (Password)
+  %h3= t('helpers.label.server.userpass')
   .pc
-    = "#{@server.username} (" + (@server.password.blank? ? "no password" : "*" * @server.password.length) +  ")"
+    = "#{@server.username} (" + (@server.password.blank? ? t("no_password") : "*" * @server.password.length) +  ")"
 .clear
 .panel.float
-  %h3 Private Key Constant
+  %h3= t('Private_Key_Constant')
   .pc
-    = @server.constant.present? ? link_to(@server.constant.name, settings_path) : "(none)"
+    = @server.constant.present? ? link_to(@server.constant.name, settings_path) : t("none")
 
 .clear
 .separator
@@ -29,12 +29,12 @@
     %thead
       %tr
         %th ID
-        %th Name
-        %th.date Updated at
+        %th= t('helpers.label.job.name')
+        %th.date= t('helpers.label.job.Updated_At')
     %tfoot
       %tr
         %td{ colspan: 3 }
-          = pluralize(@server.jobs.size, "related job")
+          = t("related_job", count: @server.jobs.size)
     %tbody
       - @server.jobs.each do |job|
         %tr

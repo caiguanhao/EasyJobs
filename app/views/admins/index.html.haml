@@ -4,13 +4,13 @@
   %thead
     %tr
       %th ID
-      %th Username
-      %th Email
-      %th.date Last Sign In At
+      %th= t('helpers.label.admin.username')
+      %th= t('helpers.label.admin.email')
+      %th.date= t('helpers.label.admin.Last_Sign_In_At')
   %tfoot
     %tr
       %td{ colspan: 4 }
-        = pluralize(@admins.size, "admin")
+        = t("admin", count: @admins.size)
   - @admins.each do |admin|
     %tr
       %td= admin.id
@@ -18,6 +18,6 @@
         = link_to admin.username, admin
         - if current_admin.id == admin.id
           %em
-            %small (this is you)
+            %small= t("this_is_you")
       %td= admin.email
       %td.date= admin.last_sign_in_at.presence || "(n/a)"

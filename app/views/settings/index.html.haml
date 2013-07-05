@@ -5,12 +5,12 @@
     %thead
       %tr
         %th ID
-        %th.path Path of interpreter
-        %th Options
+        %th.path= t("Path_of_interpreter")
+        %th= t("Options")
     %tfoot
       %tr
         %td{ colspan: 3 }
-          = pluralize(@interpreters.size - 1, "interpreter")
+          = t("interpreter", count: @interpreters.size - 1 )
     %tbody
       - @interpreters.each do |interpreter|
         %tr
@@ -21,8 +21,8 @@
             = text_field_tag "interpreters_path[]", interpreter.path, id: nil
           %td
             = check_box_tag "interpreters_usf[]", interpreter.id, interpreter.upload_script_first, id: "interpreter_usf_#{interpreter.id}"
-            = label_tag "interpreter_usf_#{interpreter.id}", "Upload script first"
-  = submit_tag "Save Changes", class: "button button-blue"
+            = label_tag "interpreter_usf_#{interpreter.id}", t("Upload_script_first")
+  = submit_tag t("Save_Changes"), class: "button button-blue"
 
 .separator
 
@@ -31,14 +31,14 @@
     %thead
       %tr
         %th ID
-        %th.name Constant name
-        %th.size Size
-        %th.date Updated at
-        %th Actions
+        %th.name= t("Constant_Name")
+        %th.size= t("Size")
+        %th.date= t("Updated_At")
+        %th= t("Actions")
     %tfoot
       %tr
         %td{ colspan: 5 }
-          = pluralize(@constants.size - 1, "constant")
+          = t("constant", count: @constants.size - 1 )
     %tbody
       - @constants.each do |constant|
         %tr
@@ -52,5 +52,5 @@
           %td.date
             = constant.updated_at if constant.id > 0
           %td
-            = link_to 'Edit content...', '#', class: "edit-constant-content", data: { id: constant.id, action: edit_content_of_constant_path(constant) } if constant.id > 0
-  = submit_tag "Save Changes", class: "button button-blue"
+            = link_to t('edit_content'), '#', class: "edit-constant-content", data: { id: constant.id, action: edit_content_of_constant_path(constant) } if constant.id > 0
+  = submit_tag t("Save_Changes"), class: "button button-blue"

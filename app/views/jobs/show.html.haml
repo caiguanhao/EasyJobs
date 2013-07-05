@@ -1,22 +1,22 @@
 = render 'menu'
 
 .panel.float
-  %h3 Name
+  %h3= t('helpers.label.job.name')
   .pc
     = @job.name
 .panel.float
-  %h3 Server
+  %h3= t('helpers.label.job.server')
   .pc
-    = @job.server ? link_to(@job.server.name, server_path(@job.server)) : "(none)"
+    = @job.server ? link_to(@job.server.name, server_path(@job.server)) : t("none")
     - if @job.server.present?
-      = link_to('Change Key', edit_server_path(@job.server), class: "key") if @job.server.constant.present?
+      = link_to(t('Change_Key'), edit_server_path(@job.server), title: t('Change_Key'), class: "key") if @job.server.constant.present?
       %small= "(#{@job.server.username}@#{@job.server.host})"
 .panel.float
-  %h3 Mean time
+  %h3= t('helpers.label.job.Mean_Time')
   #mean_time.pc{ data: { mean_time: @job.mean_time.presence || "0" }}
-    = @job.mean_time.present? ? "#{@job.mean_time} s" : "(not started yet)"
+    = @job.mean_time.present? ? "#{@job.mean_time} s" : t("not_started_yet")
 .panel.max
-  %h3= @job.interpreter.try(:path).presence || "Script"
+  %h3= @job.interpreter.try(:path).presence || t("Script")
   %pre#script.pc.script.CodeMirror.cm-s-monokai{ data: { interpreter: @job.interpreter.try(:path) } }
     = preserve do
       = @job.script
@@ -26,33 +26,33 @@
     .panel.float
       %h3= param
       .pc
-        = text_field_tag nil, nil, id: nil, class: "custom_param", placeholder: "value", data: { param: param }
+        = text_field_tag nil, nil, id: nil, class: "custom_param", placeholder: t("value"), data: { param: param }
         - if @job_parameters.include? param
           .select
-            = select_tag nil, options_for_select([['(select)','']] + @job_parameters[param]), id: nil, class: "fill_custom_param"
+            = select_tag nil, options_for_select([[t('select'),'']] + @job_parameters[param]), id: nil, class: "fill_custom_param"
         - else
-          %small= "No '#{param}' found in 'job_parameters' constant."
+          %small= t("no_param_found", param: param)
 .clear
 
 - if @job.interpreter.nil? # only for jobs without interpreters (default)
   .misc
     = check_box_tag :exit_if_non_zero, 1, true
-    = label_tag :exit_if_non_zero, "Exit if previous command returns a non-zero status"
+    = label_tag :exit_if_non_zero, t("exit_if_non_zero")
 
 #progress.progress.progress-blue.right-side
   %span
 
 .field
-  = link_to 'Run', '', data: { cancel: 'Cancel', run: 'Run', to: run_job_path(@job) }, id: "run_job", class: "button button-blue"
+  = link_to t('Run'), '', data: { cancel: t('Cancel'), run: t('Run'), to: run_job_path(@job) }, id: "run_job", class: "button button-blue"
 
 .clear
 .separator
 
-%pre#output Pending.
+%pre#output= t('pending')
 
 .separator
 .panel.max
-  %h3 Statistics
+  %h3= t('Statistics')
   #chart{ class: ("never" if @job.time_stats.empty?), data: { json: timestats_job_path(@job) } }
     - if @job.time_stats.empty?
-      %p The job has not been started yet!
+      %p= t('not_started_yet')

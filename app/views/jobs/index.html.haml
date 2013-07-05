@@ -4,16 +4,13 @@
   %thead
     %tr
       %th ID
-      %th Name
-      %th.server Server
-      %th.date Updated at
+      %th= t('helpers.label.job.name')
+      %th.server= t('helpers.label.job.server')
+      %th.date= t('helpers.label.job.Updated_At')
   %tfoot
     %tr
       %td{ colspan: 4 }
-        .table-pager
-          <a href="#" class="table-pager-link prev">Previous</a>
-          <a href="#" class="table-pager-link next">Next</a>
-        = pluralize(@jobs.size, "job")
+        = t("job", count: @jobs.size)
   %tbody
     - @jobs.each do |job|
       %tr
@@ -21,8 +18,8 @@
         %td
           = link_to job.name, job
           %span.interpreter
-            = job.interpreter.try(:path).presence || "Script"
+            = job.interpreter.try(:path).presence || t("Script")
         %td.server
           = link_to job.server.name, server_path(job.server) unless job.server.nil?
-          = link_to('Change Key', edit_server_path(job.server), class: "key") if job.server.try(:constant).present?
+          = link_to(t('Change_Key'), edit_server_path(job.server), title: t('Change_Key'), class: "key") if job.server.try(:constant).present?
         %td.date= job.updated_at

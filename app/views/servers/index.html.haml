@@ -4,19 +4,19 @@
   %thead
     %tr
       %th ID
-      %th Name
-      %th Host
-      %th Username
+      %th= t('helpers.label.server.name')
+      %th= t('helpers.label.server.host')
+      %th= t('helpers.label.server.username')
   %tfoot
     %tr
       %td{ colspan: 4 }
-        = pluralize(@servers.size, "server")
+        = t("server", count: @servers.size)
   %tbody
     - @servers.each do |server|
       %tr
         %td= server.id
         %td
           = link_to server.name, server
-          = link_to('Change Key', edit_server_path(server), class: "key") if server.constant.present?
+          = link_to(t('Change_Key'), edit_server_path(server), title: t('Change_Key'), class: "key") if server.constant.present?
         %td= server.host
         %td= server.username

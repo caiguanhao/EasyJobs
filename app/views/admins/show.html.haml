@@ -1,41 +1,41 @@
 = render 'menu'
 
 .panel.float
-  %h3 Username
+  %h3= t('helpers.label.admin.username')
   .pc
     = @admin.username
 .panel.float
-  %h3 Email
+  %h3= t('helpers.label.admin.email')
   .pc
     = @admin.email
 .panel.float
-  %h3 Sign In Count
+  %h3= t('helpers.label.admin.Sign_In_Count')
   .pc
     = @admin.sign_in_count
 .clear
 .panel.float
-  %h3 Current Sign In At
+  %h3= t('helpers.label.admin.Current_Sign_In_At')
   .pc
     = @admin.current_sign_in_at.presence || "(n/a)"
 .panel.float
-  %h3 Last Sign In At
+  %h3= t('helpers.label.admin.Last_Sign_In_At')
   .pc
     = @admin.last_sign_in_at.presence || "(n/a)"
 .panel.float
-  %h3 Created At
+  %h3= t('helpers.label.admin.Created_At')
   .pc
     = @admin.created_at
 .clear
 .panel.float
-  %h3 Current Sign In IP
+  %h3= t('helpers.label.admin.Current_Sign_In_IP')
   .pc
     = @admin.current_sign_in_ip.presence || "(n/a)"
 .panel.float
-  %h3 Last Sign In IP
+  %h3= t('helpers.label.admin.Last_Sign_In_IP')
   .pc
     = @admin.last_sign_in_ip.presence || "(n/a)"
 .panel.float
-  %h3 Updated At
+  %h3= t('helpers.label.admin.Updated_At')
   .pc
     = @admin.updated_at
 .clear
