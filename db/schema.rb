@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130704035130) do
+ActiveRecord::Schema.define(version: 20130705074807) do
 
   create_table "admins", force: true do |t|
     t.string   "email",               default: "", null: false
@@ -38,12 +38,16 @@ ActiveRecord::Schema.define(version: 20130704035130) do
     t.datetime "updated_at"
   end
 
+  add_index "constants", ["name"], name: "index_constants_on_name", unique: true
+
   create_table "interpreters", force: true do |t|
     t.string   "path"
     t.boolean  "upload_script_first"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "interpreters", ["path"], name: "index_interpreters_on_path", unique: true
 
   create_table "jobs", force: true do |t|
     t.string   "name"
@@ -56,6 +60,7 @@ ActiveRecord::Schema.define(version: 20130704035130) do
   end
 
   add_index "jobs", ["interpreter_id"], name: "index_jobs_on_interpreter_id"
+  add_index "jobs", ["name"], name: "index_jobs_on_name", unique: true
   add_index "jobs", ["server_id"], name: "index_jobs_on_server_id"
 
   create_table "servers", force: true do |t|
@@ -69,6 +74,7 @@ ActiveRecord::Schema.define(version: 20130704035130) do
   end
 
   add_index "servers", ["constant_id"], name: "index_servers_on_constant_id"
+  add_index "servers", ["name"], name: "index_servers_on_name", unique: true
 
   create_table "time_stats", force: true do |t|
     t.float    "real"
