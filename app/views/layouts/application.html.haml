@@ -22,10 +22,10 @@
             .right
               = link_to current_admin.username, edit_admin_path(current_admin)
               |
-              = link_to 'Log Out', destroy_admin_session_path, method: :delete
+              = link_to t('Log Out'), destroy_admin_session_path, method: :delete
         #menu.button_group
-          = link_to 'Jobs', jobs_path, class: "button" + (params[:controller]=="jobs" ? " active" : "")
-          = link_to 'Servers', servers_path, class: "button" + (params[:controller]=="servers" ? " active" : "")
-          = link_to 'Admins', admins_path, class: "button" + (params[:controller]=="admins" ? " active" : "")
-          = link_to 'Settings', settings_path, class: "button" + (params[:controller]=="settings" ? " active" : "")
+          = link_to t('Jobs'), jobs_path, class: "button" + (params[:controller]=="jobs" ? " active" : "")
+          = link_to t('Servers'), servers_path, class: "button" + (params[:controller]=="servers" ? " active" : "")
+          = link_to t('Admins'), admins_path, class: "button" + (params[:controller]=="admins" ? " active" : "")
+          = link_to t('Settings'), settings_path, class: "button" + (params[:controller]=="settings" ? " active" : "")
         = yield

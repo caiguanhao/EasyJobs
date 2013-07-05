@@ -1,0 +1,14 @@
+zh-CN:
+  devise:
+    failure:
+      already_authenticated: "你已登录。"
+      inactive: "用户尚未启用。"
+      invalid: "错误的用户名/电邮地址，密码或验证码。"
+      invalid_token: "错误的验证标记。"
+      locked: "用户已锁定。"
+      not_found_in_database: "错误的用户名/电邮地址，密码或验证码。"
+      timeout: "登录超时，请重新登录。"
+      unauthenticated: "在继续前请先登录。"
+    sessions:
+      signed_in: "成功登录。"
+      signed_out: "成功退出登录。"

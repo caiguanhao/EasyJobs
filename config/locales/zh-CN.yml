@@ -1,8 +1,38 @@
 zh-CN:
+  # application_small:
   Log_into_EasyJobs: 登录到EasyJobs
   Google_Authenticator_Code: Google身份验证器验证码
   Sign_In: 登录
   dont_use_ie: 请勿使用Internet Explorer，因为它不支持HTML5服务器发送事件。
+
+  # application:
+  Jobs: 任务
+  Servers: 服务器
+  Admins: 管理员
+  Settings: 设定
+
+  # admins:
+  Listing_Admins: 所有管理员
+  Admin_Details: 管理员详细
+  Edit_Admin: 编辑管理员
+  Delete_Admin: 删除管理员
+  New_Admin: 新增管理员
+
+  # jobs:
+  Listing_Jobs: 所有任务
+  Job_Details: 任务详细
+  Edit_Job: 编辑任务
+  Delete_Job: 删除任务
+  New_Job: 新增任务
+
+  # servers:
+  Listing_Servers: 所有服务器
+  Server_Details: 服务器详细
+  Edit_Server: 编辑服务器
+  Delete_Server: 删除服务器
+  New_Server: 新增服务器
+
+  # all:
   helpers:
     label:
       admin:
