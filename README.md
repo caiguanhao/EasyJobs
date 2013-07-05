@@ -60,6 +60,16 @@ Deploy:
     bundle exec rake assets:precompile
     puma -e production -b unix:/tmp/EasyJobsApp.puma.sock
 
+Default admin can be found in ``db/seeds.rb``:
+
+    Username: admin
+    Password: 12345678
+
+Get Google Authenticator code:
+
+    rails c
+    ROTP::TOTP.new(Admin.first.auth_secret).now.to_s.rjust(6,'0')
+
 Requirements
 ------------
 
