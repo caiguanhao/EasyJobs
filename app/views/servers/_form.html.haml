@@ -18,12 +18,12 @@
     %h3= f.label :password
     .pc= f.text_field :password
   .panel
-    %h3= f.label :constant_id, "Private Key Constant"
+    %h3= f.label :constant_id, t("Private_Key_Constant")
     .pc
       .select= f.collection_select :constant_id, Constant.all, :id, :name, include_blank: "(none)"
   .separator
   .actions
     - if @server.id
       = hidden_field_tag "referrer", request.referrer
-      = f.submit 'Save and go back to previous page', name: "save_and_go_back", class: "button button-green"
-    = f.submit 'Save', class: "button button-green"
+      = f.submit t('Save_and_go_back_to_previous_page'), name: "save_and_go_back", class: "button button-green"
+    = f.submit t('Save'), class: "button button-green"

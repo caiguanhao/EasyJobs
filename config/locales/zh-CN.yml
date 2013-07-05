@@ -17,6 +17,7 @@ zh-CN:
   Edit_Admin: 编辑管理员
   Delete_Admin: 删除管理员
   New_Admin: 新增管理员
+  Google_Authenticator_QRCode: Google身份验证器QR码
 
   # jobs:
   Listing_Jobs: 所有任务
@@ -31,11 +32,26 @@ zh-CN:
   Edit_Server: 编辑服务器
   Delete_Server: 删除服务器
   New_Server: 新增服务器
+  Private_Key_Constant: 私钥常量
 
   # all:
+  Save: 保存
+  Save_and_go_back_to_previous_page: 保存并返回到之前的页面
   helpers:
     label:
       admin:
         login: 用户名/电邮地址
         password: 密码
         remember_me: 记住我
+        username: 用户名
+        email: 电邮地址
+      job:
+        name: 任务名称
+        server_id: 连接到服务器
+        interpreter_id: 解释器
+        script: 脚本
+      server:
+        name: 服务器名称
+        host: 主机地址
+        username: 登录用户名
+        password: 登录密码

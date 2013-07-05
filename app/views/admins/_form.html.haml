@@ -16,8 +16,8 @@
     .pc= f.password_field :password
   - if @admin.id
     .panel
-      %h3 Google Authenticator QRCode
+      %h3= t('Google_Authenticator_QRCode')
       .pc= generate_google_authenticator_qrcode_for_admin @admin
   .separator
   .actions
-    = f.submit 'Save', class: "button button-green"
+    = f.submit t('Save'), class: "button button-green"
