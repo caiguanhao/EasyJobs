@@ -1,6 +1,7 @@
 !!!
 %html
   %head
+    %meta{ charset: 'UTF-8' }
     %title EasyJobs
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = csrf_meta_tags
@@ -14,5 +15,5 @@
     #wrapper
       #main.small
         #header
-          %h1#title Log into EasyJobs
+          %h1#title= t('Log_into_EasyJobs')
         = yield

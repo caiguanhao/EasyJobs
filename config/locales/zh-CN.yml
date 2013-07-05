@@ -1,0 +1,11 @@
+zh-CN:
+  Log_into_EasyJobs: 登录到EasyJobs
+  Google_Authenticator_Code: Google身份验证器验证码
+  Sign_In: 登录
+  dont_use_ie: 请勿使用Internet Explorer，因为它不支持HTML5服务器发送事件。
+  helpers:
+    label:
+      admin:
+        login: 用户名/电邮地址
+        password: 密码
+        remember_me: 记住我

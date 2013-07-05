@@ -6,14 +6,14 @@
     %h3= f.label :password
     .pc= f.password_field :password
   .panel
-    %h3= f.label :auth_code, 'Google Authenticator Code'
+    %h3= f.label :auth_code, t('Google_Authenticator_Code')
     .pc= f.text_field :auth_code
   = f.check_box :remember_me
   = f.label :remember_me
   .separator
   .actions
-    = f.submit 'Sign In', class: "button button-green"
+    = f.submit t('Sign_In'), class: "button button-green"
 
 <!--[if IE]>
-%small Please don't use Internet Explorer as it doesn't support HTML5 Server-Sent Events.
+%small= t('dont_use_ie')
 <![endif]-->
