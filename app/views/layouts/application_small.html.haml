@@ -6,12 +6,13 @@
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
-    - if notice
-      #notice
-        = notice
-    - if alert
-      #alert
-        = alert
+    #na_container
+      - if notice
+        #notice.will_disappear
+          = notice
+      - if alert
+        #alert.will_disappear
+          = alert
     #wrapper
       #main.small
         #header
