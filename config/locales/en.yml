@@ -40,6 +40,7 @@ en:
   select: (select)
   default: (default)
   no_password: no password
+  leave_blank_if_no_changes: Leave blank if no changes
 
   # admins:
   Listing_Admins: Listing Admins

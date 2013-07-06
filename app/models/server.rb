@@ -3,4 +3,5 @@ class Server < ActiveRecord::Base
   belongs_to :constant
   validates_presence_of :name, :host, :username
   validates_uniqueness_of :name
+  attr_accessor :need_password
 end

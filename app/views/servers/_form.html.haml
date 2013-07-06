@@ -15,8 +15,15 @@
     %h3= f.label :username
     .pc= f.text_field :username, autocomplete: :off
   .panel
-    %h3= f.label :password
-    .pc= f.password_field :password
+    - if @server.id
+      %h3
+        = f.check_box :need_password
+        = f.label :need_password, t('helpers.label.server.password')
+      .pc
+        = f.password_field :password, placeholder: t('leave_blank_if_no_changes')
+    - else
+      %h3= f.label :password
+      .pc= f.password_field :password
   .panel
     %h3= f.label :constant_id, t("Private_Key_Constant")
     .pc

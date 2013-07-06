@@ -1,3 +1,6 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+serversonload = ->
+  if $('#server_need_password').length == 1
+    $('#server_password').bind 'keyup keydown', ->
+      $('#server_need_password').prop 'checked', $(this).val().length > 0
+$(serversonload)
+$(window).bind 'page:change', serversonload # because of turbolinks

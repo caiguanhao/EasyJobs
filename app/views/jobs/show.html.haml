@@ -7,7 +7,7 @@
 .panel.float
   %h3= t('helpers.label.job.server')
   .pc
-    = @job.server ? link_to(@job.server.name, server_path(@job.server)) : t("none")
+    = @job.server ? link_to(@job.server.name, edit_server_path(@job.server)) : t("none")
     - if @job.server.present?
       = link_to(t('Change_Key'), edit_server_path(@job.server), title: t('Change_Key'), class: "key") if @job.server.constant.present?
       %small= "(#{@job.server.username}@#{@job.server.host})"

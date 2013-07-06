@@ -54,6 +54,17 @@ class ServersController < ApplicationController
       destination = @server
     end
 
+    if params[:server].has_key?(:need_password) && params[:server].has_key?(:password)
+      case params[:server][:need_password]
+        when "0"
+          params[:server][:password] = ""
+        when "1"
+          if params[:server][:password].empty? then
+            params[:server].delete :password
+          end
+      end
+    end
+
     respond_to do |format|
       if @server.update(server_params)
         format.html { redirect_to destination, notice: t('notice.server.updated') }
@@ -83,6 +94,11 @@ class ServersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_server
       @server = Server.find(params[:id])
+      if params.has_key?(:server) and params[:server].has_key?(:need_password)
+        @server.need_password = params[:server][:need_password]
+      else
+        @server.need_password = !@server.password.empty?
+      end
 
       # remeber last entered server
       session[:server_id] = params[:id]

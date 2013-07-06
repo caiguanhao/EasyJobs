@@ -28,6 +28,7 @@ zh-CN:
   select: (选择)
   default: (默认)
   no_password: 无密码
+  leave_blank_if_no_changes: 如无需改动请留空
 
   # admins:
   Listing_Admins: 所有管理员
