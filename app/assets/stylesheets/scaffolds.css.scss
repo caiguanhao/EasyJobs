@@ -82,14 +82,6 @@ div {
   border-color:#98cf9f #98cf9f #8ec397;
 }
 
-.will_disappear {
-  opacity: 0;
-  visibility: hidden;
-  transition-property: opacity, visibility;
-  transition-duration: 500ms;
-  transition-delay: 3s;
-}
-
 #error_explanation {
   width: 450px;
   background-color: #FFF5F5;
