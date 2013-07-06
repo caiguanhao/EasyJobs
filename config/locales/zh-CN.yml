@@ -58,6 +58,7 @@ zh-CN:
   pending: 等待执行。
   Statistics: 统计
   not_started_yet: 任务尚未被执行过。
+  default_script_name: "%{server}的空白任务"
   default_script: |
     # 一行一个命令：
     #

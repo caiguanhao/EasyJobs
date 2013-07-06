@@ -39,7 +39,7 @@ class ServersController < ApplicationController
 
   def create_blank_job
     job_params = Hash.new
-    job_params[:name] = "Blank job for #{@server.name}"
+    job_params[:name] = t('default_script_name', server: @server.name)
     job_params[:script] = t('default_script')
     job_params[:server_id] = @server.id
     create_job_with job_params

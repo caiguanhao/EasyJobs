@@ -70,6 +70,7 @@ en:
   pending: Pending.
   Statistics: Statistics
   not_started_yet: The job has not been started yet!
+  default_script_name: "Blank job for %{server}"
   default_script: |
     # Put each of your separate command in each line:
     #
