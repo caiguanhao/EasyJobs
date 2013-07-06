@@ -129,7 +129,7 @@ div {
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
   &.small {
     width: 250px;
-    margin: 52px auto;
+    margin: 20px auto;
   }
   #header {
     position: relative;
@@ -318,7 +318,13 @@ input,textarea,select,button,label {
   margin:0;
 }
 
-input[type=text],input[type=email],input[type=url],input[type=search],input[type=password],textarea {
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=text],input[type=email],input[type=url],input[type=search],input[type=password],input[type=number],textarea {
   display:inline-block;
   vertical-align:top;
   color:#666;

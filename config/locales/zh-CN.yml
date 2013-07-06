@@ -71,7 +71,7 @@ zh-CN:
     #
     # du -sh . # 查看当前目录大小
 
-    echo "You have successfully connected to the server."
+    echo "看到这行文字时表示你已成功连接服务器！"
 
   # servers:
   Listing_Servers: 所有服务器

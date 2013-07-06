@@ -13,10 +13,10 @@
     .pc= f.text_field :host
   .panel
     %h3= f.label :username
-    .pc= f.text_field :username
+    .pc= f.text_field :username, autocomplete: :off
   .panel
     %h3= f.label :password
-    .pc= f.text_field :password
+    .pc= f.password_field :password
   .panel
     %h3= f.label :constant_id, t("Private_Key_Constant")
     .pc

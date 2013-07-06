@@ -2,6 +2,7 @@
 %html
   %head
     %meta{ charset: 'UTF-8' }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' }
     %title EasyJobs
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = csrf_meta_tags
@@ -25,3 +26,10 @@
                 - else
                   = link_to t(locale, locale: locale), { locale: locale }
         = yield
+    :javascript
+      window.onload = function(){
+        setTimeout(function(){
+          var nac=document.getElementById('na_container');
+          if(nac)document.getElementsByTagName('body')[0].removeChild(nac);
+        }, 4000);
+      };
