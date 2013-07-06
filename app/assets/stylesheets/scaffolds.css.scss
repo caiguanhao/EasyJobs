@@ -84,7 +84,10 @@ div {
 
 .will_disappear {
   opacity: 0;
-  transition: opacity 200ms linear 3000ms;
+  visibility: hidden;
+  transition-property: opacity, visibility;
+  transition-duration: 500ms;
+  transition-delay: 3s;
 }
 
 #error_explanation {

@@ -16,5 +16,12 @@
     #wrapper
       #main.small
         #header
-          %h1#title= t('Log_into_EasyJobs')
+          %h1#title
+            = t('Log_into_EasyJobs')
+            .right
+              - I18n.available_locales.each do |locale|
+                - if I18n.locale.to_s == locale.to_s
+                  %b= t(locale, locale: locale)
+                - else
+                  = link_to t(locale, locale: locale), { locale: locale }
         = yield
