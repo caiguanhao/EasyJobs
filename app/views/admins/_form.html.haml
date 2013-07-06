@@ -11,13 +11,17 @@
   .panel
     %h3= f.label :email
     .pc= f.text_field :email
-  .panel
-    %h3= f.label :password
-    .pc= f.password_field :password
   - if @admin.id
+    .panel
+      %h3= f.label :password
+      .pc= f.password_field :password, placeholder: t('leave_blank_if_no_changes')
     .panel
       %h3= t('Google_Authenticator_QRCode')
       .pc= generate_google_authenticator_qrcode_for_admin @admin
+  -else
+    .panel
+      %h3= f.label :password
+      .pc= f.password_field :password
   .separator
   .actions
     = f.submit t('Save'), class: "button button-green"

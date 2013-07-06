@@ -196,6 +196,7 @@ zh-CN:
         username: 登录用户名
         password: 登录密码
         userpass: 用户名 (密码)
+        jobs: 任务数
   activerecord:
     attributes:
       admin:

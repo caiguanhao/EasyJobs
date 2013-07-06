@@ -7,9 +7,10 @@
       %th= t('helpers.label.server.name')
       %th= t('helpers.label.server.host')
       %th= t('helpers.label.server.username')
+      %th= t('helpers.label.server.jobs')
   %tfoot
     %tr
-      %td{ colspan: 4 }
+      %td{ colspan: 5 }
         = t("server", count: @servers.size)
   %tbody
     - @servers.each do |server|
@@ -20,3 +21,4 @@
           = link_to(t('Change_Key'), edit_server_path(server), title: t('Change_Key'), class: "key") if server.constant.present?
         %td= server.host
         %td= server.username
+        %td= server.jobs.count
