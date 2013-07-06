@@ -1,10 +1,13 @@
 EasyJobs
 ========
 
-A simple SSH web interface to ease your workload.
+A simple SSH web interface to ease your workload.  
+减轻你工作量的、简便的SSH网页界面
 
 Features
 --------
+
+Since v0.1:
 
 * Run commands or scripts via SSH.
 * Custom interpreter besides ``/bin/bash``.
@@ -13,10 +16,15 @@ Features
 * Two factor authentication with Google Authenticator.
 * Graphically showing time used each time running the script.
 
-How to use
-----------
+Since v0.2:
 
-Nginx config:
+* Support output content in UTF-8 encoding.
+* I18n support with English or Simplified Chinese translations.
+
+Configurations
+--------------
+
+Nginx:
 
     upstream EasyJobs_app {
       server unix:/tmp/EasyJobsApp.puma.sock;
@@ -48,7 +56,7 @@ Nginx config:
       }
     }
 
-Deploy:
+Rails:
 
     cd /srv/qnn
     git clone https://github.com/qnn/EasyJobs.git
