@@ -64,16 +64,31 @@ class SettingsController < ApplicationController
 
   def get_constant
     constant = Constant.find(params[:id])
+    constant.content = private_key_mask if is_a_private_key?(constant.content)
     render json: constant.to_json
   end
 
   def update_content_of_constant
     constant = Constant.find(params[:id])
-    if constant.update({ content: params[:content] })
+    content = params[:content]
+    if content == private_key_mask and is_a_private_key?(constant.content) then
       render json: { content: constant.content.length }
     else
-      render json: { content: -1 }, status: :unprocessable_entity
+      if constant.update({ content: content })
+        render json: { content: content.length }
+      else
+        render json: { content: -1 }, status: :unprocessable_entity
+      end
     end
   end
 
+  private
+    def is_a_private_key?(content)
+      content =~ /-----BEGIN RSA PRIVATE KEY-----/ or
+      content =~ /-----BEGIN DSA PRIVATE KEY-----/
+    end
+
+    def private_key_mask
+      "<<< PRIVATE KEY - NOT SHOWN >>>"
+    end
 end
