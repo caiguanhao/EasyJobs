@@ -153,6 +153,7 @@ zh-CN:
   # Server-Sent Events
   sse:
     please_select_server: 请选择一个服务器！
+    please_reload_page: 请刷新任务页面后重试！
     upload_progress: "正在上传 %{name} ... %{percent}% 完成 %{sent}/%{total} 字节已发送"
     running_command: "正在执行 %{command}"
     params_not_provided: 至少有一个参数没有被指定值

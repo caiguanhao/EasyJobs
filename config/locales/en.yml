@@ -166,6 +166,7 @@ en:
   # Server-Sent Events
   sse:
     please_select_server: Please select one server!
+    please_reload_page: Please reload job details page and try again!
     upload_progress: "Uploading %{name} ... %{percent}% %{sent}/%{total} bytes sent"
     running_command: "Running %{command}"
     params_not_provided: At least one parameter value is not provided!

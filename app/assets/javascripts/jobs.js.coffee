@@ -26,7 +26,7 @@ jobsonload = ->
         $("#progress span").animate({ width: init }, dur);
       run_job.text run_job.data('cancel')
       $("#output").empty().append(I18n.wait_connection+"\n")
-      parameters = { parameters: {} };
+      parameters = { hash: $(this).data('hash'), parameters: {} };
       if $(".custom_param").length > 0
         $(".custom_param").each (a,b) ->
           parameters.parameters[$(this).data("param")] = $(this).val();
@@ -38,7 +38,7 @@ jobsonload = ->
         $("#output").append(Array(50).join("-")+"\n")
       , false
       window.source.onmessage = (e) ->
-        console.log e
+        # console.log e
         data = $.parseJSON e.data
         $("#output").append(Base64.decode(data.output))
         output_scroll_to_bottom()

@@ -43,7 +43,7 @@
   %span
 
 .field
-  = link_to t('Run'), '', data: { cancel: t('Cancel'), run: t('Run'), to: run_job_path(@job) }, id: "run_job", class: "button button-blue"
+  = link_to t('Run'), '', data: { cancel: t('Cancel'), run: t('Run'), to: run_job_path(@job), hash: @script_hash }, id: "run_job", class: "button button-blue"
 
 .clear
 .separator

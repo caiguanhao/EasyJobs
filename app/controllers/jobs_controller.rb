@@ -15,8 +15,10 @@ class JobsController < ApplicationController
   # GET /jobs/1
   # GET /jobs/1.json
   def show
+    require 'digest/md5'
     @job_parameters = Constant.where("name = ?", "job_parameters").first || []
     @job_parameters = YAML::load @job_parameters.content unless @job_parameters.blank?
+    @script_hash = Digest::MD5.hexdigest(@job.script)
   end
 
   def timestats
@@ -89,11 +91,14 @@ class JobsController < ApplicationController
     require 'net/ssh'
     require 'net/scp'
     require 'benchmark'
+    require 'digest/md5'
 
     response.headers['Content-Type'] = 'text/event-stream'
     sse = Streamer::SSE.new(response.stream)
     begin
       raise t("sse.please_select_server") if @job.server.nil?
+      raise t("sse.please_reload_page") unless
+        params.has_key?(:hash) and Digest::MD5.hexdigest(@job.script) == params[:hash]
 
       key_data = @job.server.constant.try(:content).presence || nil
 
