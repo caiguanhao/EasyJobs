@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :delete, :destroy, :timestats, :destroy_timestats]
+  before_action :set_job, only: [:show, :edit, :update, :delete, :run, :destroy, :timestats, :destroy_timestats]
 
   helper_method :get_parameters_of
   def get_parameters_of(script)
@@ -93,94 +93,90 @@ class JobsController < ApplicationController
     response.headers['Content-Type'] = 'text/event-stream'
     sse = Streamer::SSE.new(response.stream)
     begin
-      @job = Job.find(params[:id])
+      raise t("sse.please_select_server") if @job.server.nil?
 
-      begin
-        raise t("sse.please_select_server") if @job.server.nil?
+      key_data = @job.server.constant.try(:content).presence || nil
 
-        key_data = @job.server.constant.try(:content).presence || nil
+      ssh_params = [@job.server.host, @job.server.username,
+        password: @job.server.password, key_data: key_data, timeout: 5]
 
-        ssh_params = [@job.server.host, @job.server.username,
-          password: @job.server.password, key_data: key_data, timeout: 5]
-
-        if @job.interpreter.try(:path)
-          time_used = Benchmark.measure {
-            Net::SSH.start *ssh_params do |ssh|
-              if @job.interpreter.upload_script_first
-                script = @job.script
-                script.gsub!(/\r\n?/, "\n")
-                ssh.scp.upload!(StringIO.new(script), "/tmp/easyjobs_script") do |ch, name, sent, total|
-                  sse.write(status(t('sse.upload_progress', name: name, percent: "#{(sent.to_f * 100 / total.to_f).to_i}", sent: sent, total: total)))
-                end
-                cmd = "#{@job.interpreter.path} /tmp/easyjobs_script"
-                sse.write(status(t('sse.running_command', command: cmd)))
-                ssh.exec!(cmd) do |channel, stream, data|
-                  sse.write(data)
-                end
-              else
-                ssh.open_channel do |channel|
-                  channel.exec(@job.interpreter.path) do |ch, success|
-                    channel.send_data @job.script
-                    channel.eof!
-                    channel.on_data do |ch,data|
-                      sse.write(data)
-                    end
+      if @job.interpreter.try(:path)
+        time_used = Benchmark.measure {
+          Net::SSH.start *ssh_params do |ssh|
+            if @job.interpreter.upload_script_first
+              script = @job.script
+              script.gsub!(/\r\n?/, "\n")
+              ssh.scp.upload!(StringIO.new(script), "/tmp/easyjobs_script") do |ch, name, sent, total|
+                sse.write(status(t('sse.upload_progress', name: name, percent: "#{(sent.to_f * 100 / total.to_f).to_i}", sent: sent, total: total)))
+              end
+              cmd = "#{@job.interpreter.path} /tmp/easyjobs_script"
+              sse.write(status(t('sse.running_command', command: cmd)))
+              ssh.exec!(cmd) do |channel, stream, data|
+                sse.write(data)
+              end
+            else
+              ssh.open_channel do |channel|
+                channel.exec(@job.interpreter.path) do |ch, success|
+                  channel.send_data @job.script
+                  channel.eof!
+                  channel.on_data do |ch,data|
+                    sse.write(data)
                   end
                 end
               end
             end
-          }
-          record_and_output_real_time time_used, @job, sse
-        else
-
-          # job without interpreter (default)
-          script = @job.script
-          script.gsub!(/\r\n?/, "\n")
-          script.gsub!(/\\\n\s*/, "")
-
-          # param substitute
-          good_param = 0
-          parameters = get_parameters_of(script)
-          parameters.each do |p|
-            good_param = good_param + 1 if params.has_key?(:parameters) and 
-              params[:parameters].has_key?(p) and params[:parameters][p].length > 0
           end
+        }
+        record_and_output_real_time time_used, @job, sse
+      else
 
-          raise t("sse.params_not_provided") if good_param != parameters.count
+        # job without interpreter (default)
+        script = @job.script
+        script.gsub!(/\r\n?/, "\n")
+        script.gsub!(/\\\n\s*/, "")
 
-          script = script % params[:parameters].symbolize_keys if good_param > 0
-
-          exit_if_non_zero = (params.has_key?(:exit_if_non_zero) && params[:exit_if_non_zero] == "1")
-
-          # execute commands
-          time_used = Benchmark.measure {
-            Net::SSH.start *ssh_params do |ssh|
-              script.lines.each do |line|
-                line.strip!
-                next if line.empty? or line[0] == "#"
-                exit_code = 0
-                ssh.exec!(line) do |channel, stream, data|
-                  sse.write(data)
-                  channel.on_request("exit-status") do |ch,data|
-                    exit_code = data.read_long
-                  end
-                end
-                raise t("sse.exit_with_status_code", code: exit_code) if exit_if_non_zero and exit_code > 0
-              end
-            end
-          }
-          record_and_output_real_time time_used, @job, sse
-
+        # param substitute
+        good_param = 0
+        parameters = get_parameters_of(script)
+        parameters.each do |p|
+          good_param = good_param + 1 if params.has_key?(:parameters) and 
+            params[:parameters].has_key?(p) and params[:parameters][p].length > 0
         end
-      rescue Timeout::Error
-        sse.write(status(t('sse.timed_out')))
-      rescue Net::SSH::AuthenticationFailed
-        sse.write(status(t('sse.auth_failed')))
-      rescue Exception => e
-        sse.write(status(e.message))
+
+        raise t("sse.params_not_provided") if good_param != parameters.count
+
+        script = script % params[:parameters].symbolize_keys if good_param > 0
+
+        exit_if_non_zero = (params.has_key?(:exit_if_non_zero) && params[:exit_if_non_zero] == "1")
+
+        # execute commands
+        time_used = Benchmark.measure {
+          Net::SSH.start *ssh_params do |ssh|
+            script.lines.each do |line|
+              line.strip!
+              next if line.empty? or line[0] == "#"
+              exit_code = 0
+              ssh.exec!(line) do |channel, stream, data|
+                sse.write(data)
+                channel.on_request("exit-status") do |ch,data|
+                  exit_code = data.read_long
+                end
+              end
+              raise t("sse.exit_with_status_code", code: exit_code) if exit_if_non_zero and exit_code > 0
+            end
+          end
+        }
+        record_and_output_real_time time_used, @job, sse
+
       end
+    rescue Timeout::Error
+      sse.write(status(t('sse.timed_out')))
+    rescue Net::SSH::AuthenticationFailed
+      sse.write(status(t('sse.auth_failed')))
     rescue IOError
       # the client disconnects
+    rescue Exception => e
+      sse.write(status(e.message))
     ensure
       sse.close
     end
