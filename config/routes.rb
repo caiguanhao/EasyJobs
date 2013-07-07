@@ -19,6 +19,7 @@ EasyJobs::Application.routes.draw do
   resources :admins do
     member do
       get :delete
+      post :edit
     end
   end
 

@@ -29,6 +29,7 @@ zh-CN:
   default: (默认)
   no_password: 无密码
   leave_blank_if_no_changes: 如无需改动请留空
+  your_current_password: 你当前的密码
 
   # admins:
   Listing_Admins: 所有管理员
@@ -38,6 +39,9 @@ zh-CN:
   New_Admin: 新增管理员
   Deleting_Admin: "即将删除管理员 %{admin}"
   Google_Authenticator_QRCode: Google身份验证器QR码
+  View_Google_Authenticator_QRCode: 查看Google身份验证器QR码
+  Wrong_Password: 你输入了错误的密码。
+  Back: 返回
   Delete_Admin_Confirm: 确定要删除这个管理员吗？
   Delete_Admin_Yes: 我确定这是个不可逆转的操作。请删除这个管理员。
 

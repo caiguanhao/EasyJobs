@@ -41,6 +41,7 @@ en:
   default: (default)
   no_password: no password
   leave_blank_if_no_changes: Leave blank if no changes
+  your_current_password: Enter your current password
 
   # admins:
   Listing_Admins: Listing Admins
@@ -50,6 +51,9 @@ en:
   New_Admin: New Admin
   Deleting_Admin: "Deleting %{admin}"
   Google_Authenticator_QRCode: Google Authenticator QRCode
+  View_Google_Authenticator_QRCode: View Google Authenticator QRCode
+  Wrong_Password: The password you entered is invalid.
+  Back: Back
   Delete_Admin_Confirm: Are you sure you want to delete this admin?
   Delete_Admin_Yes: Yes. Delete this admin. I know this action is irreversible.
 
