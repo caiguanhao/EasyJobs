@@ -12,6 +12,7 @@ EasyJobs::Application.routes.draw do
     member do
       get :run
       get :timestats
+      delete :timestats, to: "jobs#destroy_timestats"
       get :delete
     end
   end

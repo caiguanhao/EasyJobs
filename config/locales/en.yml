@@ -66,6 +66,9 @@ en:
   Deleting_Job: "Deleting %{job}"
   Delete_Job_Confirm: Are you sure you want to delete this job?
   Delete_Job_Yes: Yes. Delete this job. I know this action is irreversible.
+  Delete_Job_Others: or may be you just want to ...
+  Delete_Time_Stats_Only: Delete time stats only
+  Delete_Time_Stats_Confirm: Are you sure you want to delete all time stats of this job?
   value: value
   no_param_found: "No '%{param}' found in 'job_parameters' constant."
   exit_if_non_zero: Exit if previous command returns a non-zero status
@@ -127,6 +130,7 @@ en:
       created: Job was successfully created.
       updated: Job was successfully updated.
       deleted: Job was successfully deleted.
+      timestats_deleted: Time stats related to this job were successfully deleted.
     server:
       created: Server was successfully created.
       updated: Server was successfully updated.

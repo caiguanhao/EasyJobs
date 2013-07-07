@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :delete, :destroy, :timestats]
+  before_action :set_job, only: [:show, :edit, :update, :delete, :destroy, :timestats, :destroy_timestats]
 
   helper_method :get_parameters_of
   def get_parameters_of(script)
@@ -59,6 +59,15 @@ class JobsController < ApplicationController
   end
 
   def delete
+  end
+
+  def destroy_timestats
+    @job.time_stats.clear
+    @job.update({ mean_time: nil })
+    respond_to do |format|
+      format.html { redirect_to @job, notice: t('notice.job.timestats_deleted') }
+      format.json { head :no_content }
+    end
   end
 
   # DELETE /jobs/1

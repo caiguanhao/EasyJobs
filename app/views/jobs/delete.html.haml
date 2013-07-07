@@ -5,4 +5,7 @@
   .confirm
     = t('Delete_Job_Confirm')
     .buttons
-      = link_to t('Delete_Job_Yes'), job_path(@job), method: :delete, class: "button button-red"
+      = link_to t('Delete_Job_Yes'), job_path(@job), method: :delete, data: { confirm: t('Delete_Job_Confirm') }, class: "button button-red"
+    = t('Delete_Job_Others')
+    .buttons
+      = link_to t('Delete_Time_Stats_Only'), timestats_job_path(@job), method: :delete, data: { confirm: t('Delete_Time_Stats_Confirm') }, class: "button button-red"

@@ -54,6 +54,9 @@ zh-CN:
   Deleting_Job: "即将删除任务 %{job}"
   Delete_Job_Confirm: 确定要删除这个任务吗？
   Delete_Job_Yes: 我确定这是个不可逆转的操作。请删除这个任务。
+  Delete_Job_Others: 或者你想另外...
+  Delete_Time_Stats_Only: 只删除时间统计数据
+  Delete_Time_Stats_Confirm: 确定要删除这个任务的所有时间统计数据吗？
   value: 替换值
   no_param_found: "'job_parameters'常量中找不到'%{param}'"
   exit_if_non_zero: 如果上一个命令的返回码不为零就停止执行任务
@@ -114,6 +117,7 @@ zh-CN:
       created: 成功创建任务。
       updated: 成功更新任务。
       deleted: 成功删除任务。
+      timestats_deleted: 成功删除该任务的相关时间统计数据。
     server:
       created: 成功创建服务器。
       updated: 成功更新服务器。
