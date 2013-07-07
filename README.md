@@ -27,7 +27,7 @@ Configurations
 Nginx:
 
     upstream EasyJobs_app {
-      server unix:/tmp/EasyJobsApp.puma.sock;
+      server unix:///srv/qnn/EasyJobs/tmp/sockets/puma.socket;
     }
 
     server {
@@ -66,7 +66,7 @@ Rails:
     bundle exec rake db:migrate
     bundle exec rake db:seed
     bundle exec rake assets:precompile
-    puma -e production -b unix:/tmp/EasyJobsApp.puma.sock
+    bin/puma start
 
 Default admin can be found in ``db/seeds.rb``:
 
@@ -77,6 +77,11 @@ Get Google Authenticator code:
 
     rails c
     ROTP::TOTP.new(Admin.first.auth_secret).now.to_s.rjust(6,'0')
+
+bin/puma
+--------
+
+    Usage: bin/puma [status/start/stop/restart]
 
 Requirements
 ------------
