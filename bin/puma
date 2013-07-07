@@ -1,8 +1,13 @@
 #!/usr/bin/env ruby
 
 APP_ROOT = File.dirname(File.dirname(File.realpath(__FILE__)))
-PID_FILE = File.join(APP_ROOT, "tmp", "pids", "puma.pid")
-SOCKET_FILE = File.join(APP_ROOT, "tmp", "sockets", "puma.socket")
+PID_DIR = File.join(APP_ROOT, "tmp", "pids")
+PID_FILE = File.join(PID_DIR, "puma.pid")
+SOCKET_DIR = File.join(APP_ROOT, "tmp", "sockets")
+SOCKET_FILE = File.join(SOCKET_DIR, "puma.socket")
+
+`mkdir -p "#{PID_DIR}"` unless File.exists?(PID_DIR)
+`mkdir -p "#{SOCKET_DIR}"` unless File.exists?(SOCKET_DIR)
 
 def puma_is_running?
   return 0 unless File.exists?(SOCKET_FILE)
