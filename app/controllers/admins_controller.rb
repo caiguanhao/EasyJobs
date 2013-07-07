@@ -22,7 +22,7 @@ class AdminsController < ApplicationController
   def edit
     @show_qrcode = nil
     if request.method == "POST" and params.has_key?(:password)
-      @show_qrcode = current_admin.valid_password?(params[:password])
+      @show_qrcode = @admin.valid_password?(params[:password])
       flash.now[:alert] = t('Wrong_Password') if @show_qrcode == false
     end
   end
