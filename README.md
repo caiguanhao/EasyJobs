@@ -21,6 +21,47 @@ Since v0.2:
 * Support output content in UTF-8 encoding.
 * I18n support with English or Simplified Chinese translations.
 
+How to use
+----------
+
+### Job script variable
+
+You can use variable if your script is using the **(default)** interpreter. For example, if your script contains:
+
+    id %{user}
+
+then you can enter the value to this variable (user) before you run the script.
+
+### Interpreters
+
+***(default)***
+
+Take each line as separate command and commands will be executed **separately**:
+
+    $ cd /srv
+    $ pwd
+      /root
+    $ cd /srv && pwd
+      /srv
+
+If your command is too long for one line, you can break the line with a back-slash (\\) at the end of the line.
+
+Lines starting with a hashtag (#) will be treated as comments and will not be executed. Do not add comments at the same line of the command.
+
+For most systems, the interpreter for the login user is ``/bin/bash``.
+
+***Common interpreters:***
+
+* /bin/bash
+* /usr/bin/perl
+* /usr/bin/php
+* /usr/bin/python
+* /usr/bin/ruby
+
+You can add interpreters that exist on remote server.
+
+Note: Some interpreters don't support reading code from standard input but from file, like ``/bin/bash``. You need to check the *Upload script first* option to make it work. 
+
 Configurations
 --------------
 
@@ -83,11 +124,32 @@ bin/puma
 
     Usage: bin/puma [status/start/stop/restart]
 
+Gems used
+---------
+
+* turbolinks
+* haml-rails
+* puma
+* net-scp (Net::SCP)
+* net-ssh (Net::SSH)
+* codemirror-rails
+* devise
+* rotp
+* ...
+
+JavaScript:
+
+* highcharts.js
+* jquery.qrcode.min.js
+* ...
+
 Requirements
 ------------
 
 * Ruby 2.0.0
 * Rails 4.0.0
+* Browsers that support Server-Sent Events.
+  * Most of the modern desktop or mobile web browser except Internet Explorer
 
 License
 -------
