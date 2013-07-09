@@ -22,4 +22,8 @@
         %td.server
           = link_to job.server.name, server_path(job.server) unless job.server.nil?
           = link_to(t('Change_Key'), edit_server_path(job.server), title: t('Change_Key'), class: "key") if job.server.try(:constant).present?
-        %td.date= job.updated_at
+        %td.date
+          %abbr.timeago{ title: job.updated_at.getutc.iso8601 }
+            = job.updated_at
+
+%script<= raw jquery_timeago_tranlations

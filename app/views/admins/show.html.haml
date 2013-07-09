@@ -16,15 +16,24 @@
 .panel.float
   %h3= t('helpers.label.admin.Current_Sign_In_At')
   .pc
-    = @admin.current_sign_in_at.presence || "(n/a)"
+    - if @admin.current_sign_in_at.present?
+      %abbr.timeago{ title: @admin.current_sign_in_at.getutc.iso8601 }
+        = @admin.current_sign_in_at
+    - else
+      (n/a)
 .panel.float
   %h3= t('helpers.label.admin.Last_Sign_In_At')
   .pc
-    = @admin.last_sign_in_at.presence || "(n/a)"
+    - if @admin.last_sign_in_at.present?
+      %abbr.timeago{ title: @admin.last_sign_in_at.getutc.iso8601 }
+        = @admin.last_sign_in_at
+    - else
+      (n/a)
 .panel.float
   %h3= t('helpers.label.admin.Created_At')
   .pc
-    = @admin.created_at
+    %abbr.timeago{ title: @admin.created_at.getutc.iso8601 }
+      = @admin.created_at
 .clear
 .panel.float
   %h3= t('helpers.label.admin.Current_Sign_In_IP')
@@ -37,5 +46,8 @@
 .panel.float
   %h3= t('helpers.label.admin.Updated_At')
   .pc
-    = @admin.updated_at
+    %abbr.timeago{ title: @admin.updated_at.getutc.iso8601 }
+      = @admin.updated_at
 .clear
+
+%script<= raw jquery_timeago_tranlations

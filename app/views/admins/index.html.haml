@@ -20,4 +20,11 @@
           %em
             %small= t("this_is_you")
       %td= admin.email
-      %td.date= admin.last_sign_in_at.presence || "(n/a)"
+      %td.date
+        - if admin.last_sign_in_at.present?
+          %abbr.timeago{ title: admin.last_sign_in_at.getutc.iso8601 }
+            = admin.last_sign_in_at
+        - else
+          (n/a)
+
+%script<= raw jquery_timeago_tranlations

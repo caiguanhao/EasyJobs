@@ -5,4 +5,8 @@ module ApplicationHelper
     locale[:javascript][params[:controller].to_sym].to_json.html_safe +
     ";"
   end
+
+  def jquery_timeago_tranlations
+    "jQuery.timeago.settings.strings=#{I18n.t("jquery_timeago")};"
+  end
 end

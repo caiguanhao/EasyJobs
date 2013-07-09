@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.modal.min
 //= require jquery.qrcode.min
+//= require jquery.timeago
 //= require base64.min
 //= require turbolinks
 //= require codemirror

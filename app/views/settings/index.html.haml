@@ -50,9 +50,13 @@
           %td.size
             = constant.content.length if constant.id > 0
           %td.date
-            = constant.updated_at if constant.id > 0
+            - if constant.id > 0
+              %abbr.timeago{ title: constant.updated_at.getutc.iso8601 }
+                = constant.updated_at
           %td
             = link_to t('edit_content'), '#', class: "edit-constant-content", data: { id: constant.id, action: edit_content_of_constant_path(constant) } if constant.id > 0
   = submit_tag t("Save_Changes"), class: "button button-blue"
 
-%script= raw i18n_javascript_for_current_controller
+%script
+  = raw i18n_javascript_for_current_controller
+  = raw jquery_timeago_tranlations

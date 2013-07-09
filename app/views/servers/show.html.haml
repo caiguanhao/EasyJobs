@@ -43,4 +43,8 @@
             = link_to job.name, job
             %span.interpreter
               = job.interpreter.try(:path).presence || "Script"
-          %td.date= job.updated_at
+          %td.date
+            %abbr.timeago{ title: job.updated_at.getutc.iso8601 }
+              = job.updated_at
+
+%script<= raw jquery_timeago_tranlations

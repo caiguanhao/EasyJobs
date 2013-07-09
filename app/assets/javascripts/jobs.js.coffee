@@ -134,5 +134,6 @@ jobsonload = ->
         });
   if $('#chart').length > 0
     update_chart();
+  $("abbr.timeago").timeago();
 $(jobsonload)
 $(window).bind 'page:change', jobsonload # because of turbolinks
