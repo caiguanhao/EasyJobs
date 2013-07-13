@@ -4,8 +4,8 @@ EasyJobs
 A simple SSH web interface to ease your workload.  
 减轻你工作量的、简便的SSH网页界面
 
-Features
---------
+Features / Log
+--------------
 
 Since v0.1:
 
@@ -20,6 +20,10 @@ Since v0.2:
 
 * Support output content in UTF-8 encoding.
 * I18n support with English or Simplified Chinese translations.
+
+Since v0.21:
+
+* Add password, key and QR code protection and fix some problems.
 
 How to use
 ----------
