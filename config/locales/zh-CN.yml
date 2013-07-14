@@ -40,6 +40,8 @@ zh-CN:
   Deleting_Admin: "即将删除管理员 %{admin}"
   Google_Authenticator_QRCode: Google身份验证器QR码
   View_Google_Authenticator_QRCode: 查看Google身份验证器QR码
+  Mobile_Authentication_QRCode: 手机验证QR码
+  Get_Mobile_Authentication_QRCode: 查看手机验证QR码
   Wrong_Password: 你输入了错误的密码。
   Back: 返回
   Delete_Admin_Confirm: 确定要删除这个管理员吗？

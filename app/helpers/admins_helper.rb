@@ -8,4 +8,12 @@ module AdminsHelper
     # url = "https://chart.googleapis.com/chart?chs=230x230&chld=M|0&cht=qr&chl=#{data}"
     # return image_tag(url, :alt => 'Google Authenticator QRCode')
   end
+
+  def generate_mobile_authentication_qrcode_for_admin(admin)
+    require 'json'
+    require 'base64'
+
+    # version 1
+    Base64.strict_encode64(JSON.dump({ v: 1, c: admin.authentication_token }))
+  end
 end

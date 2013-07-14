@@ -20,10 +20,20 @@ class AdminsController < ApplicationController
 
   # GET /admins/1/edit
   def edit
-    @show_qrcode = nil
+    @show_qrcode = 0
     if request.method == "POST" and params.has_key?(:password)
-      @show_qrcode = @admin.valid_password?(params[:password])
-      flash.now[:alert] = t('Wrong_Password') if @show_qrcode == false
+      valid_password = @admin.valid_password?(params[:password])
+      if valid_password == false
+        flash.now[:alert] = t('Wrong_Password')
+      else
+        if params.has_key?(:google)
+          @show_qrcode = 1
+        end
+        if params.has_key?(:mobile)
+          @admin.ensure_authentication_token! # generate authentication token and save
+          @show_qrcode = 2
+        end
+      end
     end
   end
 

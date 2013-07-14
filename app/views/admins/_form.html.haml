@@ -21,15 +21,23 @@
 
 - if @admin.id
   .separator
-  - unless @show_qrcode == true
+  - case @show_qrcode
+  - when 0
     = form_tag edit_admin_path(@admin) do
       .panel
         %h3= label_tag :password, t('helpers.label.admin.password')
         .pc= password_field_tag :password, nil, placeholder: t('your_current_password')
-      = submit_tag t('View_Google_Authenticator_QRCode'), class: "button button-blue"
-  - else
+      = submit_tag t('View_Google_Authenticator_QRCode'), name: "google", class: "button button-blue"
+      = submit_tag t('Get_Mobile_Authentication_QRCode'), name: "mobile", class: "button button-blue"
+  - when 1
     .panel
       %h3= t('Google_Authenticator_QRCode')
       .pc
         .qrcode{ data: { text: generate_google_authenticator_qrcode_for_admin(@admin) } }
+    = link_to t('Back'), edit_admin_path(@admin), class: "button button-blue"
+  - when 2
+    .panel
+      %h3= t('Mobile_Authentication_QRCode')
+      .pc
+        .qrcode{ data: { text: generate_mobile_authentication_qrcode_for_admin(@admin) } }
     = link_to t('Back'), edit_admin_path(@admin), class: "button button-blue"

@@ -52,6 +52,8 @@ en:
   Deleting_Admin: "Deleting %{admin}"
   Google_Authenticator_QRCode: Google Authenticator QRCode
   View_Google_Authenticator_QRCode: View Google Authenticator QRCode
+  Mobile_Authentication_QRCode: Mobile Authentication QRCode
+  Get_Mobile_Authentication_QRCode: Get Mobile Authentication QRCode
   Wrong_Password: The password you entered is invalid.
   Back: Back
   Delete_Admin_Confirm: Are you sure you want to delete this admin?
