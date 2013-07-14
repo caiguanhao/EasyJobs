@@ -5,4 +5,4 @@
   .confirm
     = t('Delete_Admin_Confirm')
     .buttons
-      = link_to t('Delete_Admin_Yes'), admin_path(@admin), method: :delete, class: "button button-red"
+      = link_to t('Delete_Admin_Yes'), admin_path(@admin), method: :delete, data: { confirm: t('Delete_Admin_Confirm') }, class: "button button-red"

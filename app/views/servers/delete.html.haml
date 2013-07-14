@@ -7,4 +7,4 @@
     %br
     = t('Delete_Server_Jobs_Related', count: @server.jobs.count)
     .buttons
-      = link_to t('Delete_Server_Yes'), server_path(@server), method: :delete, class: "button button-red"
+      = link_to t('Delete_Server_Yes'), server_path(@server), method: :delete, data: { confirm: t('Delete_Server_Confirm') }, class: "button button-red"
