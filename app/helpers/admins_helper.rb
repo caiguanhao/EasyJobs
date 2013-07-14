@@ -14,6 +14,6 @@ module AdminsHelper
     require 'base64'
 
     # version 1
-    Base64.strict_encode64(JSON.dump({ v: 1, c: admin.authentication_token }))
+    Base64.strict_encode64(JSON.dump({ v: 1, u: api_v1_help_url, c: admin.authentication_token }))
   end
 end

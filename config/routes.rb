@@ -34,6 +34,12 @@ EasyJobs::Application.routes.draw do
 
   root to: "jobs#index"
 
+  namespace :api do
+    namespace :v1 do
+      get :help
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
