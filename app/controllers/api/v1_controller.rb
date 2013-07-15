@@ -1,5 +1,6 @@
 class Api::V1Controller < ApplicationController
   skip_before_action :authenticate
+  before_action :authenticate_with_token
 
   include AdminsHelper
 

@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
       redirect_to(new_admin_session_path) and return unless admin_signed_in?
     end
 
+    def authenticate_with_token
+      render nothing: true, status: 401 and return unless admin_signed_in?
+    end
+
     def set_locale
       if params[:locale] && I18n.available_locales.include?(params[:locale].to_sym)
         cookies['locale'] = { :value => params[:locale], :expires => 1.year.from_now }
