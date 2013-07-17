@@ -1,0 +1,27 @@
+!!!
+%html
+  %head
+    %meta{ charset: "UTF-8" }
+    %meta{ name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1" }
+    = javascript_include_tag "api_v1"
+    :css
+      pre {
+        word-break: break-word;
+      }
+  %body
+    %pre#output > Please wait while connection is being established...
+    = raw "<script>window.eventSource=\"#{@eventSource}\"</script>"
+    :javascript
+      var es = new EventSource(window.eventSource);
+      es.addEventListener("open", function (e) {
+        document.getElementById('output').innerHTML='> Connected.\n'+Array(30).join('-')+'\n'
+      });
+      es.addEventListener("message", function (e) {
+        e = JSON.parse(e.data);
+        document.getElementById('output').innerHTML+=Base64.decode(e.output);
+        window.scrollTo(0,document.body.scrollHeight);
+      });
+      es.addEventListener("error", function (e) {
+        document.getElementById('output').innerHTML+=Array(30).join('-')+'\n> Disconnected.\n'
+        es.close();
+      });
