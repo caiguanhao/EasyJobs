@@ -37,6 +37,7 @@ EasyJobs::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       get :help
+      delete :tokens, as: "revoke_token"
       resources :jobs, only: [:index, :show] do
         get :run
       end
