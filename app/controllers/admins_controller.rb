@@ -28,10 +28,12 @@ class AdminsController < ApplicationController
       else
         if params.has_key?(:google)
           @show_qrcode = 1
-        end
-        if params.has_key?(:mobile)
+        elsif params.has_key?(:mobile)
           @admin.ensure_authentication_token! # generate authentication token and save
           @show_qrcode = 2
+        elsif params.has_key?(:link)
+          @admin.ensure_authentication_token! # generate authentication token and save
+          @show_qrcode = 3
         end
       end
     end

@@ -42,6 +42,8 @@ zh-CN:
   View_Google_Authenticator_QRCode: 查看Google身份验证器QR码
   Mobile_Authentication_QRCode: 手机验证QR码
   Get_Mobile_Authentication_QRCode: 查看手机验证QR码
+  Get_Authentication_Link: 获取验证链接
+  Authenticate_Now: 在你的Android手机上点击这个链接进行验证
   Wrong_Password: 你输入了错误的密码。
   Back: 返回
   Delete_Admin_Confirm: 确定要删除这个管理员吗？

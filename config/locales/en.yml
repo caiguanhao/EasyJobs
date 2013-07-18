@@ -54,6 +54,8 @@ en:
   View_Google_Authenticator_QRCode: View Google Authenticator QRCode
   Mobile_Authentication_QRCode: Mobile Authentication QRCode
   Get_Mobile_Authentication_QRCode: Get Mobile Authentication QRCode
+  Get_Authentication_Link: Get Authentication Link
+  Authenticate_Now: Click this link on your Android to authenticate
   Wrong_Password: The password you entered is invalid.
   Back: Back
   Delete_Admin_Confirm: Are you sure you want to delete this admin?
