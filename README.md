@@ -25,6 +25,10 @@ Since v0.21:
 
 * Add password, key and QR code protection and fix some problems.
 
+Since v0.3
+
+* Add API v1 and [Android](https://github.com/qnn/EasyJobs-android) support.
+
 How to use
 ----------
 
@@ -159,6 +163,12 @@ License
 -------
 
 * [The BSD 3-Clause License](https://github.com/qnn/EasyJobs/blob/master/LICENSE)
+
+See also
+--------
+
+* [EasyJobs Android Client](https://github.com/qnn/EasyJobs-android)
+
 
 Developer
 ---------
