@@ -21,6 +21,12 @@ class Api::V1Controller < ApplicationController
           url: better_path(api_v1_job_run_url(":id"))
         },
       },
+      job_parameters: {
+        index: {
+          verb: :get,
+          url: better_path(api_v1_parameters_url)
+        }
+      },
       tokens: {
         revoke: {
           verb: :delete,
@@ -34,6 +40,12 @@ class Api::V1Controller < ApplicationController
   def tokens
     current_admin.reset_authentication_token!
     render nothing: true, status: 200
+  end
+
+  def parameters
+    job_parameters = Constant.where("name = ?", "job_parameters").first || []
+    job_parameters = YAML::load job_parameters.content unless job_parameters.blank?
+    render json: job_parameters
   end
 
 end

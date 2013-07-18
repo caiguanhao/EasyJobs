@@ -24,7 +24,8 @@ class Api::V1::JobsController < Api::V1Controller
   end
 
   def run
-    p = params.permit(:token, :hash, :exit_if_non_zero, :parameters).to_query
+    _p = params.has_key?(:parameters) ? { parameters: params[:parameters] } : {}
+    p = params.permit(:token, :hash, :exit_if_non_zero).merge(_p).to_query
     p = "?" + p unless p.empty?
     @eventSource = run_job_path(params[:job_id]) + p
   end
