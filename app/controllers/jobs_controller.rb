@@ -52,10 +52,8 @@ class JobsController < ApplicationController
     respond_to do |format|
       if @job.update(job_params)
         format.html { redirect_to @job, notice: t('notice.job.updated') }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @job.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,7 +66,6 @@ class JobsController < ApplicationController
     @job.update({ mean_time: nil })
     respond_to do |format|
       format.html { redirect_to @job, notice: t('notice.job.timestats_deleted') }
-      format.json { head :no_content }
     end
   end
 
@@ -80,7 +77,6 @@ class JobsController < ApplicationController
     session[:job_id] = nil
     respond_to do |format|
       format.html { redirect_to jobs_url, notice: t('notice.job.deleted') }
-      format.json { head :no_content }
     end
   end
 

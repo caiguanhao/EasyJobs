@@ -29,10 +29,8 @@ class ServersController < ApplicationController
     respond_to do |format|
       if @server.save
         format.html { redirect_to @server, notice: t('notice.server.created') }
-        format.json { render action: 'show', status: :created, location: @server }
       else
         format.html { render action: 'new' }
-        format.json { render json: @server.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,10 +66,8 @@ class ServersController < ApplicationController
     respond_to do |format|
       if @server.update(server_params)
         format.html { redirect_to destination, notice: t('notice.server.updated') }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @server.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -86,7 +82,6 @@ class ServersController < ApplicationController
     session[:server_id] = nil
     respond_to do |format|
       format.html { redirect_to servers_url, notice: t('notice.server.deleted') }
-      format.json { head :no_content }
     end
   end
 

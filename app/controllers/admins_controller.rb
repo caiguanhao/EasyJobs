@@ -45,10 +45,8 @@ class AdminsController < ApplicationController
     respond_to do |format|
       if @admin.save
         format.html { redirect_to @admin, notice: t('notice.admin.created') }
-        format.json { render action: 'show', status: :created, location: @admin }
       else
         format.html { render action: 'new' }
-        format.json { render json: @admin.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -62,10 +60,8 @@ class AdminsController < ApplicationController
     respond_to do |format|
       if @admin.update(admin_params)
         format.html { redirect_to @admin, notice: t('notice.admin.updated') }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @admin.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -91,7 +87,6 @@ class AdminsController < ApplicationController
     session[:admin_id] = nil
     respond_to do |format|
       format.html { redirect_to admins_url, notice: t('notice.admin.deleted') }
-      format.json { head :no_content }
     end
   end
 
