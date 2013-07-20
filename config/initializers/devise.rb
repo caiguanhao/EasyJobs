@@ -244,3 +244,10 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
 end
+
+# https://github.com/plataformatec/devise/blob/v3.0.0/lib/devise.rb#L449
+module Devise
+  def self.friendly_token
+    SecureRandom.base64(32).tr('+/=lIO0', 'pqrsxyz')
+  end
+end
