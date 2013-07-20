@@ -41,7 +41,7 @@ gem 'net-ssh'
 
 gem 'codemirror-rails'
 
-gem 'devise', '>= 3.0.0.rc'
+gem 'devise', '~> 3.0.0'
 
 gem 'rotp'
 
