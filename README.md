@@ -111,6 +111,7 @@ Rails:
     git clone https://github.com/qnn/EasyJobs.git
     cd EasyJobs
     export RAILS_ENV=production
+    sudo apt-get install libsqlite3-dev nodejs
     bundle
     bundle exec rake db:migrate
     bundle exec rake db:seed
