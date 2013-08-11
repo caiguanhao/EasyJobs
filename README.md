@@ -169,7 +169,7 @@ See also
 --------
 
 * [EasyJobs Android Client](https://github.com/qnn/EasyJobs-android)
-
+* [EasyJobs Android Client on Google Play](https://play.google.com/store/apps/details?id=com.cghio.easyjobs)
 
 Developer
 ---------
