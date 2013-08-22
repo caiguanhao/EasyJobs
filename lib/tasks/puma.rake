@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby
-
 APP_ROOT = File.dirname(File.dirname(File.realpath(__FILE__)))
 PID_DIR = File.join(APP_ROOT, "tmp", "pids")
 PID_FILE = File.join(PID_DIR, "puma.pid")
@@ -30,14 +28,18 @@ def start_puma
   end
 end
 
-case ARGV[0]
-  when "start"
+namespace :puma do
+  desc 'Start Puma'
+  task :start do
     if puma_is_running? > 0
       STDOUT.puts "Puma is already running. Nothing to do."
     else
       start_puma
     end
-  when "stop"
+  end
+
+  desc 'Stop Puma'
+  task :stop do
     if puma_is_running? > 0
       begin
         pid = File.open(PID_FILE, &:readline).to_i
@@ -57,7 +59,10 @@ case ARGV[0]
     else
       STDERR.puts "No puma is running. Nothing to do."
     end
-  when "restart"
+  end
+
+  desc 'Restart Puma'
+  task :restart do
     pid = puma_is_running?
     if pid > 0
       STDOUT.puts "Puma is restarting..."
@@ -72,14 +77,16 @@ case ARGV[0]
     else
       start_puma
     end
-  when "status"
-    pid = puma_is_running?
-    STDOUT.puts <<EOF
+  end
+
+  desc 'Check Puma Status'
+  task :status do
+      pid = puma_is_running?
+      STDOUT.puts <<EOF
   APP ROOT     :  #{APP_ROOT} [exists? = #{File.exists?(APP_ROOT)}]
   PID FILE     :  #{PID_FILE} [exists? = #{File.exists?(PID_FILE)}]
   SOCKET FILE  :  #{SOCKET_FILE} [exists? = #{File.exists?(SOCKET_FILE)}]
   RUNNING?     :  #{pid > 0 ? "YES, PID=#{pid}" : "NO"}
 EOF
-  else
-    STDOUT.puts "Usage: bin/puma [status/start/stop/restart]"
+  end
 end

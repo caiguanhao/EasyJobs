@@ -113,10 +113,10 @@ Rails:
     export RAILS_ENV=production
     sudo apt-get install libsqlite3-dev nodejs
     bundle
-    bundle exec rake db:migrate
-    bundle exec rake db:seed
-    bundle exec rake assets:precompile
-    bin/puma start
+    rake db:migrate
+    rake db:seed
+    rake assets:precompile
+    rake puma:start
 
 Default admin can be found in ``db/seeds.rb``:
 
@@ -128,10 +128,13 @@ Get Google Authenticator code:
     rails c
     ROTP::TOTP.new(Admin.first.auth_secret).now.to_s.rjust(6,'0')
 
-bin/puma
---------
+Puma
+----
 
-    Usage: bin/puma [status/start/stop/restart]
+    rake puma:restart           # Restart Puma
+    rake puma:start             # Start Puma
+    rake puma:status            # Check Puma Status
+    rake puma:stop              # Stop Puma
 
 Gems used
 ---------
