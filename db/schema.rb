@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130714112628) do
+ActiveRecord::Schema.define(version: 20130822091707) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                default: "", null: false
@@ -87,5 +87,11 @@ ActiveRecord::Schema.define(version: 20130714112628) do
   end
 
   add_index "time_stats", ["job_id"], name: "index_time_stats_on_job_id"
+
+  create_table "types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
