@@ -1,52 +1,52 @@
 .menu_div
 
-= form_tag edit_types_path, method: :put do
-  %table.list
-    %thead
-      %tr
-        %th ID
-        %th.name= t("Type_Name")
-    %tfoot
-      %tr
-        %td{ colspan: 2 }
-          = t("job_type", count: @interpreters.size - 1 )
-    %tbody
-      - @types.each do |type|
+.settings-p1
+  = form_tag edit_types_path, method: :put do
+    %table.list
+      %thead
         %tr
-          %td
-            = type.id if type.id > 0
-            = hidden_field_tag "types[]", type.id, id: nil
-          %td.name
-            = text_field_tag "types_name[]", type.name, id: nil
-  = submit_tag t("Save_Changes"), class: "button button-blue"
-
-.separator
-
-= form_tag edit_interpreters_path, method: :put do
-  %table.list
-    %thead
-      %tr
-        %th ID
-        %th.path= t("Path_of_interpreter")
-        %th= t("Options")
-    %tfoot
-      %tr
-        %td{ colspan: 3 }
-          = t("interpreter", count: @interpreters.size - 1 )
-    %tbody
-      - @interpreters.each do |interpreter|
+          %th ID
+          %th.name= t("Type_Name")
+      %tfoot
         %tr
-          %td
-            = interpreter.id if interpreter.id > 0
-            = hidden_field_tag "interpreters[]", interpreter.id, id: nil
-          %td.path
-            = text_field_tag "interpreters_path[]", interpreter.path, id: nil
-          %td
-            = check_box_tag "interpreters_usf[]", interpreter.id, interpreter.upload_script_first, id: "interpreter_usf_#{interpreter.id}"
-            = label_tag "interpreter_usf_#{interpreter.id}", t("Upload_script_first")
-  = submit_tag t("Save_Changes"), class: "button button-blue"
+          %td{ colspan: 2 }
+            = t("job_type", count: @types.size - 1 )
+      %tbody
+        - @types.each do |type|
+          %tr
+            %td
+              = type.id if type.id > 0
+              = hidden_field_tag "types[]", type.id, id: nil
+            %td.name
+              = text_field_tag "types_name[]", type.name, id: nil
+    = submit_tag t("Save_Changes"), class: "button button-blue"
 
-.separator
+.settings-p2
+  = form_tag edit_interpreters_path, method: :put do
+    %table.list
+      %thead
+        %tr
+          %th ID
+          %th.path= t("Path_of_interpreter")
+          %th= t("Options")
+      %tfoot
+        %tr
+          %td{ colspan: 3 }
+            = t("interpreter", count: @interpreters.size - 1 )
+      %tbody
+        - @interpreters.each do |interpreter|
+          %tr
+            %td
+              = interpreter.id if interpreter.id > 0
+              = hidden_field_tag "interpreters[]", interpreter.id, id: nil
+            %td.path
+              = text_field_tag "interpreters_path[]", interpreter.path, id: nil
+            %td
+              = check_box_tag "interpreters_usf[]", interpreter.id, interpreter.upload_script_first, id: "interpreter_usf_#{interpreter.id}"
+              = label_tag "interpreter_usf_#{interpreter.id}", t("Upload_script_first")
+    = submit_tag t("Save_Changes"), class: "button button-blue"
+
+.separator.clear
 
 = form_tag edit_constants_path, method: :put do
   %table.list
