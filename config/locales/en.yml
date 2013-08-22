@@ -34,6 +34,7 @@ en:
   constant:
     one: "1 constant"
     other: "%{count} constants"
+  Orphans: (orphans)
   Script: Script
   Change_Key: Change Key
 
@@ -220,6 +221,7 @@ en:
         Current_Sign_In_IP: Current Sign In IP
         Last_Sign_In_IP: Last Sign In IP
       job:
+        type: Type
         name: Name
         server: Server
         server_id: Server

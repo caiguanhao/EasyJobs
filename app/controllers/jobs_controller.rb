@@ -9,7 +9,8 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    @jobs_by_type = Job.all.order("type_id ASC").group_by(&:type)
+    @jobs_count = Job.count
   end
 
   # GET /jobs/1

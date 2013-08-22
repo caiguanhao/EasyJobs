@@ -1,29 +1,31 @@
 = render 'menu'
 
-%table.list
+%table.list.with_types
   %thead
     %tr
-      %th ID
+      %th.type= t('helpers.label.job.type')
       %th= t('helpers.label.job.name')
       %th.server= t('helpers.label.job.server')
       %th.date= t('helpers.label.job.Updated_At')
   %tfoot
     %tr
       %td{ colspan: 4 }
-        = t("job", count: @jobs.size)
+        = t("job", count: @jobs_count)
   %tbody
-    - @jobs.each do |job|
-      %tr
-        %td= job.id
-        %td
-          = link_to job.name, job
-          %span.interpreter
-            = job.interpreter.try(:path).presence || t("Script")
-        %td.server
-          = link_to job.server.name, server_path(job.server) unless job.server.nil?
-          = link_to(t('Change_Key'), edit_server_path(job.server), title: t('Change_Key'), class: "key") if job.server.try(:constant).present?
-        %td.date
-          %abbr.timeago{ title: job.updated_at.getutc.iso8601 }
-            = job.updated_at
+    - @jobs_by_type.each do |type, jobs|
+      - jobs.each_with_index do |job, index|
+        %tr
+          - if index == 0
+            %td.type{ rowspan: jobs.size }= type.try(:name) || t("Orphans")
+          %td
+            = link_to job.name, job
+            %span.interpreter
+              = job.interpreter.try(:path).presence || t("Script")
+          %td.server
+            = link_to job.server.name, server_path(job.server) unless job.server.nil?
+            = link_to(t('Change_Key'), edit_server_path(job.server), title: t('Change_Key'), class: "key") if job.server.try(:constant).present?
+          %td.date
+            %abbr.timeago{ title: job.updated_at.getutc.iso8601 }
+              = job.updated_at
 
 %script<= raw jquery_timeago_tranlations

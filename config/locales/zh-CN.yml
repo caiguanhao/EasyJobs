@@ -20,6 +20,7 @@ zh-CN:
   job_type: "%{count}个分类"
   interpreter: "%{count}个解释器"
   constant: "%{count}个常量"
+  Orphans: 未分类
   Script: "脚本"
   Change_Key: "更换密钥"
 
@@ -205,6 +206,7 @@ zh-CN:
         Current_Sign_In_IP: 当前登录IP地址
         Last_Sign_In_IP: 最后登录IP地址
       job:
+        type: 分类
         name: 任务名称
         server: 服务器
         server_id: 连接到服务器
