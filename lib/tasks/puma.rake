@@ -1,4 +1,3 @@
-APP_ROOT = File.expand_path('../../../', __FILE__)
 PID_DIR = File.join(APP_ROOT, "tmp", "pids")
 PID_FILE = File.join(PID_DIR, "puma.pid")
 SOCKET_DIR = File.join(APP_ROOT, "tmp", "sockets")
