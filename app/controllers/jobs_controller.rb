@@ -198,7 +198,7 @@ class JobsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_params
-      params.require(:job).permit(:name, :interpreter_id, :script, :server_id)
+      params.require(:job).permit(:name, :interpreter_id, :script, :server_id, :type_id)
     end
 
     def record_and_output_real_time(time_used, job, sse)

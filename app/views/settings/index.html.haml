@@ -1,5 +1,27 @@
 .menu_div
 
+= form_tag edit_types_path, method: :put do
+  %table.list
+    %thead
+      %tr
+        %th ID
+        %th.name= t("Type_Name")
+    %tfoot
+      %tr
+        %td{ colspan: 2 }
+          = t("job_type", count: @interpreters.size - 1 )
+    %tbody
+      - @types.each do |type|
+        %tr
+          %td
+            = type.id if type.id > 0
+            = hidden_field_tag "types[]", type.id, id: nil
+          %td.name
+            = text_field_tag "types_name[]", type.name, id: nil
+  = submit_tag t("Save_Changes"), class: "button button-blue"
+
+.separator
+
 = form_tag edit_interpreters_path, method: :put do
   %table.list
     %thead

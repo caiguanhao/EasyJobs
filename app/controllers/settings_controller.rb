@@ -1,8 +1,37 @@
 class SettingsController < ApplicationController
 
   def index
+    @types = Type.all.to_a.concat([Type.new(id: 0)])
     @interpreters = Interpreter.all.to_a.concat([Interpreter.new(id: 0)])
     @constants = Constant.all.to_a.concat([Constant.new(id: 0)])
+  end
+
+  def update_types
+    errors = 0
+    ids = params[:types] || []
+    names = params[:types_name] || []
+    names.each_index do |index|
+      begin
+        type = Type.find(ids[index])
+        if names[index].empty?
+          errors = errors + 1 unless type.destroy
+        else
+          errors = errors + 1 unless type.update({ name: names[index] })
+        end
+      rescue ActiveRecord::RecordNotFound
+        unless names[index].empty?
+          type = Type.new({ name: names[index] })
+          errors = errors + 1 unless type.save
+        end
+      end
+    end
+    respond_to do |format|
+      if errors == 0
+        format.html { redirect_to settings_path, notice: t('notice.types.updated') }
+      else
+        format.html { redirect_to settings_path, alert: t('alert.types.error_updating', count: errors) }
+      end
+    end
   end
 
   def update_interpreters

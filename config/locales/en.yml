@@ -25,6 +25,9 @@ en:
   admin:
     one: "1 admin"
     other: "%{count} admins"
+  job_type:
+    one: "1 job type"
+    other: "%{count} job types"
   interpreter:
     one: "1 interpreter"
     other: "%{count} interpreters"
@@ -114,6 +117,7 @@ en:
     other: "There are %{count} jobs related to this server."
   create_blank_job: No jobs related to this server! Why not create a blank job to test connectivity?
 
+  Type_Name: Type Name
   Path_of_interpreter: Path of interpreter
   Options: Options
   Upload_script_first: Upload script first
@@ -139,6 +143,8 @@ en:
       created: Server was successfully created.
       updated: Server was successfully updated.
       deleted: Server was successfully deleted.
+    types:
+      updated: Types were successfully updated.
     interpreters:
       updated: Interpreters were successfully updated.
     constants:
@@ -148,6 +154,10 @@ en:
       commit_suicide: "Please don't commit suicide."
       no_admins: "You can't delete this admin. Because there will be no admins."
       cant_modify_admin: "You can't modify settings of admin with smaller ID than yours."
+    types:
+      error_updating:
+        one: "An error occurred when updating types."
+        other: "%{count} errors occurred when updating types."
     interpreters:
       error_updating:
         one: "An error occurred when updating interpreters."
@@ -214,6 +224,7 @@ en:
         server: Server
         server_id: Server
         interpreter_id: Interpreter
+        type_id: Type
         script: Script
         Updated_At: Updated At
         Mean_Time: Mean Time

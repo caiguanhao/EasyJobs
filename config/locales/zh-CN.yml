@@ -17,6 +17,7 @@ zh-CN:
   related_job: "%{count}个相关任务"
   server: "%{count}个服务器"
   admin: "%{count}个管理员"
+  job_type: "%{count}个分类"
   interpreter: "%{count}个解释器"
   constant: "%{count}个常量"
   Script: "脚本"
@@ -101,6 +102,7 @@ zh-CN:
     other: "有%{count}个任务与此服务器关联。"
   create_blank_job: 目前还没有任务与服务器关联，何不创建一个测试任务？
 
+  Type_Name: 分类名
   Path_of_interpreter: 解释器路径
   Options: 选项
   Upload_script_first: 执行前先上传脚本
@@ -126,6 +128,8 @@ zh-CN:
       created: 成功创建服务器。
       updated: 成功更新服务器。
       deleted: 成功删除服务器。
+    types:
+      updated: 成功更新分类。
     interpreters:
       updated: 成功更新解释器。
     constants:
@@ -135,6 +139,10 @@ zh-CN:
       commit_suicide: "请勿自杀！"
       no_admins: 你不能删除这个管理员，因为他是最后一个。
       cant_modify_admin: 你不能更改ID比你小的管理员。
+    types:
+      error_updating:
+        one: 更新分类时发生一个错误。
+        other: "更新分类时发生%{count}个错误。"
     interpreters:
       error_updating:
         one: 更新解释器时发生一个错误。
@@ -201,6 +209,7 @@ zh-CN:
         server: 服务器
         server_id: 连接到服务器
         interpreter_id: 解释器
+        type_id: 分类
         script: 脚本
         Updated_At: 任务修改时间
         Mean_Time: 平均时间

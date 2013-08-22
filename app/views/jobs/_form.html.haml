@@ -20,6 +20,10 @@
   .panel.max
     %h3= f.label :script
     .pc= f.text_area :script, size: "80x10"
-  .separator
+  .panel.float
+    %h3= f.label :type_id
+    .pc
+      .select= f.collection_select :type_id, Type.all, :id, :name, include_blank: t("none")
+  .separator.clear
   .actions
     = f.submit t('Save'), class: "button button-green"
