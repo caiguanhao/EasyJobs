@@ -21,6 +21,7 @@
             = link_to job.name, job
             %span.interpreter
               = job.interpreter.try(:path).presence || t("Script")
+            = link_to t('Edit_Job'), edit_job_path(job), title: t('Edit_Job'), class: "edit"
           %td.server
             = link_to job.server.name, server_path(job.server) unless job.server.nil?
             = link_to(t('Change_Key'), edit_server_path(job.server), title: t('Change_Key'), class: "key") if job.server.try(:constant).present?

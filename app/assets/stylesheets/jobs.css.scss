@@ -66,3 +66,13 @@
     margin: 10px;
   }
 }
+
+.edit, .edit:hover {
+  width: 16px;
+  height: 16px;
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABIElEQVR42qWSP0uFUBjG+xR9pbiES2vbhaY+QkuNrtlQQ5tjW+DS0CI0uyuKoqj4X3F98hnO4crrvV3ogQdF/f3ec9QLAP/q5kXTNHGiN0KwBXueh63w3lGBAtVxnmdM04RhGNB1HRjXdXl4XLpfeingJZ/qfBxH9H0PwhQxd7cGqyWbe7ZtO6eAIEsRBQSHjytWSw6nr8rJbdty+QL+ednh/eEavKYFjNpr0zQsJZwu4KMCTqzrmv0LlltgqqpCWZZcBVdzCpYvkSmKAlmWaThLX1kBi8+oBGmaIkkSrkALvr+eWA3zP1Aw2ZUgjmNEUcRt6O9N+O35Xk2G4zhQsBCEYQjf9xEEAYFV8zwHY1kWyAjBueGzWwKDN86scSj4BZllFhGFFTulAAAAAElFTkSuQmCC') no-repeat 0 0;
+  text-indent: -9999px;
+  display: inline-block;
+  line-height: 16px;
+  margin-left: 4px;
+}

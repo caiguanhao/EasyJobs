@@ -26,4 +26,7 @@
       .select= f.collection_select :type_id, Type.all, :id, :name, include_blank: t("none")
   .separator.clear
   .actions
+    - if @job.id
+      = hidden_field_tag "referrer", request.referrer
+      = f.submit t('Save_and_go_back_to_previous_page'), name: "save_and_go_back", class: "button button-green"
     = f.submit t('Save'), class: "button button-green"

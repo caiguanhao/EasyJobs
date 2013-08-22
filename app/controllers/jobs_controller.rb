@@ -50,9 +50,15 @@ class JobsController < ApplicationController
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+    if params.has_key?(:save_and_go_back) and params.has_key?(:referrer)
+      destination = params[:referrer]
+    else
+      destination = @job
+    end
+
     respond_to do |format|
       if @job.update(job_params)
-        format.html { redirect_to @job, notice: t('notice.job.updated') }
+        format.html { redirect_to destination, notice: t('notice.job.updated') }
       else
         format.html { render action: 'edit' }
       end
