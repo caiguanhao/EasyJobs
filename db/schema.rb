@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130822091707) do
+ActiveRecord::Schema.define(version: 20130822091821) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                default: "", null: false
@@ -59,11 +59,13 @@ ActiveRecord::Schema.define(version: 20130822091707) do
     t.integer  "server_id"
     t.integer  "interpreter_id"
     t.float    "mean_time"
+    t.integer  "type_id"
   end
 
   add_index "jobs", ["interpreter_id"], name: "index_jobs_on_interpreter_id"
   add_index "jobs", ["name"], name: "index_jobs_on_name", unique: true
   add_index "jobs", ["server_id"], name: "index_jobs_on_server_id"
+  add_index "jobs", ["type_id"], name: "index_jobs_on_type_id"
 
   create_table "servers", force: true do |t|
     t.string   "name"
