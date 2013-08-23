@@ -29,6 +29,10 @@ a {
   }
 }
 
+a, input, button {
+  -ms-touch-action: none !important;
+}
+
 div {
   &.field, &.actions {
     margin-bottom: 10px;

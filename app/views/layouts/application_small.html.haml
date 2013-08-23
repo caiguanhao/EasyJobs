@@ -4,7 +4,6 @@
     = render '/layouts/head'
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = csrf_meta_tags
-    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' }
   %body
     #na_container
       - if notice
@@ -26,9 +25,10 @@
                   = link_to t(locale, locale: locale), { locale: locale }
         = yield
     :javascript
-      window.onload = function(){
+      window.addEventListener('load', function() {
+        FastClick.attach(document.body);
         setTimeout(function(){
           var nac=document.getElementById('na_container');
           if(nac)document.getElementsByTagName('body')[0].removeChild(nac);
         }, 4000);
-      };
+      }, false);

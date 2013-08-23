@@ -1,7 +1,7 @@
 = form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { novalidate: '' } ) do |f|
   .panel
     %h3= f.label :login
-    .pc= f.email_field :login, autofocus: true
+    .pc= f.email_field :login, id: 'login'
   .panel
     %h3= f.label :password
     .pc= f.password_field :password
@@ -13,6 +13,11 @@
   .separator
   .actions
     = f.submit t('Sign_In'), class: "button button-green"
+
+-# auto-focused text input on iPhone can't click to edit
+:javascript
+  if (!navigator.userAgent.match(/(iPad|iPhone|iPod)/g))
+    document.getElementById('login').focus();
 
 <!--[if IE]>
 %small= t('dont_use_ie')

@@ -28,3 +28,6 @@
 //= require codemirror/modes/yaml
 //= require highcharts
 //= require_tree .
+function loadFastClick() { FastClick.attach(document.body); }
+$(loadFastClick);
+$(window).bind('page:change', loadFastClick);
