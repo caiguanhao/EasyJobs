@@ -1,12 +1,7 @@
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 table.list {
   margin: 0 0 10px 0;
   width:100%;
-  line-height:29px;
+  line-height:20px;
   text-align:left;
   background:white;
   border-collapse:separate;
@@ -67,7 +62,7 @@ table.list {
     border-color:#1d87e2 #187ed9 #1670c1;
     border-style:solid;
     border-width:1px 1px 1px 0;
-    padding:0 10px;
+    padding:5px 8px;
     &:first-child {
       border-left-width:1px;
       border-top-left-radius:3px;
@@ -87,7 +82,7 @@ table.list {
     text-shadow:0 1px white;
     border-right:1px solid #eee;
     border-right-color:rgba(0,0,0,0.07);
-    padding:0 10px;
+    padding:5px 8px;
     &:first-child {
       border-left:1px solid #d2d2d2;
     }

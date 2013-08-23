@@ -13,5 +13,11 @@
  *= require codemirror
  *= require codemirror/themes/monokai
  *= require jquery.modal
- *= require_tree .
+ *= require controls
+ *= require jobs
+ *= require layout
+ *= require servers
+ *= require settings
+ *= require table
+ *= require mobile
  */

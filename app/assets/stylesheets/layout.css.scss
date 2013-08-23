@@ -118,9 +118,13 @@ div {
   }
 }
 
+#wrapper {
+  padding: 10px;
+}
+
 #main {
-  width: 780px;
-  margin: 20px auto;
+  max-width: 780px;
+  margin: 0 auto;
   padding: 15px;
   background: #f3f6fa;
   border: 1px solid;
@@ -188,6 +192,7 @@ div {
   font-size: 0;
   white-space: nowrap;
   margin-right: 15px;
+  margin-bottom: 10px;
   &>.button {
     margin-left:-1px;
     height:inherit;
@@ -209,7 +214,7 @@ div {
 }
 
 .menu_div {
-  padding: 6px 0;
+  display: block;
 }
 
 .clear {

@@ -1,11 +1,15 @@
 #submenu.button_group
-  = link_to t('Listing_Admins'), admins_path, class: "button" + (active_action? %w(index))
+  = link_to admins_path, class: "button button-list#{active_action? %w(index)}" do
+    %span.icon= t('Listing_Admins')
   - admin_id = @admin.try(:id)
   - admin_id = session[:admin_id] if admin_id.nil? and session[:admin_id].present?
   - if admin_id.present?
-    = link_to t('Admin_Details'), admin_path(admin_id), class: "button" + (active_action? %w(show))
-    = link_to t('Edit_Admin'), edit_admin_path(admin_id), class: "button" + (active_action? %w(edit update))
-    = link_to delete_admin_path(admin_id), title: t('Delete_Admin'), class: "button button-red delete#{active_action? %w(delete)}" do
+    = link_to admin_path(admin_id), class: "button button-details#{active_action? %w(show)}" do
+      %span.icon= t('Admin_Details')
+    = link_to edit_admin_path(admin_id), class: "button button-edit#{active_action? %w(edit update)}" do
+      %span.icon= t('Edit_Admin')
+    = link_to delete_admin_path(admin_id), title: t('Delete_Admin'), class: "button button-delete button-red delete#{active_action? %w(delete)}" do
       %span.icon
-  = link_to t('New_Admin'), new_admin_path, class: "button button-green" + (active_action? %w(new create))
+  = link_to new_admin_path, class: "button button-new button-green#{active_action? %w(new create)}" do
+    %span.icon= t('New_Admin')
 .menu_div

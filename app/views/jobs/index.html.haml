@@ -1,10 +1,15 @@
 = render 'menu'
-
-%table.list.with_types
+:css
+  @media only screen and (max-width: 480px) {
+    table#jobs td:nth-of-type(2):before { content: "#{t('helpers.label.job.name')}"; }
+    table#jobs td:nth-of-type(3):before { content: "#{t('helpers.label.job.server')}"; }
+    table#jobs td:nth-of-type(4):before { content: "#{t('helpers.label.job.Updated_At')}"; }
+  }
+%table#jobs.list.with_types
   %thead
     %tr
       %th.type= t('helpers.label.job.type')
-      %th= t('helpers.label.job.name')
+      %th.job_name= t('helpers.label.job.name')
       %th.server= t('helpers.label.job.server')
       %th.date= t('helpers.label.job.Updated_At')
   %tfoot
@@ -17,13 +22,16 @@
         %tr
           - if index == 0
             %td.type{ rowspan: jobs.size }= type.try(:name) || t("Orphans")
-          %td
+          %td.job_name
             = link_to job.name, job
             %span.interpreter
               = job.interpreter.try(:path).presence || t("Script")
             = link_to t('Edit_Job'), edit_job_path(job), title: t('Edit_Job'), class: "edit"
           %td.server
-            = link_to job.server.name, server_path(job.server) unless job.server.nil?
+            -if job.server.nil?
+              = t('none')
+            -else
+              = link_to job.server.name, server_path(job.server)
             = link_to(t('Change_Key'), edit_server_path(job.server), title: t('Change_Key'), class: "key") if job.server.try(:constant).present?
           %td.date
             %abbr.timeago{ title: job.updated_at.getutc.iso8601 }

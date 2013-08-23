@@ -1,6 +1,13 @@
 = render 'menu'
-
-%table.list
+:css
+  @media only screen and (max-width: 480px) {
+    table#servers td:nth-of-type(1):before { content: "ID"; }
+    table#servers td:nth-of-type(2):before { content: "#{t('helpers.label.server.name')}"; }
+    table#servers td:nth-of-type(3):before { content: "#{t('helpers.label.server.host')}"; }
+    table#servers td:nth-of-type(4):before { content: "#{t('helpers.label.server.username')}"; }
+    table#servers td:nth-of-type(5):before { content: "#{t('helpers.label.server.jobs')}"; }
+  }
+%table#servers.list
   %thead
     %tr
       %th ID

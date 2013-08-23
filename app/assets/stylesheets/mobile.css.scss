@@ -1,0 +1,140 @@
+@media only screen and (max-width: 650px) {
+  #jobs {
+    th.type {
+      display: none;
+    }
+    td.type {
+      display: none;
+    }
+    th.job_name {
+      border-left-width:1px;
+      border-top-left-radius:3px;
+    }
+    td.job_name {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+      border-left:1px solid #d2d2d2;
+    }
+    span.interpreter {
+      display: none;
+    }
+    a.edit {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+
+  .button_group {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    a.button {
+      display: table-cell;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding: 0 2px;
+      &:not(:first-child) {
+        border-left: 0;
+      }
+    }
+    .button-list {
+      .icon {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAABQElEQVRIx+2TPWuDQBjHM+QDNEskjedLQKOk2vgSSCFDMjipQzIpBEzRwcnBj9Cpo+DXLJ3kkCxPT8gHeI4uKc0DP265//2P43ej0WP+3ADAmDFhKAydE5nxNJyBKZpc3i/N2lnT1csKeHBcpyvL8mMowxTJnu9R13PB930uhsz2bfvFziCoot1u1x8OBwiCgIshs9/vv7FFk6qq2iiKrmEYAg9xHPd1XX9in+43Mii37Pi+rDufz41lWdQ0TeDBtu0uz3O8dYZhUF3XYblccqFpGrAL4q1jf6K3X21gfwkcx0Ex7L1l8NZlWdZuNpur53nAA8v0RVH8Z+uOx2NDJEJnzzPgQZKlLk1TvHXz+ZwKggC8TKdTUBQFbx0hpBdFEdjKxZBRVRVv3el0aheLxVWWZeCBZfokSe7Musfc3fwA/Vu9NQQKrhYAAAAASUVORK5CYII=') no-repeat center 1px;
+        text-indent: -9999px;
+        display: block;
+        width: 100%;
+        height: 26px;
+      }
+    }
+    .button-details {
+      .icon {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAQAAAADQ4RFAAACrklEQVQ4y72UyUuUYRzHP+/qZE5ulTqOe1iaFZEtpN6CwoJouXaqq5B0KAjy1KHo0KG6dag/IGghCBOqS7SChnUol0RU3GZGx3nnnfdZOjRmZWWH6Dk9PPw+z/fHb/nC/zrG8qduW1WbVUahRsbEiDnULn6OsJdDd7Y4+0JNTjF4M/P9mR7erKDU0RA6E2mPlhXgYiKIMTjxqdu+eu3tb6HTx9Zd2lRXgotGYeHiohjm+Vj8wvWbS3HW0rXzaPnNrZFiJGlgPbnM4WFQQjQ8fqBt7tmLZVBn/dpbjWUhUkgCyqmnCI9ZFD75lFj9rUf6uj9+jTUXodC5aK3NAgKBJEChyCBQBMQpZnt4rOtp0XdK9+zSzWsvl4QkEtD4TDHLKJPYaDQKTSED5emRh6+WlKrs/XkFkgwSH0EpUQQBLoIAgcTDopKJQ/2rvkFGtb3FISBA4KGJ0kwbrZTiIZFIBAH5iI3Ttb15i80tNIsVAoWJRYa3SDYAJj4WFhITgYURTkWcJMnsRCgkEoUGFHPEABBIBBoTjUBi2OTqnKySjqmZABuFicL41vOvX2lMTCQLmNLxySxCw0F/CidbKYMAlYUCHAxMbHymWR0PjRFbrN5n9SiVyCCzCcVJAbBAggySAE2SaSIfnMGWRBY6LK72LtyfQyHwgCbqAKihHo2HAgbIUZUPdid/mIjcK/PjSTQpFG1UEJAhSguaNA6jjLH1Wd69ZVPedTJ+o8AN4VCJiwRcFJMYxBiicbT51J5Hv1iNSx3jF51wPhKwMTCxsJgmTtPotvMtt3+xGvD45Ym+dM1khQAkAp84U4TEricNZ/fe+YNH9KwfOT51MFYv803HCcKJsvcVD8N3d0ysYCzwerVfnY7oXNtzJtyhnfN/4UYA79akClUOvkq0xP+R730BiNojZgLXu5AAAAAASUVORK5CYII=') no-repeat center 1px;
+        text-indent: -9999px;
+        display: block;
+        width: 100%;
+        height: 26px;
+      }
+    }
+    .button-new {
+      .icon {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAB2lBMVEX///9vg41SYml3eXh0dnXi6f7E0fZrb25na2pqbGtwcnFydHP////w8PDg4eC+wcKqtrzn7f8lLjLh4eFvcXAolERqbWzT8KTQ7aBmaWgoj0PQ76TN7KDW5fVXidJdjdJmk9Zvm9t7od6Iq+OWsuijvOyvw+9kZmUni0Lz9//19//2+f/5+//u8//w9v/z+f/0+f/3+/9XWFcmhkBClj3O7qTK6qDg6/h3nd2EpuGQr+afuOqrwe5UVVQlgT/N8qTK7KTG6Z+/5ZOz4YCk3WiW2VJRUVEkez6/5J694pq44JKy34qu3X+l2nSd2WeX1lyR1FKK00p0mtuBpeCOreactuqpv+1NTk0jdTwkdT00gzup236h2HPd3d1JSkkjcTum2X/V5PXZ5/bc6ffC1vFzmtt+odyNqeKatOapvO3g4OBISEgiaTml13+d1XPy9f7Z4vze5/zj7Pzl7vz09PT39/c/QD9Nf8ZThMpciMxkjtDv7+9+fn5sbGxiYmJfX19CQ0IhZDj4+Pjp6eltbW3o6OjR0tJFRUXU1NTj4+NkZGTl5eXDw8NDQ0PMzMzt7e3u7u7o5+jJyso+Pj5LSktqa2qrrKs/Pj9LS0tHRkZERERCQkJAP0BBQEFMKGBVAAAAAXRSTlMAQObYZgAAARNJREFUeAGt0rFKw1AYhuHvPUlrS9JgBavU0UFcnL0BF9degEOngi66VQQH0UW8BK/C0TsRF0Fc1IC2FWlzIjmkTTI46cs3/c/6+/q1PxPYxSrkAVhMgjfDZ7ygEGyG8TJxQNwqkRqSvqRg6iajgmRIVOSVqAamwby36MVRmFH0qQgg8R0FcqQtSbSwqSQnaE4B0iQg6/sdpkuomVMTCHGZYAPgqZ1TmxTAWtR4fgDYJ6c7ST1mNXO/xy6unEaSwhZYr5cfue07KvroAMQrcEiJViV1kKQuVxqW6fr0YlCPJCU+OuekoNHNo7pIqRmPXi85UkHSts6UNVxbZ6AK+Qc7gKZSva8qTTbHkmugKh3/17P9APkaP6V9j2CTAAAAAElFTkSuQmCC') no-repeat center 1px;
+        text-indent: -9999px;
+        display: block;
+        width: 100%;
+        height: 26px;
+      }
+    }
+    .button-edit {
+      .icon {
+        background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAQAAAADQ4RFAAAAi0lEQVQ4y+3ToQ2AMBAF0K7ABKzQBZiASZjgZGVtwxasgECgcbimsskpJPrgYIH7DsH/+uUnl9a5P7ZUnxbikPceQDORaEM2r6xD9eFBxEYSMskkVZSlxUy0N/MzVQ8Q7TpAK+8J4JUPkaOFiXOlIwaJZhpBsvdn8zAGVuKWRFnpjtb8nonjBn2APxej6JkxIBH24gAAAABJRU5ErkJggg==') no-repeat center 1px;
+        text-indent: -9999px;
+        display: block;
+        width: 100%;
+        height: 26px;
+      }
+    }
+    .icon {
+      width: 100%;
+      background-position: center 2px;
+    }
+  }
+
+  .list {
+    display: block;
+    thead, tbody, th, td, tr {
+      display: block;
+    }
+
+    thead tr, tfoot tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tbody > tr > td:before {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 35%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    tbody > tr > td {
+      border: none;
+      border-bottom: 1px solid #eee; 
+      position: relative;
+      padding-left: 40%;
+    }
+
+    tbody > tr > td:first-child {
+      border-left: 0;
+    }
+
+    tr {
+      border: 1px solid #ccc;
+    }
+  }
+
+  table#jobs, table#servers, table#admins {
+    tbody > tr > td:before {
+      width: 25%;
+    }
+    tbody > tr > td {
+      padding-left: 30%;
+      border-right: 0;
+    }
+  }
+
+  table#jobs {
+    td.job_name {
+      border-left: 0;
+    }
+  }
+
+}
