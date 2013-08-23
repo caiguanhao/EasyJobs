@@ -1,3 +1,13 @@
+@mixin no_select {
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+
 @media only screen and (max-width: 650px) {
   #jobs {
     th.type {
@@ -26,6 +36,10 @@
 }
 
 @media only screen and (max-width: 480px) {
+
+  a, .select {
+    @include no_select;
+  }
 
   .button_group {
     display: table;
@@ -135,6 +149,27 @@
     td.job_name {
       border-left: 0;
     }
+  }
+
+  div.panel {
+    float: none;
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .progress.right-side {
+    width: 150px;
+  }
+
+  .actions .button {
+    margin-bottom: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    display: block;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 
 }

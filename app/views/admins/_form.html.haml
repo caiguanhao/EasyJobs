@@ -26,13 +26,13 @@
       %h3= t('Google_Authenticator_QRCode')
       .pc
         .qrcode{ data: { text: generate_google_authenticator_qrcode_for_admin(@admin) } }
-    = link_to t('Back'), edit_admin_path(@admin), class: "button button-blue"
+    .actions= link_to t('Back'), edit_admin_path(@admin), class: "button button-blue"
   - else
     = form_tag edit_admin_path(@admin) do
       .panel
         %h3= label_tag :password, t('helpers.label.admin.password')
         .pc= password_field_tag :password, nil, placeholder: t('your_current_password')
-      = submit_tag t('View_Google_Authenticator_QRCode'), name: "google", class: "button button-blue"
+      .actions= submit_tag t('View_Google_Authenticator_QRCode'), name: "google", class: "button button-blue"
   .separator
   - if @show_qrcode == 2 or @show_qrcode == 3
     - if @show_qrcode == 2
@@ -40,14 +40,14 @@
         %h3= t('Mobile_Authentication_QRCode')
         .pc
           .qrcode{ data: { text: generate_mobile_authentication_qrcode_for_admin(@admin) } }
-      = link_to t('Back'), edit_admin_path(@admin), class: "button button-blue"
+      .actions= link_to t('Back'), edit_admin_path(@admin), class: "button button-blue"
     - if @show_qrcode == 3
-      = link_to t('Authenticate_Now'), 'easyjobs://' + generate_mobile_authentication_qrcode_for_admin(@admin), class: "button button-green"
-      = link_to t('Back'), edit_admin_path(@admin), class: "button button-blue"
+      .actions= link_to t('Authenticate_Now'), 'easyjobs://' + generate_mobile_authentication_qrcode_for_admin(@admin), class: "button button-green"
+      .actions= link_to t('Back'), edit_admin_path(@admin), class: "button button-blue"
   - else
     = form_tag edit_admin_path(@admin) do
       .panel
         %h3= label_tag :password, t('helpers.label.admin.password')
         .pc= password_field_tag :password, nil, placeholder: t('your_current_password')
-      = submit_tag t('Get_Mobile_Authentication_QRCode'), name: "mobile", class: "button button-blue"
-      = submit_tag t('Get_Authentication_Link'), name: "link", class: "button button-blue"
+      .actions= submit_tag t('Get_Mobile_Authentication_QRCode'), name: "mobile", class: "button button-blue"
+      .actions= submit_tag t('Get_Authentication_Link'), name: "link", class: "button button-blue"
