@@ -25,7 +25,13 @@
   .field
     = link_to t('create_blank_job'), create_blank_job_for_server_path(@server), method: :post, class: "button button-blue"
 - else
-  %table.list
+  :css
+    @media only screen and (max-width: 480px) {
+      table#jobs td:nth-of-type(1):before { content: "ID"; }
+      table#jobs td:nth-of-type(2):before { content: "#{t('helpers.label.job.name')}"; }
+      table#jobs td:nth-of-type(3):before { content: "#{t('helpers.label.job.Updated_At')}"; }
+    }
+  %table#jobs.list
     %thead
       %tr
         %th ID

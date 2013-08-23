@@ -1,8 +1,23 @@
 .menu_div
 
+:css
+  @media only screen and (max-width: 480px) {
+    table#types td:nth-of-type(1):before { content: "ID"; }
+    table#types td:nth-of-type(2):before { content: "#{t('Type_Name')}"; }
+
+    table#interpreters td:nth-of-type(1):before { content: "ID"; }
+    table#interpreters td:nth-of-type(2):before { content: "#{t('Path_of_interpreter')}"; }
+    table#interpreters td:nth-of-type(3):before { content: "#{t('Options')}"; }
+
+    table#constants td:nth-of-type(1):before { content: "ID"; }
+    table#constants td:nth-of-type(2):before { content: "#{t('Constant_Name')}"; }
+    table#constants td:nth-of-type(3):before { content: "#{t('Size')}"; }
+    table#constants td:nth-of-type(4):before { content: "#{t('Updated_At')}"; }
+    table#constants td:nth-of-type(5):before { content: "#{t('Actions')}"; }
+  }
 .settings-p1
   = form_tag edit_types_path, method: :put do
-    %table.list
+    %table#types.list
       %thead
         %tr
           %th ID
@@ -23,7 +38,7 @@
 
 .settings-p2
   = form_tag edit_interpreters_path, method: :put do
-    %table.list
+    %table#interpreters.list
       %thead
         %tr
           %th ID
@@ -42,14 +57,14 @@
             %td.path
               = text_field_tag "interpreters_path[]", interpreter.path, id: nil
             %td
-              = check_box_tag "interpreters_usf[]", interpreter.id, interpreter.upload_script_first, id: "interpreter_usf_#{interpreter.id}"
+              = check_box_tag "interpreters_usf[]", interpreter.id, interpreter.upload_script_first, id: "interpreter_usf_#{interpreter.id}", class: "check_box"
               = label_tag "interpreter_usf_#{interpreter.id}", t("Upload_script_first")
     = submit_tag t("Save_Changes"), class: "button button-blue"
 
 .separator.clear
 
 = form_tag edit_constants_path, method: :put do
-  %table.list
+  %table#constants.list
     %thead
       %tr
         %th ID

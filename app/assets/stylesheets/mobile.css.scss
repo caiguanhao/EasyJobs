@@ -135,14 +135,23 @@
     }
   }
 
-  table#jobs, table#servers, table#admins {
+  table#jobs, table#servers, table#admins, table#types, table#interpreters, table#constants {
     tbody > tr > td:before {
       width: 25%;
     }
     tbody > tr > td {
+      width: auto;
       padding-left: 30%;
       border-right: 0;
+      min-height: 20px;
+      input[type=text] {
+        width: 100% !important;
+      }
+      &:first-child {
+        border-left: 0;
+      }
     }
+    
   }
 
   table#jobs {
@@ -151,7 +160,7 @@
     }
   }
 
-  div.panel {
+  div.panel, div.panel.float {
     float: none;
     margin-right: 0;
     width: 100%;
@@ -159,6 +168,15 @@
 
   .progress.right-side {
     width: 150px;
+  }
+
+  #job_script {
+    width: 100%;
+    font-family: monospace;
+  }
+
+  #chart {
+    height: 300px;
   }
 
   .actions .button {
@@ -170,6 +188,19 @@
     display: block;
     padding-top: 8px;
     padding-bottom: 8px;
+  }
+
+  .settings-p1, .settings-p2 {
+    float: none;
+    width: 100%;
+  }
+
+  .modal {
+    width: 80%;
+    padding: 10px;
+    .CodeMirror {
+      height: 275px;
+    }
   }
 
 }

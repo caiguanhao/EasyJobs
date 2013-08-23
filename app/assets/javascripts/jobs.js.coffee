@@ -108,6 +108,8 @@ jobsonload = ->
       if chart
         chart.destroy();
       if data.hasOwnProperty("real") && data.real.length > 0
+        if $(window).width() <= 480 # don't display too many records on mobile devices
+          data.real = data.real.slice(-4)
         if data.mean_time != null
           $("#mean_time").data("mean-time", data.mean_time).text(data.mean_time + " s")
         $('#chart').removeClass("never").highcharts({
