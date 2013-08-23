@@ -1,5 +1,5 @@
 class Admin < ActiveRecord::Base
-  devise :database_authenticatable, :token_authenticatable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :rememberable, :trackable, :validatable
   validates_format_of :username, :with => /[0-9a-zA-Z\p{Han}]{3,16}/
   validates :username, :uniqueness => { :case_sensitive => false }
 

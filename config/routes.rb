@@ -11,6 +11,7 @@ EasyJobs::Application.routes.draw do
   resources :jobs do
     member do
       get :run
+      get :token_run
       get :timestats
       delete :timestats, to: "jobs#destroy_timestats"
       get :delete
@@ -34,6 +35,8 @@ EasyJobs::Application.routes.draw do
   end
 
   root to: "jobs#index"
+
+  get '/token_login/*token', to: "application#token_login", as: "token_login", format: false
 
   namespace :api do
     namespace :v1 do

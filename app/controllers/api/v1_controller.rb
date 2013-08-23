@@ -31,6 +31,10 @@ class Api::V1Controller < ApplicationController
         revoke: {
           verb: :delete,
           url: better_path(api_v1_revoke_token_url)
+        },
+        login: {
+          verb: :get,
+          url: better_path(token_login_url(":token"))
         }
       }
     }
@@ -38,7 +42,7 @@ class Api::V1Controller < ApplicationController
 
   # revoke tokens
   def tokens
-    current_admin.reset_authentication_token!
+    reset_authtication_token current_admin
     render nothing: true, status: 200
   end
 

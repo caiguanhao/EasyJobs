@@ -1,5 +1,5 @@
 class JobsController < ApplicationController
-  before_action :set_job, only: [:show, :edit, :update, :delete, :run, :destroy, :timestats, :destroy_timestats]
+  before_action :set_job, only: [:show, :edit, :update, :delete, :run, :token_run, :destroy, :timestats, :destroy_timestats]
 
   helper_method :get_parameters_of
   def get_parameters_of(script)
@@ -90,6 +90,17 @@ class JobsController < ApplicationController
   # GET /jobs/1/run
   include ActionController::Live
   def run
+    __run
+  end
+
+  skip_before_action :authenticate, only: [:token_run]
+  before_action :authenticate_with_token, only: [:token_run]
+  def token_run
+    __run
+  end
+
+  private
+  def __run
     require 'streamer/sse'
     require 'net/ssh'
     require 'net/scp'
@@ -190,7 +201,6 @@ class JobsController < ApplicationController
     end
   end
 
-  private
     def status(string)
       "> #{string}\n"
     end
