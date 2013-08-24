@@ -24,11 +24,11 @@ table.list {
     white-space: nowrap;
   }
   td.path, td.name {
-    width: 250px;
     input[type=text] {
       padding: 2px 5px;
       vertical-align: middle;
-      width: 250px;
+      max-width: 250px;
+      width: 100%;
       font-family: monospace;
     }
   }

@@ -12,7 +12,6 @@
   %h3= t('helpers.label.server.userpass')
   .pc
     = "#{@server.username} (" + (@server.password.blank? ? t("no_password") : "*" * @server.password.length) +  ")"
-.clear
 .panel.float
   %h3= t('Private_Key_Constant')
   .pc

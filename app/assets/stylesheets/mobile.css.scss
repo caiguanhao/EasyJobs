@@ -8,6 +8,16 @@
   -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 
+@media only screen and (max-width: 660px) {
+  .settings-p1, .settings-p2 {
+    float: none;
+    width: 100%;
+  }
+  th.date {
+    width: auto !important;
+  }
+}
+
 @media only screen and (max-width: 650px) {
   #jobs {
     th.type {
@@ -36,6 +46,17 @@
 }
 
 @media only screen and (max-width: 480px) {
+
+  #main {
+    #header {
+      h1#title {
+        .right {
+          width: 205px;
+          right: 15px;
+        }
+      }
+    }
+  }
 
   a, .select {
     @include no_select;
@@ -124,6 +145,9 @@
       border-bottom: 1px solid #eee; 
       position: relative;
       padding-left: 40%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     tbody > tr > td:first-child {
@@ -190,11 +214,6 @@
     padding-bottom: 8px;
   }
 
-  .settings-p1, .settings-p2 {
-    float: none;
-    width: 100%;
-  }
-
   .modal {
     width: 80%;
     padding: 10px;
@@ -202,5 +221,23 @@
       height: 275px;
     }
   }
+}
 
+@media only screen and (max-width: 319px) {
+  #main {
+    #header {
+      h1#title {
+        text-align: center;
+        padding-bottom: 15px;
+        .right {
+          display: block;
+          width: 100%;
+          left: 0;
+          right: 0;
+          top: 20px;
+          text-align: center;
+        }
+      }
+    }
+  }
 }

@@ -12,7 +12,6 @@
   %h3= t('helpers.label.admin.Sign_In_Count')
   .pc
     = @admin.sign_in_count
-.clear
 .panel.float
   %h3= t('helpers.label.admin.Current_Sign_In_At')
   .pc
@@ -34,7 +33,6 @@
   .pc
     %abbr.timeago{ title: @admin.created_at.getutc.iso8601 }
       = @admin.created_at
-.clear
 .panel.float
   %h3= t('helpers.label.admin.Current_Sign_In_IP')
   .pc
