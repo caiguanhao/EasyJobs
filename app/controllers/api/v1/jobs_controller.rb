@@ -3,7 +3,8 @@ class Api::V1::JobsController < Api::V1Controller
 
   def index
     render json: Job.joins('LEFT JOIN servers ON servers.id = jobs.server_id')
-      .select('jobs.id, jobs.name, servers.name as server_name')
+      .joins('LEFT JOIN types ON types.id = jobs.type_id')
+      .select('jobs.id, jobs.name, servers.name as server_name, types.id as type_id, types.name as type_name')
   end
 
   def show
