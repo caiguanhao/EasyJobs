@@ -4,6 +4,16 @@ EasyJobs
 A simple SSH web interface to ease your workload.  
 减轻你工作量的、简便的SSH网页界面
 
+Please note that this repository is not being actively maintained.
+
+You may want to use a newer similar project: [Maintainer](https://github.com/caiguanhao/Maintainer)
+
+---
+
+![easyjobs-3](https://f.cloud.github.com/assets/1284703/2059933/e410728e-8be9-11e3-8673-2be86fcbf2be.png)
+
+[More screenshots](https://github.com/caiguanhao/EasyJobs/issues/1)
+
 Features / Log
 --------------
 
